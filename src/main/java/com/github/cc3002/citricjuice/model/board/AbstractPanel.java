@@ -54,7 +54,7 @@ public abstract class AbstractPanel implements IPanel{
   }
 
 
-  //{
+  // public void activatedBy(final Player player){
 /*    switch (type) {
       case BONUS:
         applyBonusTo(player);

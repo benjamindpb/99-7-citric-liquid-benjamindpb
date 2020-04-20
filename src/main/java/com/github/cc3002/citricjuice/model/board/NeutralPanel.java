@@ -1,4 +1,15 @@
 package com.github.cc3002.citricjuice.model.board;
 
-public class NeutralPanel {
+import com.github.cc3002.citricjuice.model.Player;
+
+public class NeutralPanel extends AbstractPanel{
+    /**
+     * Executes the appropriate action to the player according to this panel's type.
+     *
+     * @param player
+     */
+    @Override
+    public void activatedBy(Player player) {
+
+    }
 }

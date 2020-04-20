@@ -1,5 +1,7 @@
 package com.github.cc3002.citricjuice.model;
 
+import com.github.cc3002.citricjuice.model.board.IPanel;
+
 import java.util.Random;
 
 /**
@@ -176,4 +178,14 @@ public class Player {
   public Player copy() {
     return new Player(name, maxHP, atk, def, evd);
   }
+
+  /**
+   * @param panel
+   */
+  public void activatePanel(IPanel panel){
+    panel.activatedBy(this);
+  }
+
+
+
 }
