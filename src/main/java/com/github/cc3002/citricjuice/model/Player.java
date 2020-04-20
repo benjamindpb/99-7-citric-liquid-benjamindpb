@@ -20,7 +20,11 @@ public class Player {
   private final int evd;
   private int normaLevel;
   private int stars;
+  private int wins;
   private int currentHP;
+
+  private boolean chooseStars;
+  private boolean chooseWins;
 
   /**
    * Creates a new character.
@@ -44,6 +48,9 @@ public class Player {
     this.def = def;
     this.evd = evd;
     normaLevel = 1;
+    wins = 0;
+    chooseStars = false;
+    chooseWins = false;
     random = new Random();
   }
 
@@ -59,6 +66,15 @@ public class Player {
    */
   public int getStars() {
     return stars;
+  }
+
+  /**
+   * Return this player's wins count
+   *
+   * @return the wins of the player
+   */
+  public int getWins() {
+    return wins;
   }
 
   /**
@@ -150,6 +166,22 @@ public class Player {
    */
   public void reduceStarsBy(final int amount) {
     stars = Math.max(0, stars - amount);
+  }
+
+  /**
+   * This method choose a stars objective to level up
+   */
+  private void setChooseStars(){
+    chooseStars = true;
+    chooseWins = false;
+  }
+
+  /**
+   * This method choose a wins objective to level up
+   */
+  private void setChooseWins(){
+    chooseWins = true;
+    chooseStars = false;
   }
 
   @Override

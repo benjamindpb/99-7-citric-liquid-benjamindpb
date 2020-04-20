@@ -17,26 +17,16 @@ public class HomePanel extends AbstractPanel{
         normaCheck(player);
     }
 
+    /**
+     * Make a normal check for a player
+     *
+     * @param player who will have a normal check
+     *
+     */
     private void normaCheck(Player player) {
         int norma = player.getNormaLevel();
         int stars = player.getStars();
-        int wins = player.
-        if(norma == 1){
-            if(player.getStars() == 10)
-                player.normaClear();
-        }
-        if(norma == 2){
+        int wins = player.getWins();
 
-
-        }
-        if(norma == 3){
-
-        }
-        if(norma == 4){
-
-        }
-        if(norma == 5){
-
-        }
     }
 }
