@@ -92,4 +92,8 @@ public class Panel {
         break;
     }
   }
+
+  public void hola(){
+    System.out.println("hola feedback 3");
+  }
 }
