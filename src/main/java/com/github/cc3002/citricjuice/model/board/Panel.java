@@ -94,6 +94,6 @@ public class Panel {
   }
 
   public void hola(){
-    System.out.println("hola feedback 2");
+    System.out.println("hola feedback 3");
   }
 }
