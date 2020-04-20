@@ -2,14 +2,18 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
 
+/**
+ * This class represent a Bonus Panel
+ */
 public class BonusPanel extends AbstractPanel{
+
     /**
-     * Executes the appropriate action to the player according to this panel's type.
+     * Increase the player's star count by the D6 roll multiplied by the minimum between the
+     * player's norma level and three.
      *
-     * @param player
+     * @param player who activate the panel
      */
-    @Override
-    public void activatedBy(Player player) {
+    public void activatePanelEffectBy(Player player) {
         player.increaseStarsBy(player.roll() * Math.min(player.getNormaLevel(), 3));
     }
 }

@@ -75,18 +75,18 @@ class AbstractPanelTest {
   @Test
   public void homePanelTest() {
     assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
-    testHomePanel.activatedBy(suguri);
+    testHomePanel.activatePanelEffectBy(suguri);
     assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
 
     suguri.setCurrentHP(1);
-    testHomePanel.activatedBy(suguri);
+    testHomePanel.activatePanelEffectBy(suguri);
     assertEquals(2, suguri.getCurrentHP());
   }
 
   @Test
   public void neutralPanelTest() {
     final var expectedSuguri = suguri.copy();
-    testNeutralPanel.activatedBy(suguri);
+    testNeutralPanel.activatePanelEffectBy(suguri);
     assertEquals(expectedSuguri, suguri);
   }
 
@@ -99,7 +99,7 @@ class AbstractPanelTest {
     suguri.setSeed(testSeed);
     for (int normaLvl = 1; normaLvl <= 6; normaLvl++) {
       final int roll = testRandom.nextInt(6) + 1;
-      testBonusPanel.activatedBy(suguri);
+      testBonusPanel.activatePanelEffectBy(suguri);
       expectedStars += roll * Math.min(3, normaLvl);
       assertEquals(expectedStars, suguri.getStars(),
                    "Test failed with seed: " + testSeed);
@@ -116,7 +116,7 @@ class AbstractPanelTest {
     suguri.setSeed(testSeed);
     for (int normaLvl = 1; normaLvl <= 6; normaLvl++) {
       final int roll = testRandom.nextInt(6) + 1;
-      testDropPanel.activatedBy(suguri);
+      testDropPanel.activatePanelEffectBy(suguri);
       expectedStars = Math.max(expectedStars - roll * normaLvl, 0);
       assertEquals(expectedStars, suguri.getStars(),
                    "Test failed with seed: " + testSeed);

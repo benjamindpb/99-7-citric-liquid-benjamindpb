@@ -2,14 +2,17 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
 
+/**
+ * This class represent a Drop Panel
+ */
 public class DropPanel extends AbstractPanel{
+
     /**
-     * Executes the appropriate action to the player according to this panel's type.
+     * Reduces the player's star count by the D6 roll multiplied by the player's norma level.
      *
-     * @param player
+     * @param player who activate the panel
      */
-    @Override
-    public void activatedBy(Player player) {
+    public void activatePanelEffectBy(Player player) {
         player.reduceStarsBy(player.roll() * player.getNormaLevel());
     }
 }

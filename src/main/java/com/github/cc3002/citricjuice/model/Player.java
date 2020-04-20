@@ -7,8 +7,7 @@ import java.util.Random;
 /**
  * This class represents a player in the game 99.7% Citric Liquid.
  *
- * @author <a href="mailto:ignacio.slater@ug.uchile.cl">Ignacio Slater
- *     Muñoz</a>.
+ * @author <a href="mailto:benjamin.dpb@gmail.com"> Benjamín del Pino </a>.
  * @version 1.0.6-rc.3
  * @since 1.0
  */
@@ -180,10 +179,12 @@ public class Player {
   }
 
   /**
-   * @param panel
+   * The player activate a panel
+   *
+   * @param panel the panel who will be activated
    */
   public void activatePanel(IPanel panel){
-    panel.activatedBy(this);
+    panel.activatePanelEffectBy(this);
   }
 
 

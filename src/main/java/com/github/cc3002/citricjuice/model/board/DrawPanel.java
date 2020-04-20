@@ -2,14 +2,17 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
 
+/**
+ * This class represent a Draw Panel
+ */
 public class DrawPanel extends AbstractPanel {
+
     /**
-     * Executes the appropriate action to the player according to this panel's type.
+     * The player draw a card and add the card to his hand
      *
-     * @param player
+     * @param player who activate the panel
      */
-    @Override
-    public void activatedBy(Player player) {
+    public void activatePanelEffectBy(Player player) {
 
     }
 }

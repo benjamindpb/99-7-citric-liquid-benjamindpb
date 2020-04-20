@@ -2,14 +2,21 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
 
+/**
+ * This class represent a Neutral Panel
+ */
 public class NeutralPanel extends AbstractPanel{
+
+    public NeutralPanel() {
+    }
+
     /**
-     * Executes the appropriate action to the player according to this panel's type.
+     * This type of panel does not have any type of effect on the player,
+     * if a player falls on one of these panels, then his turn ends without changes.
      *
-     * @param player
+     * @param player who activate the panel
      */
-    @Override
-    public void activatedBy(Player player) {
+    public void activatePanelEffectBy(Player player) {
 
     }
 }
