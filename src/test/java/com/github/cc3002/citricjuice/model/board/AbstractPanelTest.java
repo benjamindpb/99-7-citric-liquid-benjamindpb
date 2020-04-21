@@ -16,29 +16,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @version 1.0.6-rc.1
  * @since 1.0
  */
-class PanelTest {
+class AbstractPanelTest {
   private final static String PLAYER_NAME = "Suguri";
   private final static int BASE_HP = 4;
   private final static int BASE_ATK = 1;
   private final static int BASE_DEF = -1;
   private final static int BASE_EVD = 2;
-  private Panel testHomePanel;
-  private Panel testNeutralPanel;
-  private Panel testBonusPanel;
-  private Panel testDropPanel;
-  private Panel testEncounterPanel;
-  private Panel testBossPanel;
+  private AbstractPanel testHomePanel;
+  private AbstractPanel testNeutralPanel;
+  private AbstractPanel testBonusPanel;
+  private AbstractPanel testDropPanel;
+  private AbstractPanel testEncounterPanel;
+  private AbstractPanel testBossPanel;
   private Player suguri;
   private long testSeed;
 
   @BeforeEach
   public void setUp() {
-    testBonusPanel = new Panel(PanelType.BONUS);
-    testBossPanel = new Panel(PanelType.BOSS);
-    testDropPanel = new Panel(PanelType.DROP);
-    testEncounterPanel = new Panel(PanelType.ENCOUNTER);
-    testHomePanel = new Panel(PanelType.HOME);
-    testNeutralPanel = new Panel(PanelType.NEUTRAL);
+    testBonusPanel = new AbstractPanel(PanelType.BONUS);
+    testBossPanel = new AbstractPanel(PanelType.BOSS);
+    testDropPanel = new AbstractPanel(PanelType.DROP);
+    testEncounterPanel = new AbstractPanel(PanelType.ENCOUNTER);
+    testHomePanel = new AbstractPanel(PanelType.HOME);
+    testNeutralPanel = new AbstractPanel(PanelType.NEUTRAL);
     testSeed = new Random().nextLong();
     suguri = new Player(PLAYER_NAME, BASE_HP, BASE_ATK, BASE_DEF, BASE_EVD);
   }
@@ -56,8 +56,8 @@ class PanelTest {
   @Test
   public void nextPanelTest() {
     assertTrue(testNeutralPanel.getNextPanels().isEmpty());
-    final var expectedPanel1 = new Panel(PanelType.NEUTRAL);
-    final var expectedPanel2 = new Panel(PanelType.NEUTRAL);
+    final var expectedPanel1 = new AbstractPanel(PanelType.NEUTRAL);
+    final var expectedPanel2 = new AbstractPanel(PanelType.NEUTRAL);
 
     testNeutralPanel.addNextPanel(expectedPanel1);
     assertEquals(1, testNeutralPanel.getNextPanels().size());
@@ -75,18 +75,18 @@ class PanelTest {
   @Test
   public void homePanelTest() {
     assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
-    testHomePanel.activatedBy(suguri);
+    testHomePanel.activatePanelEffectBy(suguri);
     assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
 
     suguri.setCurrentHP(1);
-    testHomePanel.activatedBy(suguri);
+    testHomePanel.activatePanelEffectBy(suguri);
     assertEquals(2, suguri.getCurrentHP());
   }
 
   @Test
   public void neutralPanelTest() {
     final var expectedSuguri = suguri.copy();
-    testNeutralPanel.activatedBy(suguri);
+    testNeutralPanel.activatePanelEffectBy(suguri);
     assertEquals(expectedSuguri, suguri);
   }
 
@@ -99,7 +99,7 @@ class PanelTest {
     suguri.setSeed(testSeed);
     for (int normaLvl = 1; normaLvl <= 6; normaLvl++) {
       final int roll = testRandom.nextInt(6) + 1;
-      testBonusPanel.activatedBy(suguri);
+      testBonusPanel.activatePanelEffectBy(suguri);
       expectedStars += roll * Math.min(3, normaLvl);
       assertEquals(expectedStars, suguri.getStars(),
                    "Test failed with seed: " + testSeed);
@@ -116,7 +116,7 @@ class PanelTest {
     suguri.setSeed(testSeed);
     for (int normaLvl = 1; normaLvl <= 6; normaLvl++) {
       final int roll = testRandom.nextInt(6) + 1;
-      testDropPanel.activatedBy(suguri);
+      testDropPanel.activatePanelEffectBy(suguri);
       expectedStars = Math.max(expectedStars - roll * normaLvl, 0);
       assertEquals(expectedStars, suguri.getStars(),
                    "Test failed with seed: " + testSeed);
