@@ -18,15 +18,29 @@ public abstract class AbstractPanel implements IPanel{
   private Set<IPanel> nextPanels = new HashSet<>();
   private Set<Player> playersInPanel = new HashSet<>();
 
+  /**
+   * Creates a new Panel
+   *
+   * @param nextPanels Panel's next panels
+   * @param playersInPanel Panel's players
+   */
+  public AbstractPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
+    this.nextPanels = nextPanels;
+    this.playersInPanel = playersInPanel;
+  }
+
+  @Override
   public Set<IPanel> getNextPanels() {
     return Set.copyOf(nextPanels);
   }
 
+  @Override
   public Set<Player> getPlayers() {
     return Set.copyOf(playersInPanel);
   }
 
 
+  @Override
   public void addNextPanel(final IPanel panel) {
     nextPanels.add(panel);
   }

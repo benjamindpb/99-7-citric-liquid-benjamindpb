@@ -2,10 +2,22 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
 
+import java.util.Set;
+
 /**
  * This class represent a Home Panel
  */
 public class HomePanel extends AbstractPanel{
+
+    /**
+     * Creates a new Home Panel
+     *
+     * @param nextPanels     Panel's next panels
+     * @param playersInPanel Panel's players
+     */
+    public HomePanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
+        super(nextPanels, playersInPanel);
+    }
 
     /**
      * The player recovers one point of HP and realize a Norma check
@@ -25,8 +37,6 @@ public class HomePanel extends AbstractPanel{
      */
     private void normaCheck(Player player) {
         int norma = player.getNormaLevel();
-        int stars = player.getStars();
-        int wins = player.getWins();
-
+        //...to do...
     }
 }
