@@ -10,16 +10,6 @@ import java.util.Set;
 public class EncounterPanel extends AbstractPanel {
 
     /**
-     * Creates a new Encounter Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
-     */
-    public EncounterPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
-    }
-
-    /**
      * * In this panel the player battles with a random Wild unit
      *
      * @param player who activate the panel
@@ -27,4 +17,5 @@ public class EncounterPanel extends AbstractPanel {
     public void activatePanelEffectBy(Player player) {
 
     }
+
 }

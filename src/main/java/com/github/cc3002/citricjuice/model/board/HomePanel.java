@@ -10,16 +10,6 @@ import java.util.Set;
 public class HomePanel extends AbstractPanel{
 
     /**
-     * Creates a new Home Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
-     */
-    public HomePanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
-    }
-
-    /**
      * The player recovers one point of HP and realize a Norma check
      *
      * @param player who activate the panel

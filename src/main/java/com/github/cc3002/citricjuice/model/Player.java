@@ -20,9 +20,9 @@ public class Player {
   private final int evd;
   private int normaLevel;
   private int stars;
-  private int wins;
   private int currentHP;
 
+  private int wins;
   private boolean chooseStars;
   private boolean chooseWins;
 
@@ -48,10 +48,11 @@ public class Player {
     this.def = def;
     this.evd = evd;
     normaLevel = 1;
+    random = new Random();
+
     wins = 0;
     chooseStars = false;
     chooseWins = false;
-    random = new Random();
   }
 
   /**
@@ -211,7 +212,7 @@ public class Player {
   }
 
   /**
-   * The player activate a panel
+   * The player who activate the panel
    *
    * @param panel the panel who will be activated
    */

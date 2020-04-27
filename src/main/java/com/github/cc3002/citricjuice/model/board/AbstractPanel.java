@@ -1,9 +1,9 @@
 package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -14,20 +14,16 @@ import java.util.Set;
  * @version 1.0.6-rc.2
  * @since 1.0
  */
-public abstract class AbstractPanel implements IPanel{
-  private Set<IPanel> nextPanels = new HashSet<>();
-  private Set<Player> playersInPanel = new HashSet<>();
+public abstract class AbstractPanel implements IPanel {
+  protected Set<IPanel> nextPanels = new HashSet<>();
+  protected Set<Player> playersInPanel = new HashSet<>();
 
   /**
-   * Creates a new Panel
-   *
-   * @param nextPanels Panel's next panels
-   * @param playersInPanel Panel's players
+   * This is the constructor of this abstract class.
+   * Note that this will never uses because an abstract
+   * class cannot be instantiated.
    */
-  public AbstractPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-    this.nextPanels = nextPanels;
-    this.playersInPanel = playersInPanel;
-  }
+
 
   @Override
   public Set<IPanel> getNextPanels() {
@@ -45,5 +41,17 @@ public abstract class AbstractPanel implements IPanel{
     nextPanels.add(panel);
   }
 
+  public void addPlayerToPanel(final Player player){
+    playersInPanel.add(player);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    AbstractPanel that = (AbstractPanel) o;
+    return Objects.equals(nextPanels, that.nextPanels) &&
+            Objects.equals(playersInPanel, that.playersInPanel);
+  }
 
 }

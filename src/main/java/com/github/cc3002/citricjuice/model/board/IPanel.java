@@ -27,6 +27,13 @@ public interface IPanel {
     void addNextPanel(final IPanel panel);
 
     /**
+     * Adds a new player to this panel
+     *
+     * @param player to be added
+     */
+    void addPlayerToPanel(final Player player);
+
+    /**
      * Executes the appropriate action to the player according to the panel's type.
      */
     void activatePanelEffectBy(final Player player);

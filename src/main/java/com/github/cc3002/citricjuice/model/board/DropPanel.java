@@ -10,16 +10,6 @@ import java.util.Set;
 public class DropPanel extends AbstractPanel{
 
     /**
-     * Creates a new Drop Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
-     */
-    public DropPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
-    }
-
-    /**
      * Reduces the player's star count by the D6 roll multiplied by the player's norma level.
      *
      * @param player who activate the panel

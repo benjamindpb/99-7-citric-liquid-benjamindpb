@@ -9,15 +9,6 @@ import java.util.Set;
  */
 public class BossPanel extends AbstractPanel{
 
-    /**
-     * Creates a new Boss Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
-     */
-    public BossPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
-    }
 
     /**
      * In this panel the player battles with a random Boss unit

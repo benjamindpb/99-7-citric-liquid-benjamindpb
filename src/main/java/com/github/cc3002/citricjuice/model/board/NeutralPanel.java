@@ -9,17 +9,6 @@ import java.util.Set;
  */
 public class NeutralPanel extends AbstractPanel{
 
-
-    /**
-     * Creates a new Neutral Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
-     */
-    public NeutralPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
-    }
-
     /**
      * This type of panel does not have any type of effect on the player,
      * if a player falls on one of these panels, then his turn ends without changes.

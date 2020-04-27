@@ -9,15 +9,6 @@ import java.util.Set;
  */
 public class DrawPanel extends AbstractPanel {
 
-    /**
-     * Creates a new Draw Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
-     */
-    public DrawPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
-    }
 
     /**
      * The player draw a card and add the card to his hand
