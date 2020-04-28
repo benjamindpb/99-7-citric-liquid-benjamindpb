@@ -8,8 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Random;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author <a href="mailto:ignacio.slater@ug.uchile.cl">Ignacio Slater M.</a>.
@@ -67,6 +66,29 @@ class AbstractPanelTest {
   }
 
   @Test
+  public void constructorWhitParameterTest(){
+    final var bonus = new BonusPanel(1,2);
+    final var boss = new BossPanel(4,6);
+    final var draw = new DrawPanel(3,2);
+    final var drop = new DropPanel(0,1);
+    final var encounter = new EncounterPanel(5,2);
+    final var home = new HomePanel(1,9);
+    assertEquals(1, bonus.getRow());
+    assertEquals(2, bonus.getColumn());
+    assertEquals(4, boss.getRow());
+    assertEquals(6, boss.getColumn());
+    assertEquals(3, draw.getRow());
+    assertEquals(2, draw.getColumn());
+    assertEquals(0, drop.getRow());
+    assertEquals(1, drop.getColumn());
+    assertEquals(5, encounter.getRow());
+    assertEquals(2, encounter.getColumn());
+    assertEquals(1, home.getRow());
+    assertEquals(9, home.getColumn());
+
+  }
+
+  @Test
   public void nextPanelTest() {
     assertTrue(testNeutralPanel.getNextPanels().isEmpty());
     final var expectedPanel1 = new NeutralPanel(1, 2);
@@ -112,6 +134,15 @@ class AbstractPanelTest {
     testNeutralPanel.activatePanelEffectBy(suguri);
     assertEquals(expectedSuguri, suguri);
   }
+
+  @Test
+  public void bonusPanelTest(){
+    int stars = suguri.getStars();
+    assertEquals(1, suguri.getNormaLevel());
+    testBonusPanel.activatePanelEffectBy(suguri);
+    assertNotEquals(stars, suguri.getStars());
+  }
+
 
   // region : Consistency tests
   @RepeatedTest(100)
