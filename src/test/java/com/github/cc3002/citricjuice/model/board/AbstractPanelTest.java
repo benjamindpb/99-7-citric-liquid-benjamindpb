@@ -25,24 +25,29 @@ class AbstractPanelTest {
 
   private Player kai;
   private Player chicken;
+  private Player suguri;
 
   private HomePanel testHomePanel;
   private NeutralPanel testNeutralPanel;
-  private AbstractPanel testBonusPanel;
-  private AbstractPanel testDropPanel;
-  private AbstractPanel testEncounterPanel;
-  private AbstractPanel testBossPanel;
-  private Player suguri;
+  private BonusPanel testBonusPanel;
+  private DropPanel testDropPanel;
+  private EncounterPanel testEncounterPanel;
+  private BossPanel testBossPanel;
+  private DrawPanel testDrawPanel;
+
+
   private long testSeed;
 
   @BeforeEach
   public void setUp() {
     testBonusPanel = new BonusPanel();
     testBossPanel = new BossPanel();
+    testDrawPanel = new DrawPanel();
     testDropPanel = new DropPanel();
     testEncounterPanel = new EncounterPanel();
     testHomePanel = new HomePanel();
     testNeutralPanel = new NeutralPanel();
+
     testSeed = new Random().nextLong();
 
     suguri = new Player(PLAYER_NAME, BASE_HP, BASE_ATK, BASE_DEF, BASE_EVD);
@@ -54,6 +59,7 @@ class AbstractPanelTest {
   public void constructorTest() {
     assertEquals(new BonusPanel(), testBonusPanel);
     assertEquals(new BossPanel(), testBossPanel);
+    assertEquals(new DrawPanel(), testDrawPanel);
     assertEquals(new DropPanel(), testDropPanel);
     assertEquals(new EncounterPanel(), testEncounterPanel);
     assertEquals(new HomePanel(), testHomePanel);
@@ -63,8 +69,8 @@ class AbstractPanelTest {
   @Test
   public void nextPanelTest() {
     assertTrue(testNeutralPanel.getNextPanels().isEmpty());
-    final var expectedPanel1 = new NeutralPanel();
-    final var expectedPanel2 = new NeutralPanel();
+    final var expectedPanel1 = new NeutralPanel(1, 2);
+    final var expectedPanel2 = new NeutralPanel(2,3);
 
     testNeutralPanel.addNextPanel(expectedPanel1);
     assertEquals(1, testNeutralPanel.getNextPanels().size());

@@ -1,6 +1,7 @@
 package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
+import javafx.geometry.Point2D;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,15 +16,25 @@ import java.util.Set;
  * @since 1.0
  */
 public abstract class AbstractPanel implements IPanel {
+
   protected Set<IPanel> nextPanels = new HashSet<>();
   protected Set<Player> playersInPanel = new HashSet<>();
 
-  /**
-   * This is the constructor of this abstract class.
-   * Note that this will never uses because an abstract
-   * class cannot be instantiated.
-   */
+  private int row;
+  private int column;
+  private  String id;
 
+  /**
+   * Constructor for a default panel without any special behaviour.
+   *
+   * @param row represent a row of the panel in the board
+   * @param column  represent a column of the panel in the board
+   */
+  public AbstractPanel(int row, int column) {
+    this.row = row;
+    this.column = column;
+    id = "(" + row + ", " + column + ")";
+  }
 
   @Override
   public Set<IPanel> getNextPanels() {
@@ -46,12 +57,37 @@ public abstract class AbstractPanel implements IPanel {
   }
 
   @Override
+  public String toString() {
+    return id;
+  }
+
+  /**
+   * @return the row of the current panel
+   */
+  public int getRow() {
+    return row;
+  }
+
+  /**
+   * @return the column of the current panel
+   */
+  public int getColumn() {
+    return column;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     AbstractPanel that = (AbstractPanel) o;
-    return Objects.equals(nextPanels, that.nextPanels) &&
+    return row == that.row &&
+            column == that.column &&
+            Objects.equals(nextPanels, that.nextPanels) &&
             Objects.equals(playersInPanel, that.playersInPanel);
   }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(nextPanels, playersInPanel, row, column);
+  }
 }

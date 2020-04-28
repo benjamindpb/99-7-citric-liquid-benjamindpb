@@ -10,6 +10,21 @@ import java.util.Set;
 public class DropPanel extends AbstractPanel{
 
     /**
+     * @param row    represent a row of the panel in the board
+     * @param column represent a column of the panel in the board
+     */
+    public DropPanel(int row, int column) {
+        super(row, column);
+    }
+
+    /**
+     * Thic Constructor creates a panel in the (0,0) board coordinate
+     */
+    public DropPanel() {
+        super(0,0);
+    }
+
+    /**
      * Reduces the player's star count by the D6 roll multiplied by the player's norma level.
      *
      * @param player who activate the panel

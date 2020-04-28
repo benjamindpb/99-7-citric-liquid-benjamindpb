@@ -169,21 +169,21 @@ public class Player {
     stars = Math.max(0, stars - amount);
   }
 
-  /**
+/*  *//**
    * This method choose a stars objective to level up
-   */
+   *//*
   private void setChooseStars(){
     chooseStars = true;
     chooseWins = false;
   }
 
-  /**
+  *//**
    * This method choose a wins objective to level up
-   */
+   *//*
   private void setChooseWins(){
     chooseWins = true;
     chooseStars = false;
-  }
+  }*/
 
   @Override
   public boolean equals(final Object o) {
