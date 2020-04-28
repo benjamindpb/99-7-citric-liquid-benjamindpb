@@ -60,7 +60,6 @@ public abstract class AbstractPanel implements IPanel {
   public String toString() {
     return id;
   }
-
   /**
    * @return the row of the current panel
    */

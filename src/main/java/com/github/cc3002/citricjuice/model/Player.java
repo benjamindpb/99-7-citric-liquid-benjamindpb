@@ -1,6 +1,7 @@
 package com.github.cc3002.citricjuice.model;
 
 import com.github.cc3002.citricjuice.model.board.IPanel;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -23,8 +24,6 @@ public class Player {
   private int currentHP;
 
   private int wins;
-  private boolean chooseStars;
-  private boolean chooseWins;
 
   /**
    * Creates a new character.
@@ -51,8 +50,6 @@ public class Player {
     random = new Random();
 
     wins = 0;
-    chooseStars = false;
-    chooseWins = false;
   }
 
   /**
@@ -80,7 +77,6 @@ public class Player {
 
   /**
    * Set's the seed for this player's random number generator.
-   * <p>
    * The random number generator is used for taking non-deterministic decisions, this method is
    * declared to avoid non-deterministic behaviour while testing the code.
    */
@@ -169,22 +165,6 @@ public class Player {
     stars = Math.max(0, stars - amount);
   }
 
-/*  *//**
-   * This method choose a stars objective to level up
-   *//*
-  private void setChooseStars(){
-    chooseStars = true;
-    chooseWins = false;
-  }
-
-  *//**
-   * This method choose a wins objective to level up
-   *//*
-  private void setChooseWins(){
-    chooseWins = true;
-    chooseStars = false;
-  }*/
-
   @Override
   public boolean equals(final Object o) {
     if (this == o) {
@@ -216,10 +196,8 @@ public class Player {
    *
    * @param panel the panel who will be activated
    */
-  public void activatePanel(IPanel panel){
+  public void activatePanel(@NotNull IPanel panel){
     panel.activatePanelEffectBy(this);
   }
-
-
 
 }

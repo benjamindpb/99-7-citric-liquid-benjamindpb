@@ -89,6 +89,14 @@ class AbstractPanelTest {
   }
 
   @Test
+  public void toStringTest(){
+    final var bonus = new BonusPanel(1,2);
+    String coordinate = bonus.toString();
+    assertEquals("(1, 2)", coordinate);
+    assertEquals("(0, 0)", testNeutralPanel.toString());
+  }
+
+  @Test
   public void nextPanelTest() {
     assertTrue(testNeutralPanel.getNextPanels().isEmpty());
     final var expectedPanel1 = new NeutralPanel(1, 2);
