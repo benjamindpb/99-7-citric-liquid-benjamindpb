@@ -22,42 +22,55 @@ class AbstractPanelTest {
   private final static int BASE_ATK = 1;
   private final static int BASE_DEF = -1;
   private final static int BASE_EVD = 2;
-  private AbstractPanel testHomePanel;
-  private AbstractPanel testNeutralPanel;
-  private AbstractPanel testBonusPanel;
-  private AbstractPanel testDropPanel;
-  private AbstractPanel testEncounterPanel;
-  private AbstractPanel testBossPanel;
+
+  private Player kai;
+  private Player chicken;
   private Player suguri;
+
+  private HomePanel testHomePanel;
+  private NeutralPanel testNeutralPanel;
+  private BonusPanel testBonusPanel;
+  private DropPanel testDropPanel;
+  private EncounterPanel testEncounterPanel;
+  private BossPanel testBossPanel;
+  private DrawPanel testDrawPanel;
+
+
   private long testSeed;
 
   @BeforeEach
   public void setUp() {
-    testBonusPanel = new AbstractPanel(PanelType.BONUS);
-    testBossPanel = new AbstractPanel(PanelType.BOSS);
-    testDropPanel = new AbstractPanel(PanelType.DROP);
-    testEncounterPanel = new AbstractPanel(PanelType.ENCOUNTER);
-    testHomePanel = new AbstractPanel(PanelType.HOME);
-    testNeutralPanel = new AbstractPanel(PanelType.NEUTRAL);
+    testBonusPanel = new BonusPanel();
+    testBossPanel = new BossPanel();
+    testDrawPanel = new DrawPanel();
+    testDropPanel = new DropPanel();
+    testEncounterPanel = new EncounterPanel();
+    testHomePanel = new HomePanel();
+    testNeutralPanel = new NeutralPanel();
+
     testSeed = new Random().nextLong();
+
     suguri = new Player(PLAYER_NAME, BASE_HP, BASE_ATK, BASE_DEF, BASE_EVD);
+    kai = new Player("Kai", 5, 1, 0, 0);
+    chicken = new Player("Chicken", 3, -1, -1, 1);
   }
 
   @Test
   public void constructorTest() {
-    assertEquals(PanelType.BONUS, testBonusPanel.getType());
-    assertEquals(PanelType.BOSS, testBossPanel.getType());
-    assertEquals(PanelType.DROP, testDropPanel.getType());
-    assertEquals(PanelType.ENCOUNTER, testEncounterPanel.getType());
-    assertEquals(PanelType.HOME, testHomePanel.getType());
-    assertEquals(PanelType.NEUTRAL, testNeutralPanel.getType());
+    assertEquals(new BonusPanel(), testBonusPanel);
+    assertEquals(new BossPanel(), testBossPanel);
+    assertEquals(new DrawPanel(), testDrawPanel);
+    assertEquals(new DropPanel(), testDropPanel);
+    assertEquals(new EncounterPanel(), testEncounterPanel);
+    assertEquals(new HomePanel(), testHomePanel);
+    assertEquals(new NeutralPanel(), testNeutralPanel);
   }
 
   @Test
   public void nextPanelTest() {
     assertTrue(testNeutralPanel.getNextPanels().isEmpty());
-    final var expectedPanel1 = new AbstractPanel(PanelType.NEUTRAL);
-    final var expectedPanel2 = new AbstractPanel(PanelType.NEUTRAL);
+    final var expectedPanel1 = new NeutralPanel(1, 2);
+    final var expectedPanel2 = new NeutralPanel(2,3);
 
     testNeutralPanel.addNextPanel(expectedPanel1);
     assertEquals(1, testNeutralPanel.getNextPanels().size());
@@ -71,6 +84,16 @@ class AbstractPanelTest {
     assertEquals(Set.of(expectedPanel1, expectedPanel2),
                  testNeutralPanel.getNextPanels());
   }
+
+  @Test
+  public void addPlayerTest(){
+    assertTrue(testNeutralPanel.getPlayers().isEmpty());
+    testNeutralPanel.addPlayerToPanel(kai);
+    assertEquals(1, testNeutralPanel.getPlayers().size());
+    testNeutralPanel.addPlayerToPanel(chicken);
+    assertEquals(2, testNeutralPanel.getPlayers().size());
+  }
+
 
   @Test
   public void homePanelTest() {

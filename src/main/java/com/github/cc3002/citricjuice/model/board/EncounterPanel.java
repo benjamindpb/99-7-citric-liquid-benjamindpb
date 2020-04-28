@@ -10,13 +10,18 @@ import java.util.Set;
 public class EncounterPanel extends AbstractPanel {
 
     /**
-     * Creates a new Encounter Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
+     * @param row    represent a row of the panel in the board
+     * @param column represent a column of the panel in the board
      */
-    public EncounterPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public EncounterPanel(int row, int column) {
+        super(row, column);
+    }
+
+    /**
+     * Thic Constructor creates a panel in the (0,0) board coordinate
+     */
+    public EncounterPanel() {
+        super(0,0);
     }
 
     /**
@@ -27,4 +32,5 @@ public class EncounterPanel extends AbstractPanel {
     public void activatePanelEffectBy(Player player) {
 
     }
+
 }

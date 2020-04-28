@@ -9,14 +9,19 @@ import java.util.Set;
  */
 public class DrawPanel extends AbstractPanel {
 
+
     /**
-     * Creates a new Draw Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
+     * @param row    represent a row of the panel in the board
+     * @param column represent a column of the panel in the board
      */
-    public DrawPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public DrawPanel(int row, int column) {
+        super(row, column);
+    }
+    /**
+     * Thic Constructor creates a panel in the (0,0) board coordinate
+     */
+    public DrawPanel() {
+        super(0,0);
     }
 
     /**

@@ -10,13 +10,20 @@ import java.util.Set;
 public class BonusPanel extends AbstractPanel{
 
     /**
-     * Creates a new Bonus Panel
+     * Constructor for a default panel without any special behaviour.
      *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
+     * @param row    represent a row of the panel in the board
+     * @param column represent a column of the panel in the board
      */
-    public BonusPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public BonusPanel(int row, int column) {
+        super(row, column);
+    }
+
+    /**
+     * Thic Constructor creates a panel in the (0,0) board coordinate
+     */
+    public BonusPanel() {
+        super(0,0);
     }
 
     /**

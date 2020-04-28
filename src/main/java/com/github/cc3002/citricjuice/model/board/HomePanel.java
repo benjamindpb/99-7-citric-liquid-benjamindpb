@@ -10,13 +10,18 @@ import java.util.Set;
 public class HomePanel extends AbstractPanel{
 
     /**
-     * Creates a new Home Panel
-     *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
+     * @param row    represent a row of the panel in the board
+     * @param column represent a column of the panel in the board
      */
-    public HomePanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public HomePanel(int row, int column) {
+        super(row, column);
+    }
+
+    /**
+     * Thic Constructor creates a panel in the (0,0) board coordinate
+     */
+    public HomePanel() {
+        super(0,0);
     }
 
     /**

@@ -1,9 +1,10 @@
 package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.Player;
-import org.jetbrains.annotations.NotNull;
+import javafx.geometry.Point2D;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -14,19 +15,25 @@ import java.util.Set;
  * @version 1.0.6-rc.2
  * @since 1.0
  */
-public abstract class AbstractPanel implements IPanel{
-  private Set<IPanel> nextPanels = new HashSet<>();
-  private Set<Player> playersInPanel = new HashSet<>();
+public abstract class AbstractPanel implements IPanel {
+
+  protected Set<IPanel> nextPanels = new HashSet<>();
+  protected Set<Player> playersInPanel = new HashSet<>();
+
+  private int row;
+  private int column;
+  private  String id;
 
   /**
-   * Creates a new Panel
+   * Constructor for a default panel without any special behaviour.
    *
-   * @param nextPanels Panel's next panels
-   * @param playersInPanel Panel's players
+   * @param row represent a row of the panel in the board
+   * @param column  represent a column of the panel in the board
    */
-  public AbstractPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-    this.nextPanels = nextPanels;
-    this.playersInPanel = playersInPanel;
+  public AbstractPanel(int row, int column) {
+    this.row = row;
+    this.column = column;
+    id = "(" + row + ", " + column + ")";
   }
 
   @Override
@@ -45,5 +52,42 @@ public abstract class AbstractPanel implements IPanel{
     nextPanels.add(panel);
   }
 
+  public void addPlayerToPanel(final Player player){
+    playersInPanel.add(player);
+  }
 
+  @Override
+  public String toString() {
+    return id;
+  }
+
+  /**
+   * @return the row of the current panel
+   */
+  public int getRow() {
+    return row;
+  }
+
+  /**
+   * @return the column of the current panel
+   */
+  public int getColumn() {
+    return column;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    AbstractPanel that = (AbstractPanel) o;
+    return row == that.row &&
+            column == that.column &&
+            Objects.equals(nextPanels, that.nextPanels) &&
+            Objects.equals(playersInPanel, that.playersInPanel);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(nextPanels, playersInPanel, row, column);
+  }
 }
