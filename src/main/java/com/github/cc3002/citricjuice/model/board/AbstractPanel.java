@@ -1,7 +1,6 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-import javafx.geometry.Point2D;
+import com.github.cc3002.citricjuice.model.units.Player;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -60,6 +59,7 @@ public abstract class AbstractPanel implements IPanel {
   public String toString() {
     return id;
   }
+
   /**
    * @return the row of the current panel
    */

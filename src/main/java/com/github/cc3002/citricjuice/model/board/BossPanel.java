@@ -1,8 +1,6 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-
-import java.util.Set;
+import com.github.cc3002.citricjuice.model.units.Player;
 
 /**
  * This class represent a Boss Panel
