@@ -1,5 +1,8 @@
 package com.github.cc3002.citricjuice.model.units;
 
+import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
+
 public interface IUnit{
 
     /**
@@ -62,4 +65,12 @@ public interface IUnit{
      * @return the wins of the player
      */
     int getWins();
+
+    void attack(IUnit unit);
+
+    void receiveWildAttack(WildUnit wildUnit);
+
+    void receiveBossAttack(BossUnit bossUnit);
+
+    void receivePlayerAttack(Player player);
 }

@@ -81,4 +81,5 @@ public abstract class AbstractUnit implements IUnit{
     public int getWins() {
       return wins;
     }
+
 }

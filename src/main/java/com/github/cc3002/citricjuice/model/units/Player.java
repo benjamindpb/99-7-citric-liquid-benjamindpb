@@ -1,6 +1,8 @@
 package com.github.cc3002.citricjuice.model.units;
 
 import com.github.cc3002.citricjuice.model.board.IPanel;
+import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -102,4 +104,23 @@ public class Player extends AbstractUnit {
     panel.activatePanelEffectBy(this);
   }
 
+  @Override
+  public void attack(IUnit unit) {
+    unit.receivePlayerAttack(this);
+  }
+
+  @Override
+  public void receiveWildAttack(WildUnit wildUnit) {
+
+  }
+
+  @Override
+  public void receiveBossAttack(BossUnit bossUnit) {
+
+  }
+
+  @Override
+  public void receivePlayerAttack(Player player) {
+
+  }
 }

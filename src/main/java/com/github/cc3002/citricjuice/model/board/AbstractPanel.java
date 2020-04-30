@@ -21,7 +21,7 @@ public abstract class AbstractPanel implements IPanel {
 
   private int row;
   private int column;
-  private  String id;
+  private String id;
 
   /**
    * Constructor for a default panel without any special behaviour.
