@@ -3,6 +3,12 @@ package com.github.cc3002.citricjuice.model.units;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
+/**
+ * A representation of an Unit that can battle others
+ *
+ * @author Benjamin del Pino Badilla
+ *
+ */
 public interface IUnit{
 
     /**
@@ -66,11 +72,31 @@ public interface IUnit{
      */
     int getWins();
 
+    /**
+     * Attacks another unit
+     *
+     * @param unit that receives the attack
+     */
     void attack(IUnit unit);
 
+    /**
+     * Receives damage from a wild unit attack
+     *
+     * @param wildUnit that attacks
+     */
     void receiveWildAttack(WildUnit wildUnit);
 
+    /**
+     * Receives damage from a boss unit attack
+     *
+     * @param bossUnit that attacks
+     */
     void receiveBossAttack(BossUnit bossUnit);
 
+    /**
+     * Receive damage from a player attack
+     *
+     * @param player that attacks
+     */
     void receivePlayerAttack(Player player);
 }
