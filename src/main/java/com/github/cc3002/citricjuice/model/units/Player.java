@@ -5,8 +5,6 @@ import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
 /**
  * This class represents a player in the game 99.7% Citric Liquid.
  *
@@ -15,7 +13,6 @@ import java.util.Random;
  * @since 1.0
  */
 public class Player extends AbstractUnit {
-  private final Random random;
   private int normaLevel;
 
   /**
@@ -36,7 +33,6 @@ public class Player extends AbstractUnit {
                 final int evd) {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
-    random = new Random();
   }
 
   /**
@@ -48,14 +44,7 @@ public class Player extends AbstractUnit {
     random.setSeed(seed);
   }
 
-  /**
-   * Returns a uniformly distributed random value in [1, 6]
-   */
-  public int roll() {
-    return random.nextInt(6) + 1;
-  }
-
-  /**
+   /**
    * Returns the current norma level
    */
   public int getNormaLevel() {
@@ -106,21 +95,48 @@ public class Player extends AbstractUnit {
 
   @Override
   public void attack(IUnit unit) {
-    unit.receivePlayerAttack(this);
+    unit.receivePlayerAttack(this, false);
   }
 
   @Override
-  public void receiveWildAttack(WildUnit wildUnit) {
-
+  public void receiveWildAttack(WildUnit wildUnit, boolean counterattack) {
+    wildUnit.battle(this);
+    if(this.getCurrentHP() > 0 && !counterattack){
+      wildUnit.receivePlayerAttack(this, true);
+    }
+    else if (this.getCurrentHP() == 0){ // hp == 0
+      wildUnit.increaseWinsBy(2);
+      int stars = (int) Math.floor(this.getStars() * 0.5);
+      wildUnit.increaseStarsBy(stars);
+      this.reduceStarsBy(stars);
+    }
   }
 
   @Override
-  public void receiveBossAttack(BossUnit bossUnit) {
-
+  public void receiveBossAttack(BossUnit bossUnit, boolean counterAttack) {
+    bossUnit.battle(this);
+    if(this.getCurrentHP() > 0 && !counterAttack){
+      bossUnit.receivePlayerAttack(this, true);
+    }
+    else if (this.getCurrentHP() == 0){ // hp == 0
+      bossUnit.increaseWinsBy(2);
+      int stars = (int) Math.floor(this.getStars() * 0.5);
+      bossUnit.increaseStarsBy(stars);
+      this.reduceStarsBy(stars);
+    }
   }
 
   @Override
-  public void receivePlayerAttack(Player player) {
-
+  public void receivePlayerAttack(Player player, boolean counterAttack) {
+    player.battle(this);
+    if(this.getCurrentHP() > 0 && !counterAttack){
+      player.receivePlayerAttack(this, true);
+    }
+    else if (this.getCurrentHP() == 0){ // hp == 0
+      player.increaseWinsBy(2);
+      int stars = (int) Math.floor(this.getStars() * 0.5);
+      player.increaseStarsBy(stars);
+      this.reduceStarsBy(stars);
+    }
   }
 }

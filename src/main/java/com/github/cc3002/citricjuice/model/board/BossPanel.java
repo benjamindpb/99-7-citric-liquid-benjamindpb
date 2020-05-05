@@ -6,11 +6,8 @@ import com.github.cc3002.citricjuice.model.units.boss.FlyingCastle;
 import com.github.cc3002.citricjuice.model.units.boss.ShifuRobot;
 import com.github.cc3002.citricjuice.model.units.boss.StoreManager;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * This class represent a Boss Panel
@@ -20,7 +17,7 @@ import java.util.Set;
  */
 public class BossPanel extends AbstractPanel{
 
-    private BossUnit panelUnit;
+    private BossUnit selectedBossUnit;
     private final ArrayList<BossUnit> bossUnits = new ArrayList<BossUnit>();
     private Random random;
 
@@ -32,7 +29,7 @@ public class BossPanel extends AbstractPanel{
      */
     public BossPanel(int row, int column) {
         super(row, column);
-        this.panelUnit = null;
+        this.selectedBossUnit = null;
         random = new Random();
 
         this.bossUnits.add(new FlyingCastle());
@@ -53,10 +50,10 @@ public class BossPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        if(this.panelUnit == null || this.panelUnit.getCurrentHP() == 0){
+        if(this.selectedBossUnit == null || this.selectedBossUnit.getCurrentHP() == 0){
             createBossUnit();
         }
-        player.attack(this.panelUnit);
+        player.attack(selectedBossUnit);
     }
 
     /**
@@ -64,6 +61,6 @@ public class BossPanel extends AbstractPanel{
      */
     public void createBossUnit(){
         int index = random.nextInt(bossUnits.size());
-        this.panelUnit = bossUnits.get(index);
+        this.selectedBossUnit = bossUnits.get(index);
     }
 }

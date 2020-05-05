@@ -29,21 +29,29 @@ public class WildUnit extends AbstractUnit {
 
     @Override
     public void attack(IUnit unit) {
-        unit.receiveWildAttack(this);
+        unit.receiveWildAttack(this, false);
     }
 
     @Override
-    public void receiveWildAttack(WildUnit wildUnit) {
-
-    }
-
-    @Override
-    public void receiveBossAttack(BossUnit bossUnit) {
+    public void receiveWildAttack(WildUnit wildUnit, boolean counterattack) {
 
     }
 
     @Override
-    public void receivePlayerAttack(Player player) {
+    public void receiveBossAttack(BossUnit bossUnit, boolean counterAttack) {
 
+    }
+
+    @Override
+    public void receivePlayerAttack(Player player, boolean counterAttack) {
+        player.battle(this);
+        if(this.getCurrentHP() > 0 && !counterAttack){
+            player.receiveWildAttack(this, true);
+        }
+        else{ // hp == 0
+            int stars = this.getStars();
+            player.increaseStarsBy(stars);
+            this.reduceStarsBy(stars);
+        }
     }
 }

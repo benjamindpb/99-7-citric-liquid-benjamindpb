@@ -1,5 +1,7 @@
 package com.github.cc3002.citricjuice.model.units;
 
+import java.util.Random;
+
 /**
  *
  * Abstract Class that represents the Units of the game
@@ -12,9 +14,12 @@ public abstract class AbstractUnit implements IUnit{
     protected final int atk;
     protected final int def;
     protected final int evd;
+    protected final Random random;
     protected int stars;
     protected int currentHP;
     protected int wins;
+
+    protected boolean defend, evade;
 
     public AbstractUnit(final String name, final int hp, final int atk, final int def,
                         final int evd) {
@@ -25,6 +30,7 @@ public abstract class AbstractUnit implements IUnit{
         this.evd = evd;
         wins = 0;
         stars = 0;
+        random = new Random();
     }
 
     @Override
@@ -82,4 +88,39 @@ public abstract class AbstractUnit implements IUnit{
       return wins;
     }
 
+    @Override
+    public int roll() {
+      return random.nextInt(6) + 1;
+    }
+
+    @Override
+    public boolean chooseDefend(){
+        return true;
+    }
+    @Override
+    public boolean chooseEvade(){
+        return true;
+    }
+
+    public void battle(IUnit unit){
+        int roll_atk = this.roll();
+        int dmg = roll_atk + this.getAtk();
+        if(unit.chooseDefend()){
+            int roll_def = unit.roll();
+            int def = roll_def + unit.getDef();
+            unit.setCurrentHP(Math.max(1, dmg - def));
+        }
+        else if (unit.chooseEvade()){
+            int roll_evd = unit.roll();
+            int evd = roll_evd + unit.getEvd();
+            if (evd <= dmg){
+                unit.setCurrentHP(unit.getCurrentHP() - dmg);
+            }
+        }
+
+    }
+
+    public void increaseWinsBy(final int amount){
+        wins += amount;
+    }
 }

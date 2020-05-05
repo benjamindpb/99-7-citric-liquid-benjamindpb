@@ -38,7 +38,7 @@ public class EncounterPanel extends AbstractPanel {
     }
 
     /**
-     * Thic Constructor creates a panel in the (0,0) board coordinate
+     * ThiS Constructor creates a panel in the (0,0) board coordinate
      */
     public EncounterPanel() {
         super(0,0);
@@ -53,7 +53,7 @@ public class EncounterPanel extends AbstractPanel {
         if(this.selectedWildUnit == null || this.selectedWildUnit.getCurrentHP() == 0){
             createWildUnit();
         }
-        player.attack(this.selectedWildUnit);
+        player.attack(selectedWildUnit);
     }
 
     /**

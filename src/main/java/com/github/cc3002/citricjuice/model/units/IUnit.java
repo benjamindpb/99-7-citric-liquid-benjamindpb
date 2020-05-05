@@ -83,20 +83,32 @@ public interface IUnit{
      * Receives damage from a wild unit attack
      *
      * @param wildUnit that attacks
+     * @param counterattack
      */
-    void receiveWildAttack(WildUnit wildUnit);
+    void receiveWildAttack(WildUnit wildUnit, boolean counterattack);
 
     /**
      * Receives damage from a boss unit attack
      *
      * @param bossUnit that attacks
+     * @param counterAttack
      */
-    void receiveBossAttack(BossUnit bossUnit);
+    void receiveBossAttack(BossUnit bossUnit, boolean counterAttack);
 
     /**
      * Receive damage from a player attack
      *
      * @param player that attacks
+     * @param counterAttack
      */
-    void receivePlayerAttack(Player player);
+    void receivePlayerAttack(Player player, boolean counterAttack);
+
+    /**
+     * Returns a uniformly distributed random value in [1, 6]
+     */
+    int roll();
+
+    boolean chooseDefend();
+
+    boolean chooseEvade();
 }
