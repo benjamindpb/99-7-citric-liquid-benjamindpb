@@ -70,7 +70,7 @@ public class PlayerTest {
   // region : consistency tests
   @RepeatedTest(100)
   public void hitPointsConsistencyTest() {
-    final long testSeed = new Random().nextLong();
+    final int testSeed = new Random().nextInt();
     // We're gonna try and set random hit points in [-maxHP * 2, maxHP * 2]
     final int testHP = new Random(testSeed).nextInt(4 * suguri.getMaxHP() + 1)
                        - 2 * suguri.getMaxHP();
@@ -84,7 +84,7 @@ public class PlayerTest {
 
   @RepeatedTest(100)
   public void normaClearConsistencyTest() {
-    final long testSeed = new Random().nextLong();
+    final int testSeed = new Random().nextInt();
     // We're gonna test for 0 to 5 norma clears
     final int iterations = Math.abs(new Random(testSeed).nextInt(6));
     final int expectedNorma = suguri.getNormaLevel() + iterations;
@@ -97,7 +97,7 @@ public class PlayerTest {
 
   @RepeatedTest(100)
   public void rollConsistencyTest() {
-    final long testSeed = new Random().nextLong();
+    final int testSeed = new Random().nextInt();
     suguri.setSeed(testSeed);
     final int roll = suguri.roll();
     assertTrue(roll >= 1 && roll <= 6,

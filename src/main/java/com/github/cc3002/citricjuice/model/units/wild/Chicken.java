@@ -7,4 +7,5 @@ public class Chicken extends WildUnit {
     public Chicken() {
         super("Chicken", 3, -1, -1, 1);
     }
+
 }

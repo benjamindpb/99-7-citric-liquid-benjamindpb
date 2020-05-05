@@ -35,7 +35,7 @@ class AbstractPanelTest {
   private DrawPanel testDrawPanel;
 
 
-  private long testSeed;
+  private int testSeed;
 
   @BeforeEach
   public void setUp() {
@@ -47,7 +47,7 @@ class AbstractPanelTest {
     testHomePanel = new HomePanel();
     testNeutralPanel = new NeutralPanel();
 
-    testSeed = new Random().nextLong();
+    testSeed = new Random().nextInt();
 
     suguri = new Player(PLAYER_NAME, BASE_HP, BASE_ATK, BASE_DEF, BASE_EVD);
     kai = new Player("Kai", 5, 1, 0, 0);

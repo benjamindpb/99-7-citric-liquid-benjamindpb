@@ -108,7 +108,11 @@ public interface IUnit{
      */
     int roll();
 
-    boolean chooseDefend();
+    void chooseDefend();
 
-    boolean chooseEvade();
+    void chooseEvade();
+
+    boolean getDefChoose();
+
+    boolean getEvadeChoose();
 }

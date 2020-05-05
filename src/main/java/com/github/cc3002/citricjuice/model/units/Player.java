@@ -40,9 +40,9 @@ public class Player extends AbstractUnit {
    * The random number generator is used for taking non-deterministic decisions, this method is
    * declared to avoid non-deterministic behaviour while testing the code.
    */
-  public void setSeed(final long seed) {
+/*  public void setSeed(final long seed) {
     random.setSeed(seed);
-  }
+  }*/
 
    /**
    * Returns the current norma level
@@ -100,11 +100,11 @@ public class Player extends AbstractUnit {
 
   @Override
   public void receiveWildAttack(WildUnit wildUnit, boolean counterattack) {
-    wildUnit.battle(this);
+    wildUnit.beginBattle(this);
     if(this.getCurrentHP() > 0 && !counterattack){
       wildUnit.receivePlayerAttack(this, true);
     }
-    else if (this.getCurrentHP() == 0){ // hp == 0
+    else if (this.isOutOfCombat()){ // hp == 0
       wildUnit.increaseWinsBy(2);
       int stars = (int) Math.floor(this.getStars() * 0.5);
       wildUnit.increaseStarsBy(stars);
@@ -114,11 +114,11 @@ public class Player extends AbstractUnit {
 
   @Override
   public void receiveBossAttack(BossUnit bossUnit, boolean counterAttack) {
-    bossUnit.battle(this);
+    bossUnit.beginBattle(this);
     if(this.getCurrentHP() > 0 && !counterAttack){
       bossUnit.receivePlayerAttack(this, true);
     }
-    else if (this.getCurrentHP() == 0){ // hp == 0
+    else if (this.isOutOfCombat()){ // hp == 0
       bossUnit.increaseWinsBy(2);
       int stars = (int) Math.floor(this.getStars() * 0.5);
       bossUnit.increaseStarsBy(stars);
@@ -128,11 +128,11 @@ public class Player extends AbstractUnit {
 
   @Override
   public void receivePlayerAttack(Player player, boolean counterAttack) {
-    player.battle(this);
+    player.beginBattle(this);
     if(this.getCurrentHP() > 0 && !counterAttack){
       player.receivePlayerAttack(this, true);
     }
-    else if (this.getCurrentHP() == 0){ // hp == 0
+    else if (this.isOutOfCombat()){ // hp == 0
       player.increaseWinsBy(2);
       int stars = (int) Math.floor(this.getStars() * 0.5);
       player.increaseStarsBy(stars);
