@@ -49,7 +49,7 @@ public class CombatTest {
         return new Player("Kai", 5, 1, 0, 0);
     }
 
-    @RepeatedTest(50)
+    @RepeatedTest(10)
     public void simpleBattleWithDefUnitChooseTest(){
         WildUnit opponent = getChicken();
         r1.setSeed(seed1);
@@ -65,7 +65,7 @@ public class CombatTest {
         suguri.beginBattle(opponent);
         assertEquals(expectedHP, opponent.getCurrentHP());
     }
-    @RepeatedTest(50)
+    @RepeatedTest(10)
     public void simpleBattleWithEvadeUnitChooseTest(){
         BossUnit opponent = new StoreManager();
         r1.setSeed(seed1);
@@ -81,4 +81,5 @@ public class CombatTest {
         suguri.beginBattle(opponent);
         assertEquals(expectedHP, opponent.getCurrentHP());
     }
+
 }

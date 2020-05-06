@@ -35,7 +35,8 @@ public class BossUnit extends AbstractUnit {
 
     @Override
     public void receiveWildAttack(WildUnit wildUnit, boolean counterAttack) {
-        wildUnit.beginBattle(this);
+        if (!counterAttack)
+            wildUnit.beginBattle(this);
         if(this.getCurrentHP() > 0 && !counterAttack){
             wildUnit.receiveBossAttack(this, true);
         }
@@ -49,7 +50,8 @@ public class BossUnit extends AbstractUnit {
 
     @Override
     public void receiveBossAttack(BossUnit bossUnit, boolean counterAttack) {
-        bossUnit.beginBattle(this);
+        if (!counterAttack)
+            bossUnit.beginBattle(this);
         if(this.getCurrentHP() > 0 && !counterAttack){
             bossUnit.receiveBossAttack(this, true);
         }
@@ -63,7 +65,8 @@ public class BossUnit extends AbstractUnit {
 
     @Override
     public void receivePlayerAttack(Player player, boolean counterAttack) {
-        player.beginBattle(this);
+        if (!counterAttack)
+            player.beginBattle(this);
         if(this.getCurrentHP() > 0 && !counterAttack){
             player.receiveBossAttack(this, true);
         }
