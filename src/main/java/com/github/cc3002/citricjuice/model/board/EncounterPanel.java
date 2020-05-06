@@ -8,6 +8,7 @@ import com.github.cc3002.citricjuice.model.units.wild.Seagull;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -21,6 +22,15 @@ public class EncounterPanel extends AbstractPanel {
     private WildUnit selectedWildUnit;
     private final ArrayList<WildUnit> wildUnits = new ArrayList<WildUnit>();
     private Random random;
+    private long seed;
+
+    public WildUnit getSelectedWildUnit() {
+        return selectedWildUnit;
+    }
+
+    public ArrayList<WildUnit> getWildUnits() {
+        return wildUnits;
+    }
 
     /**
      * Creates a new Encounter Panel
@@ -62,6 +72,25 @@ public class EncounterPanel extends AbstractPanel {
     public void createWildUnit(){
         int index = random.nextInt(wildUnits.size());
         this.selectedWildUnit = wildUnits.get(index);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        EncounterPanel that = (EncounterPanel) o;
+        return Objects.equals(wildUnits, that.wildUnits);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), wildUnits);
+    }
+
+    public void setSeed(long seed) {
+        random = new Random(seed);
+        this.seed = seed;
     }
 
 }

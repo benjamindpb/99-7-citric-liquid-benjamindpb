@@ -1,5 +1,6 @@
 package com.github.cc3002.citricjuice.model.units;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -127,8 +128,7 @@ public abstract class AbstractUnit implements IUnit{
         }
         else if (unit.getEvadeChoose()){
             evade = false;
-            int roll_evd = unit.roll();
-            int evd = roll_evd + unit.getEvd();
+            int evd = unit.roll() + unit.getEvd();
             if (evd <= dmg) {
                 unit.setCurrentHP(unit.getCurrentHP() - dmg);
             }
@@ -152,5 +152,27 @@ public abstract class AbstractUnit implements IUnit{
 
     public long getSeed(){
         return seed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractUnit that = (AbstractUnit) o;
+        return maxHP == that.maxHP &&
+                atk == that.atk &&
+                def == that.def &&
+                evd == that.evd &&
+                stars == that.stars &&
+                currentHP == that.currentHP &&
+                wins == that.wins &&
+                defend == that.defend &&
+                evade == that.evade &&
+                Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, maxHP, atk, def, evd, stars, currentHP, wins, defend, evade);
     }
 }

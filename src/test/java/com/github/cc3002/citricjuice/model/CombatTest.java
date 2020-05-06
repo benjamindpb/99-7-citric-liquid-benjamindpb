@@ -1,6 +1,5 @@
 package com.github.cc3002.citricjuice.model;
 
-import com.github.cc3002.citricjuice.model.units.IUnit;
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.boss.ShifuRobot;
@@ -23,11 +22,21 @@ public class CombatTest {
     private Seagull seagull;
     private ShifuRobot shifu;
 
+    private long seed1;
+    private long seed2;
+    private Random r1;
+    private Random r2;
+
+
     @BeforeEach
     public void setUp(){
         suguri = new Player("Suguri", 4,1, -1, 2);
         seagull = new Seagull(); //("Seagull", 3, 1, -1, -1)
         shifu = new ShifuRobot(); //("Shifu Robot", 7, 2, 3, -2)
+        seed1 = new Random().nextLong();
+        seed2 = new Random().nextLong();
+        r1 = new Random();
+        r2 = new Random();
     }
 
     private BossUnit getStoreManager(){
@@ -36,36 +45,40 @@ public class CombatTest {
     private WildUnit getChicken(){
         return new Chicken(); //("Chicken", 3, -1, -1, 1);
     }
-
     private Player getKai(){
         return new Player("Kai", 5, 1, 0, 0);
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(50)
     public void simpleBattleWithDefUnitChooseTest(){
         WildUnit opponent = getChicken();
-        long seed1 = new Random().nextLong();
-        long seed2 = new Random().nextLong();
-        Random r = new Random();
-        Random r2 = new Random();
-        r.setSeed(seed1);
+        r1.setSeed(seed1);
         r2.setSeed(seed2);
         suguri.setSeed(seed1);
         opponent.setSeed(seed2);
 
-        int dmg = (r.nextInt(6) + 1) + suguri.getAtk();
+        int dmg = (r1.nextInt(6) + 1) + suguri.getAtk();
         int def = (r2.nextInt(6) +1) + opponent.getDef();
 
         int expectedHP = Math.max(0,opponent.getCurrentHP() - Math.max(1, dmg - def));
-        //System.out.println(expectedHP);
         opponent.chooseDefend();
         suguri.beginBattle(opponent);
         assertEquals(expectedHP, opponent.getCurrentHP());
-
     }
-    /*@Test
+    @RepeatedTest(50)
     public void simpleBattleWithEvadeUnitChooseTest(){
         BossUnit opponent = new StoreManager();
-        long
-    }*/
+        r1.setSeed(seed1);
+        r2.setSeed(seed2);
+        suguri.setSeed(seed1);
+        opponent.setSeed(seed2);
+
+        int dmg = (r1.nextInt(6) + 1) + suguri.getAtk();
+        int evd = (r2.nextInt(6) +1) + opponent.getEvd();
+
+        int expectedHP = Math.max(0, opponent.getCurrentHP() - (evd <= dmg ? dmg : 0));
+        opponent.chooseEvade();
+        suguri.beginBattle(opponent);
+        assertEquals(expectedHP, opponent.getCurrentHP());
+    }
 }

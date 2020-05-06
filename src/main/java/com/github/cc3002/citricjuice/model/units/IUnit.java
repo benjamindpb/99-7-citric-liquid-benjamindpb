@@ -83,7 +83,7 @@ public interface IUnit{
      * Receives damage from a wild unit attack
      *
      * @param wildUnit that attacks
-     * @param counterattack
+     * @param counterattack verify if its a counterattack
      */
     void receiveWildAttack(WildUnit wildUnit, boolean counterattack);
 
@@ -91,7 +91,7 @@ public interface IUnit{
      * Receives damage from a boss unit attack
      *
      * @param bossUnit that attacks
-     * @param counterAttack
+     * @param counterAttack verify if its a counterattack
      */
     void receiveBossAttack(BossUnit bossUnit, boolean counterAttack);
 
@@ -99,7 +99,7 @@ public interface IUnit{
      * Receive damage from a player attack
      *
      * @param player that attacks
-     * @param counterAttack
+     * @param counterAttack verify if its a counterattack
      */
     void receivePlayerAttack(Player player, boolean counterAttack);
 
