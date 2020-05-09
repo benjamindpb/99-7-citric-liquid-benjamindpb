@@ -9,7 +9,6 @@ import com.github.cc3002.citricjuice.model.units.wild.Seagull;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
@@ -61,8 +60,8 @@ public class CombatTest {
         int def = (r2.nextInt(6) +1) + opponent.getDef();
 
         int expectedHP = Math.max(0,opponent.getCurrentHP() - Math.max(1, dmg - def));
-        opponent.chooseDefend();
-        suguri.beginBattle(opponent);
+        int d = suguri.setDmg();
+        opponent.defend(d);
         assertEquals(expectedHP, opponent.getCurrentHP());
     }
     @RepeatedTest(10)
@@ -75,10 +74,12 @@ public class CombatTest {
 
         int dmg = (r1.nextInt(6) + 1) + suguri.getAtk();
         int evd = (r2.nextInt(6) +1) + opponent.getEvd();
+        int d = suguri.setDmg();
+
+        System.out.println("this dmg: " + dmg + " program dmg = " + d);
 
         int expectedHP = Math.max(0, opponent.getCurrentHP() - (evd <= dmg ? dmg : 0));
-        opponent.chooseEvade();
-        suguri.beginBattle(opponent);
+        opponent.evade(d);
         assertEquals(expectedHP, opponent.getCurrentHP());
     }
 

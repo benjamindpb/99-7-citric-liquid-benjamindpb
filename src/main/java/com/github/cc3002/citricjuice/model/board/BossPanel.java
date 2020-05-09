@@ -55,10 +55,13 @@ public class BossPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        if(this.selectedBossUnit == null || this.selectedBossUnit.getCurrentHP() == 0){
+        if(this.selectedBossUnit == null || selectedBossUnit.getCurrentHP() == 0){
             createBossUnit();
         }
         player.attack(selectedBossUnit);
+        if(!selectedBossUnit.isOutOfCombat()){ //CA
+            selectedBossUnit.attack(player);
+        }
     }
 
     /**
