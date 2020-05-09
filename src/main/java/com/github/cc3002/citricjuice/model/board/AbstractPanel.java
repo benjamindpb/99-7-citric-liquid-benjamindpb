@@ -1,7 +1,6 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-import javafx.geometry.Point2D;
+import com.github.cc3002.citricjuice.model.units.Player;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -22,7 +21,7 @@ public abstract class AbstractPanel implements IPanel {
 
   private int row;
   private int column;
-  private  String id;
+  private String id;
 
   /**
    * Constructor for a default panel without any special behaviour.
