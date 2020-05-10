@@ -16,8 +16,8 @@ import java.util.Set;
  */
 public abstract class AbstractPanel implements IPanel {
 
-  protected Set<IPanel> nextPanels = new HashSet<>();
-  protected Set<Player> playersInPanel = new HashSet<>();
+  private Set<IPanel> nextPanels = new HashSet<>();
+  private Set<Player> playersInPanel = new HashSet<>();
 
   private int row;
   private int column;
