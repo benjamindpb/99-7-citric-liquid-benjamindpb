@@ -92,9 +92,9 @@ public class CombatTest {
         assertEquals(expectedHP, opponent.getCurrentHP());
     }
 
-    @RepeatedTest(100)
+    @RepeatedTest(10)
     public void playerVersusSeagullTest(){
-        // (hp: 3, atk: 1, def: -1, evd: -1)
+
         r1.setSeed(seed1);
         r2.setSeed(seed2);
         suguri.setSeed(seed1);
@@ -102,17 +102,36 @@ public class CombatTest {
 
         int dmg_ply = (r1.nextInt(6) + 1) + suguri.getAtk();
         int def_opp = (r2.nextInt(6) + 1) + seagull.getDef();
-
-
         int expectedSeagullHP = Math.max(0,seagull.getCurrentHP() - Math.max(1, dmg_ply - def_opp));
+        int expectedSuguriWins = suguri.getWins();
+
         int dmg = suguri.setDmg();
         seagull.chooseDefend();
         seagull.receivePlayerAttack(suguri, dmg);
+        assertEquals(expectedSeagullHP, seagull.getCurrentHP());
+
         if(seagull.isOutOfCombat()){
             assertEquals(0, seagull.getCurrentHP());
             assertEquals(1, suguri.getWins());
         }
-        assertEquals(expectedSeagullHP, seagull.getCurrentHP());
+        else{ // contrattack
+            int dmg_opp = (r2.nextInt(6) + 1) + seagull.getAtk();
+            int evd_ply = (r1.nextInt(6) + 1) + suguri.getEvd();
+            int expectedSuguriHP = Math.max(0, suguri.getCurrentHP() - (evd_ply <= dmg_opp ? dmg_opp : 0));
+            int expectedSeagullWins = seagull.getWins();
+
+            int dmg2 = seagull.setDmg();
+            suguri.chooseEvade();
+            suguri.receiveWildAttack(seagull, dmg2);
+            assertEquals(expectedSuguriHP, suguri.getCurrentHP());
+            if(suguri.isOutOfCombat()){
+                assertEquals(0, suguri.getCurrentHP());
+                assertEquals(expectedSeagullWins + 1, seagull.getWins());
+            }
+        }
+
+
+
     }
 
 }
