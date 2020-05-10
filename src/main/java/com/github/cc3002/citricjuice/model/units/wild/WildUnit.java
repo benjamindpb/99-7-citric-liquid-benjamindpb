@@ -71,13 +71,12 @@ public class WildUnit extends AbstractUnit {
 
     @Override
     public void receivePlayerAttack(Player player, int dmg) {
-        if(this.defend){
+        if(this.isDefend()){
             this.defend(dmg);
-            this.defend = false;
         }
-        else if (this.evade){
+        else if (this.isEvade()){
             this.evade(dmg);
-            this.evade = false;
+
         }
         if(this.isOutOfCombat()){
             player.increaseWinsBy(1);

@@ -108,6 +108,7 @@ public abstract class AbstractUnit implements IUnit{
     public void defend(int dmg){
         int def = this.roll() + this.getDef();
         this.setCurrentHP(this.getCurrentHP() - Math.max(1, dmg - def));
+        this.defend = true;
     }
     @Override
     public void evade(int dmg){
@@ -115,6 +116,7 @@ public abstract class AbstractUnit implements IUnit{
         if (evd <= dmg) {
             this.setCurrentHP(this.getCurrentHP() - dmg);
         }
+        this.evade = false;
     }
 
     @Override
@@ -125,15 +127,26 @@ public abstract class AbstractUnit implements IUnit{
 
     @Override
     public void chooseEvade(){
-        defend = true;
-        evade = false;
+        defend = false;
+        evade = true;
     }
 
+    @Override
+    public boolean isDefend() {
+        return defend;
+    }
 
+    @Override
+    public boolean isEvade() {
+        return evade;
+    }
+
+    @Override
     public void increaseWinsBy(final int amount){
         wins += amount;
     }
 
+    @Override
     public boolean isOutOfCombat(){
         return currentHP == 0;
     }

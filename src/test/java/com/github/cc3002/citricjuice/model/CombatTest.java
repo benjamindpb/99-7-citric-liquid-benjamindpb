@@ -9,6 +9,7 @@ import com.github.cc3002.citricjuice.model.units.wild.Seagull;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
@@ -44,8 +45,18 @@ public class CombatTest {
     private WildUnit getChicken(){
         return new Chicken(); //("Chicken", 3, -1, -1, 1);
     }
-    private Player getKai(){
-        return new Player("Kai", 5, 1, 0, 0);
+
+    @Test
+    public void verifyDefenseEvadeValuesTest(){
+        //Defense Case
+        assertEquals(false, suguri.isDefend());
+        suguri.chooseDefend();
+        assertEquals(true, suguri.isDefend());
+        //Evade Case
+        assertEquals(false, suguri.isEvade());
+        suguri.chooseEvade();
+        assertEquals(true, suguri.isEvade());
+
     }
 
     @RepeatedTest(10)
@@ -76,11 +87,32 @@ public class CombatTest {
         int evd = (r2.nextInt(6) +1) + opponent.getEvd();
         int d = suguri.setDmg();
 
-        System.out.println("this dmg: " + dmg + " program dmg = " + d);
-
         int expectedHP = Math.max(0, opponent.getCurrentHP() - (evd <= dmg ? dmg : 0));
         opponent.evade(d);
         assertEquals(expectedHP, opponent.getCurrentHP());
+    }
+
+    @RepeatedTest(100)
+    public void playerVersusSeagullTest(){
+        // (hp: 3, atk: 1, def: -1, evd: -1)
+        r1.setSeed(seed1);
+        r2.setSeed(seed2);
+        suguri.setSeed(seed1);
+        seagull.setSeed(seed2);
+
+        int dmg_ply = (r1.nextInt(6) + 1) + suguri.getAtk();
+        int def_opp = (r2.nextInt(6) + 1) + seagull.getDef();
+
+
+        int expectedSeagullHP = Math.max(0,seagull.getCurrentHP() - Math.max(1, dmg_ply - def_opp));
+        int dmg = suguri.setDmg();
+        seagull.chooseDefend();
+        seagull.receivePlayerAttack(suguri, dmg);
+        if(seagull.isOutOfCombat()){
+            assertEquals(0, seagull.getCurrentHP());
+            assertEquals(1, suguri.getWins());
+        }
+        assertEquals(expectedSeagullHP, seagull.getCurrentHP());
     }
 
 }

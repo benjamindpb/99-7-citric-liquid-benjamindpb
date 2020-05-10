@@ -117,4 +117,12 @@ public interface IUnit{
     void chooseDefend();
 
     void chooseEvade();
+
+    boolean isDefend();
+
+    boolean isEvade();
+
+    void increaseWinsBy(int amount);
+
+    boolean isOutOfCombat();
 }
