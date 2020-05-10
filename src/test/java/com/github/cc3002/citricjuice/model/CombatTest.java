@@ -112,7 +112,7 @@ public class CombatTest {
 
         if(seagull.isOutOfCombat()){
             assertEquals(0, seagull.getCurrentHP());
-            assertEquals(1, suguri.getWins());
+            assertEquals(expectedSuguriWins + 1, suguri.getWins());
         }
         else{ // contrattack
             int dmg_opp = (r2.nextInt(6) + 1) + seagull.getAtk();
