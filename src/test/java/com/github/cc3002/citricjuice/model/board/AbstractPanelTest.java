@@ -148,14 +148,34 @@ class AbstractPanelTest {
   @Test
   public void homePanelTest() {
     assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
+    suguri.increaseStarsBy(10);
+
     testHomePanel.activatePanelEffectBy(suguri);
     assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
+    assertEquals(2, suguri.getNormaLevel());
 
     suguri.setCurrentHP(1);
+    suguri.increaseWinsBy(1);
+
     testHomePanel.activatePanelEffectBy(suguri);
     assertEquals(2, suguri.getCurrentHP());
-  }
+    assertEquals(3, suguri.getNormaLevel());
 
+    suguri.increaseStarsBy(61);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(4, suguri.getNormaLevel());
+
+    suguri.increaseWinsBy(12);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(5, suguri.getNormaLevel());
+
+    suguri.increaseStarsBy(300);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(6, suguri.getNormaLevel());
+  }
   @Test
   public void neutralPanelTest() {
     final var expectedSuguri = suguri.copy();

@@ -64,6 +64,9 @@ public class EncounterPanel extends AbstractPanel {
             createWildUnit();
         }
         player.attack(selectedWildUnit);
+        if(!selectedWildUnit.isOutOfCombat()){
+            selectedWildUnit.attack(player);
+        }
     }
 
     /**
@@ -83,10 +86,6 @@ public class EncounterPanel extends AbstractPanel {
         return Objects.equals(wildUnits, that.wildUnits);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), wildUnits);
-    }
 
     public void setSeed(long seed) {
         random = new Random(seed);

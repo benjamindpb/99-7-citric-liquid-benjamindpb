@@ -85,10 +85,6 @@ public class BossPanel extends AbstractPanel{
         return Objects.equals(bossUnits, bossPanel.bossUnits);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), bossUnits);
-    }
     public void setSeed(long seed) {
         random = new Random(seed);
         this.seed = seed;
