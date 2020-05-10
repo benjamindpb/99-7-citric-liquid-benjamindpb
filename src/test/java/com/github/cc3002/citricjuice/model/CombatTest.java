@@ -99,7 +99,7 @@ public class CombatTest {
         assertEquals(expectedHP, opponent.getCurrentHP());
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(50)
     public void suguriVersusKaiTest(){
 
         r1.setSeed(seed1);
@@ -136,7 +136,7 @@ public class CombatTest {
         }
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(50)
     public void suguriVersusSeagullTest(){
 
         r1.setSeed(seed1);
@@ -173,7 +173,7 @@ public class CombatTest {
         }
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(50)
     public void suguriVersusShifuTest(){
 
         r1.setSeed(seed1);
@@ -210,7 +210,7 @@ public class CombatTest {
         }
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(50)
     public void seagullVersusShifuTest(){
 
         r1.setSeed(seed1);
@@ -247,7 +247,7 @@ public class CombatTest {
         }
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(50)
     public void seagullVersusChickenTest(){
 
         r1.setSeed(seed1);
@@ -284,7 +284,7 @@ public class CombatTest {
         }
     }
 
-    @RepeatedTest(10)
+    @RepeatedTest(50)
     public void shifuVersusStoreManagerTest(){
 
         r1.setSeed(seed1);
