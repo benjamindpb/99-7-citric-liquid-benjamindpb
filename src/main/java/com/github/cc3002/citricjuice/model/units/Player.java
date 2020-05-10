@@ -9,8 +9,7 @@ import org.jetbrains.annotations.NotNull;
  * This class represents a player in the game 99.7% Citric Liquid.
  *
  * @author <a href="mailto:benjamin.dpb@gmail.com"> Benjamín del Pino </a>.
- * @version 1.0.6-rc.3
- * @since 1.0
+
  */
 public class Player extends AbstractUnit {
   private int normaLevel;
@@ -34,15 +33,6 @@ public class Player extends AbstractUnit {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
   }
-
-  /**
-   * Set's the seed for this player's random number generator.
-   * The random number generator is used for taking non-deterministic decisions, this method is
-   * declared to avoid non-deterministic behaviour while testing the code.
-   */
-/*  public void setSeed(final long seed) {
-    random.setSeed(seed);
-  }*/
 
    /**
    * Returns the current norma level

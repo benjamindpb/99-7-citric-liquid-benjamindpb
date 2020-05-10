@@ -6,6 +6,9 @@ import java.util.Set;
 
 /**
  * A representation of a Panel
+ *
+ * @author Benjamin del Pino Badilla
+ *
  */
 public interface IPanel {
     /**
@@ -16,7 +19,7 @@ public interface IPanel {
     /**
      * Returns a copy of the players in this panel.
      */
-    Set<Player> getPlayers();
+    Set<Player> getPlayersInPanel();
 
     /**
      * Adds a new adjacent panel to this one.

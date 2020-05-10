@@ -137,11 +137,11 @@ class AbstractPanelTest {
 
   @Test
   public void addPlayerTest(){
-    assertTrue(testNeutralPanel.getPlayers().isEmpty());
+    assertTrue(testNeutralPanel.getPlayersInPanel().isEmpty());
     testNeutralPanel.addPlayerToPanel(kai);
-    assertEquals(1, testNeutralPanel.getPlayers().size());
+    assertEquals(1, testNeutralPanel.getPlayersInPanel().size());
     testNeutralPanel.addPlayerToPanel(chicken);
-    assertEquals(2, testNeutralPanel.getPlayers().size());
+    assertEquals(2, testNeutralPanel.getPlayersInPanel().size());
   }
 
 

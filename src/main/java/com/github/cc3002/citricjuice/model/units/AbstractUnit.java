@@ -74,10 +74,12 @@ public abstract class AbstractUnit implements IUnit{
       this.currentHP = Math.max(Math.min(newHP, maxHP), 0);
     }
 
+
     @Override
     public void reduceStarsBy(final int amount) {
       stars = Math.max(0, stars - amount);
     }
+
 
     @Override
     public void increaseStarsBy(final int amount) {

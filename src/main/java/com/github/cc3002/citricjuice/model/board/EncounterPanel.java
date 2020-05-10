@@ -87,6 +87,11 @@ public class EncounterPanel extends AbstractPanel {
     }
 
 
+    /**
+     * Set a seed
+     *
+     * @param seed to be setted
+     */
     public void setSeed(long seed) {
         random = new Random(seed);
         this.seed = seed;
