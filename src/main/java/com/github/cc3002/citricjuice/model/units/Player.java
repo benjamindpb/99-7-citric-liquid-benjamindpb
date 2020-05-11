@@ -9,8 +9,7 @@ import org.jetbrains.annotations.NotNull;
  * This class represents a player in the game 99.7% Citric Liquid.
  *
  * @author <a href="mailto:benjamin.dpb@gmail.com"> Benjamín del Pino </a>.
- * @version 1.0.6-rc.3
- * @since 1.0
+
  */
 public class Player extends AbstractUnit {
   private int normaLevel;
@@ -34,15 +33,6 @@ public class Player extends AbstractUnit {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
   }
-
-  /**
-   * Set's the seed for this player's random number generator.
-   * The random number generator is used for taking non-deterministic decisions, this method is
-   * declared to avoid non-deterministic behaviour while testing the code.
-   */
-/*  public void setSeed(final long seed) {
-    random.setSeed(seed);
-  }*/
 
    /**
    * Returns the current norma level
@@ -95,48 +85,59 @@ public class Player extends AbstractUnit {
 
   @Override
   public void attack(IUnit unit) {
-    unit.receivePlayerAttack(this, false);
+    int dmg = this.setDmg();
+    unit.receivePlayerAttack(this, dmg);
   }
 
   @Override
-  public void receiveWildAttack(WildUnit wildUnit, boolean counterattack) {
-    wildUnit.beginBattle(this);
-    if(this.getCurrentHP() > 0 && !counterattack){
-      wildUnit.receivePlayerAttack(this, true);
+  public void receiveWildAttack(WildUnit wildUnit, int dmg) {
+    if(this.defend){
+      this.defend(dmg);
     }
-    else if (this.isOutOfCombat()){ // hp == 0
+    else if (this.evade){
+      this.evade(dmg);
+    }
+    if(this.isOutOfCombat()){
       wildUnit.increaseWinsBy(2);
-      int stars = (int) Math.floor(this.getStars() * 0.5);
+      int stars = (int) (this.getStars() * 0.5);
+      this.reduceStarsBy(stars);
       wildUnit.increaseStarsBy(stars);
-      this.reduceStarsBy(stars);
     }
   }
 
   @Override
-  public void receiveBossAttack(BossUnit bossUnit, boolean counterAttack) {
-    bossUnit.beginBattle(this);
-    if(this.getCurrentHP() > 0 && !counterAttack){
-      bossUnit.receivePlayerAttack(this, true);
+  public void receiveBossAttack(BossUnit bossUnit, int dmg) {
+    if(this.defend){
+      this.defend(dmg);
+      this.defend = false;
     }
-    else if (this.isOutOfCombat()){ // hp == 0
+    else if (this.evade){
+      this.evade(dmg);
+      this.evade = false;
+    }
+    if(this.isOutOfCombat()){
       bossUnit.increaseWinsBy(2);
-      int stars = (int) Math.floor(this.getStars() * 0.5);
-      bossUnit.increaseStarsBy(stars);
+      int stars = (int) (this.getStars() * 0.5);
       this.reduceStarsBy(stars);
+      bossUnit.increaseStarsBy(stars);
     }
   }
 
   @Override
-  public void receivePlayerAttack(Player player, boolean counterAttack) {
-    player.beginBattle(this);
-    if(this.getCurrentHP() > 0 && !counterAttack){
-      player.receivePlayerAttack(this, true);
+  public void receivePlayerAttack(Player player, int dmg) {
+    if(this.defend){
+      this.defend(dmg);
+      this.defend = false;
     }
-    else if (this.isOutOfCombat()){ // hp == 0
+    else if (this.evade){
+      this.evade(dmg);
+      this.evade = false;
+    }
+    if(this.isOutOfCombat()){
       player.increaseWinsBy(2);
-      int stars = (int) Math.floor(this.getStars() * 0.5);
-      player.increaseStarsBy(stars);
+      int stars = (int) (this.getStars() * 0.5);
       this.reduceStarsBy(stars);
+      player.increaseStarsBy(stars);
     }
   }
 }

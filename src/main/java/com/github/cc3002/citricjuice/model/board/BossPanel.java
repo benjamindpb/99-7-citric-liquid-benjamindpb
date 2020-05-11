@@ -55,10 +55,13 @@ public class BossPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        if(this.selectedBossUnit == null || this.selectedBossUnit.getCurrentHP() == 0){
+        if(this.selectedBossUnit == null || selectedBossUnit.getCurrentHP() == 0){
             createBossUnit();
         }
         player.attack(selectedBossUnit);
+        if(!selectedBossUnit.isOutOfCombat()){ //CA
+            selectedBossUnit.attack(player);
+        }
     }
 
     /**
@@ -82,10 +85,11 @@ public class BossPanel extends AbstractPanel{
         return Objects.equals(bossUnits, bossPanel.bossUnits);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), bossUnits);
-    }
+    /**
+     * Set a seed
+     *
+     * @param seed to be setted
+     */
     public void setSeed(long seed) {
         random = new Random(seed);
         this.seed = seed;

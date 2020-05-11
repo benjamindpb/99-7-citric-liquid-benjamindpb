@@ -15,12 +15,13 @@ public abstract class AbstractUnit implements IUnit{
     private final int atk;
     private final int def;
     private final int evd;
+    protected boolean defend;
+    protected boolean evade;
     private Random random;
     private int stars;
     private int currentHP;
     private int wins;
 
-    private boolean defend, evade;
     private long seed;
 
     public AbstractUnit(final String name, final int hp, final int atk, final int def,
@@ -31,11 +32,11 @@ public abstract class AbstractUnit implements IUnit{
         this.def = def;
         this.evd = evd;
 
+        defend = false;
+        evade = false;
         wins = 0;
         stars = 0;
         random = new Random();
-        defend = false;
-        evade = false;
     }
 
     @Override
@@ -73,10 +74,12 @@ public abstract class AbstractUnit implements IUnit{
       this.currentHP = Math.max(Math.min(newHP, maxHP), 0);
     }
 
+
     @Override
     public void reduceStarsBy(final int amount) {
       stars = Math.max(0, stars - amount);
     }
+
 
     @Override
     public void increaseStarsBy(final int amount) {
@@ -99,10 +102,31 @@ public abstract class AbstractUnit implements IUnit{
     }
 
     @Override
+    public int setDmg(){
+        return this.roll() + this.getAtk();
+    }
+
+    @Override
+    public void defend(int dmg){
+        int def = this.roll() + this.getDef();
+        this.setCurrentHP(this.getCurrentHP() - Math.max(1, dmg - def));
+        this.defend = true;
+    }
+    @Override
+    public void evade(int dmg){
+        int evd = this.roll() + this.getEvd();
+        if (evd <= dmg) {
+            this.setCurrentHP(this.getCurrentHP() - dmg);
+        }
+        this.evade = false;
+    }
+
+    @Override
     public void chooseDefend(){
         defend = true;
         evade = false;
     }
+
     @Override
     public void chooseEvade(){
         defend = false;
@@ -110,36 +134,21 @@ public abstract class AbstractUnit implements IUnit{
     }
 
     @Override
-    public boolean getDefChoose(){
+    public boolean isDefend() {
         return defend;
     }
 
     @Override
-    public boolean getEvadeChoose(){
+    public boolean isEvade() {
         return evade;
     }
 
-    public void beginBattle(IUnit unit) {
-        int dmg =  this.roll() + this.getAtk();
-        if(unit.getDefChoose()){
-            defend = false;
-            int def = unit.roll() + unit.getDef();
-            unit.setCurrentHP(unit.getCurrentHP() - Math.max(1, dmg - def));
-        }
-        else if (unit.getEvadeChoose()){
-            evade = false;
-            int evd = unit.roll() + unit.getEvd();
-            if (evd <= dmg) {
-                unit.setCurrentHP(unit.getCurrentHP() - dmg);
-            }
-        }
-
-    }
-
+    @Override
     public void increaseWinsBy(final int amount){
         wins += amount;
     }
 
+    @Override
     public boolean isOutOfCombat(){
         return currentHP == 0;
     }
@@ -148,10 +157,6 @@ public abstract class AbstractUnit implements IUnit{
     public void setSeed(long seed) {
         random = new Random(seed);
         this.seed = seed;
-    }
-
-    public long getSeed(){
-        return seed;
     }
 
     @Override
@@ -166,13 +171,11 @@ public abstract class AbstractUnit implements IUnit{
                 stars == that.stars &&
                 currentHP == that.currentHP &&
                 wins == that.wins &&
-                defend == that.defend &&
-                evade == that.evade &&
                 Objects.equals(name, that.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, maxHP, atk, def, evd, stars, currentHP, wins, defend, evade);
+        return Objects.hash(name, maxHP, atk, def, evd, stars, currentHP, wins);
     }
 }

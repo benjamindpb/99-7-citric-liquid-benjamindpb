@@ -49,14 +49,12 @@ public interface IUnit{
     void setCurrentHP(int newHP);
 
     /**
-     * Reduces this player's star count by a given amount.
-     * <p>
-     * The star count will must always be greater or equal to 0
+     * @param amount of stars to reduce
      */
     void reduceStarsBy(int amount);
 
     /**
-     * Increases this player's star count by an amount.
+     * @param amount of stars to increase
      */
     void increaseStarsBy(int amount);
 
@@ -83,36 +81,78 @@ public interface IUnit{
      * Receives damage from a wild unit attack
      *
      * @param wildUnit that attacks
-     * @param counterattack verify if its a counterattack
+     * @param dmg to receive
+     *
      */
-    void receiveWildAttack(WildUnit wildUnit, boolean counterattack);
+    void receiveWildAttack(WildUnit wildUnit, int dmg);
 
     /**
      * Receives damage from a boss unit attack
-     *
      * @param bossUnit that attacks
-     * @param counterAttack verify if its a counterattack
+     * @param dmg to receive
+     *
      */
-    void receiveBossAttack(BossUnit bossUnit, boolean counterAttack);
+    void receiveBossAttack(BossUnit bossUnit, int dmg);
 
     /**
      * Receive damage from a player attack
-     *
      * @param player that attacks
-     * @param counterAttack verify if its a counterattack
+     * @param dmg to receive
+     *
      */
-    void receivePlayerAttack(Player player, boolean counterAttack);
+    void receivePlayerAttack(Player player, int dmg);
 
     /**
      * Returns a uniformly distributed random value in [1, 6]
      */
     int roll();
 
+    /**
+     * @return the amount of the total damage to do in a battle
+     */
+    int setDmg();
+
+    /**
+     * This method is used when an unit choose to defend an attack
+     *
+     * @param dmg received
+     */
+    void defend(int dmg);
+
+    /**
+     * This method is used when an unit choose to evade an attack
+     *
+     * @param dmg received
+     */
+    void evade(int dmg);
+
+    /**
+     * set true to defend field in unit
+     */
     void chooseDefend();
 
+    /**
+     * set true to evade field in unit
+     */
     void chooseEvade();
 
-    boolean getDefChoose();
+    /**
+     * @return true if an unit choose defend, false in contrary case
+     */
+    boolean isDefend();
 
-    boolean getEvadeChoose();
+    /**
+     * @return true if an unit choose defend, false in contrary case
+     */
+    boolean isEvade();
+
+    /**
+     * @param amount of wins to add
+     */
+    void increaseWinsBy(int amount);
+
+    /**
+     * @return true if an unit dies in a combat :(, false if don't
+     */
+    boolean isOutOfCombat();
 }

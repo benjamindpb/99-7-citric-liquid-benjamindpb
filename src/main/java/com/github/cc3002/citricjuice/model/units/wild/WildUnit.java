@@ -29,50 +29,60 @@ public class WildUnit extends AbstractUnit {
 
     @Override
     public void attack(IUnit unit) {
-        unit.receiveWildAttack(this, false);
+        int dmg = this.setDmg();
+        unit.receiveWildAttack(this, dmg);
     }
 
     @Override
-    public void receiveWildAttack(WildUnit wildUnit, boolean counterAttack) {
-        if (!counterAttack)
-            wildUnit.beginBattle(this);
-        if(this.getCurrentHP() > 0 && !counterAttack){
-            wildUnit.receiveWildAttack(this, true);
+    public void receiveWildAttack(WildUnit wildUnit, int dmg) {
+        if(this.defend){
+            this.defend(dmg);
+            this.defend = false;
         }
-        else if (this.isOutOfCombat()){ // hp == 0
+        else if (this.evade){
+            this.evade(dmg);
+            this.evade = false;
+        }
+        if(this.isOutOfCombat()){
             wildUnit.increaseWinsBy(1);
-            int stars = (int) Math.floor(this.getStars() * 0.5);
+            int stars = (int) (this.getStars() * 0.5);
+            this.reduceStarsBy(stars);
             wildUnit.increaseStarsBy(stars);
-            this.reduceStarsBy(stars);
         }
     }
 
     @Override
-    public void receiveBossAttack(BossUnit bossUnit, boolean counterAttack) {
-        if (!counterAttack)
-            bossUnit.beginBattle(this);
-        if(this.getCurrentHP() > 0 && !counterAttack){
-            bossUnit.receiveWildAttack(this, true);
+    public void receiveBossAttack(BossUnit bossUnit, int dmg) {
+        if(this.defend){
+            this.defend(dmg);
+            this.defend = false;
         }
-        else if (this.isOutOfCombat()){ // hp == 0
+        else if (this.evade){
+            this.evade(dmg);
+            this.evade = false;
+        }
+        if(this.isOutOfCombat()){
             bossUnit.increaseWinsBy(1);
-            int stars = (int) Math.floor(this.getStars() * 0.5);
-            bossUnit.increaseStarsBy(stars);
+            int stars = (int) (this.getStars() * 0.5);
             this.reduceStarsBy(stars);
+            bossUnit.increaseStarsBy(stars);
         }
     }
 
     @Override
-    public void receivePlayerAttack(Player player, boolean counterAttack) {
-        if (!counterAttack)
-            player.beginBattle(this);
-        if(this.getCurrentHP() > 0 && !counterAttack){
-            player.receiveWildAttack(this, true);
+    public void receivePlayerAttack(Player player, int dmg) {
+        if(this.isDefend()){
+            this.defend(dmg);
         }
-        else if (this.isOutOfCombat()){ // hp == 0
+        else if (this.isEvade()){
+            this.evade(dmg);
+
+        }
+        if(this.isOutOfCombat()){
+            player.increaseWinsBy(1);
             int stars = this.getStars();
-            player.increaseStarsBy(stars);
             this.reduceStarsBy(stars);
+            player.increaseStarsBy(stars);
         }
     }
 
