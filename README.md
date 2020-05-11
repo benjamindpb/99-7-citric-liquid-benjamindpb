@@ -24,6 +24,8 @@ public void activatePanel(IPanel panel){
 ```
 En el cual se puede ver que se implementa el patron de diseño de ***Double Dispatch***, para asi no tener que preguntar que tipo de panel activa el player, sino que es el panel que activa su efecto por si solo. Con este patron evitamos el uso de **instanceof** y se aplica una buena metodologia de diseño.
 
+> La logica de las activacion de paneles se pueden observar en el archivo AbstractPanelTest.java
+
 # Batallas
 
 Esta version permite las batallas entre todas las unidades. A grandes rasgos las batallas se realizan de la siguiente forma:
@@ -44,3 +46,5 @@ public void attack(IUnit unit){
 }
 ```
 El metodo ``setDmg()`` retorna el ataque de la unidad, ademas existen otros metodos para defender o evadir dependiendo de lo que quiere hacer la unidad, al igual que uno que verifica si la unidad sigue en combate o no. Estos metodos son los mas importantes que se usan en una batalla.
+
+> La logica de las batallas se pueden observar en el archivo CombatTest.java
