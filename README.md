@@ -24,7 +24,7 @@ public void activatePanel(IPanel panel){
 ```
 En el cual se puede ver que se implementa el patron de diseño de ***Double Dispatch***, para así no tener que preguntar que tipo de panel activa el player, sino que es el panel que activa su efecto por si solo. Con este patron evitamos el uso de **instanceof** y se aplica una buena metodología de diseño.
 
-> La lógica de la activación de paneles se pueden observar en el archivo AbstractPanelTest.java
+> La lógica de la activación de paneles se puede observar en el archivo AbstractPanelTest.java
 
 # Batallas
 
@@ -36,7 +36,7 @@ Esta version permite las batallas entre todas las unidades. A grandes rasgos las
 
 Existen diversas formas en que una batalla puede ser originada, que no explicaré ya que me importa mas que quede clara la implementación de las batallas.
 
-Cuando una unidad derrota a otra, es decir hace que sus puntos de vida lleguen a 0, aumenta la cantidad de victorias y la cantidad de estrellas, mientras que la unidad vencida pierde cierta cantidad de estrellas. Cabe destacar que este aumento de victorias y aumento/disminución de estrellas depende directamente de que unidades son las que estaban en combate. Es por esto que también se implementa el patron de diseño ***Double Dispatch*** en el combate para evitar preguntar que unidad es la vencida o que unidad es la vencedora, dejando que exista una doble llamada entre métodos que lo haga por si sola (nuevamente evitamos el sucio **instanceof**).
+Cuando una unidad derrota a otra, es decir hace que sus puntos de vida lleguen a 0, aumenta la cantidad de victorias y la cantidad de estrellas, mientras que la unidad vencida pierde cierta cantidad de estrellas. Cabe destacar que este aumento de victorias y aumento/disminución de estrellas depende directamente de que unidades son las que estaban en combate. Es por esto que también se implementa el patron de diseño ***Double Dispatch*** en el combate para evitar preguntar que unidad esta siendo atacada y si es derrotada, sea este patrón el que se encargue de la distribucion de estrellas y victorias.
 
 Concretamente podemos ver esta implementación en que cada unidad implementa el método:
 ```
@@ -47,4 +47,4 @@ public void attack(IUnit unit){
 ```
 El método ``setDmg()`` retorna el ataque de la unidad, además existen otros métodos para defender o evadir dependiendo de lo que quiere hacer la unidad, al igual que uno que verifica si la unidad sigue en combate o no. Estos métodos son los más importantes que se usan en una batalla.
 
-> La lógica de las batallas se pueden observar en el archivo CombatTest.java
+> La lógica de las batallas se puede observar en el archivo CombatTest.java
