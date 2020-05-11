@@ -8,7 +8,7 @@
 
 Este proyecto consiste en crear un clon (simplificado) del juego **100% Orange Juice** desarrollado por [Orange_Juice](http://dadai.moo.jp) y distribuido por [Fruitbat Factory](https://fruitbatfactory.com). A grandes rasgos este es un juego de tablero por turnos de 4 jugadores donde cada uno maneja un personaje distinto con características propias. El objetivo del juego es cumplir una cierta cantidad de requisitos para llegar al nivel más alto antes que los otros jugadores.
 
-Usa una version de Java 13 o mayor, además se usa el testing framework de [JUnit 5.1](https://junit.org/junit5/), la librería [@API Guardian](https://github.com/apiguardian-team/apiguardian) para anotar tipos públicos, métodos, constructores y campos dentro de un marco o aplicación, y [OpenJFX](https://openjfx.io/) que es una plataforma de aplicación para sistemas de escritorio, móviles y embebidos integrados en Java.
+Es necesario JDK13 o JDK14, además usa el testing framework de [JUnit 5.1](https://junit.org/junit5/), la librería [@API Guardian](https://github.com/apiguardian-team/apiguardian) para anotar tipos públicos, métodos, constructores y campos dentro de un marco o aplicación, y [OpenJFX](https://openjfx.io/) que es una plataforma de aplicación para sistemas de escritorio, móviles y embebidos integrados en Java.
 
 # Lógica del juego
 
