@@ -10,6 +10,8 @@ Este proyecto consiste en crear un clon (simplificado) del juego **100% Orange J
 
 Es necesario JDK13 o JDK14, además usa el testing framework de [JUnit 5.1](https://junit.org/junit5/), la librería [@API Guardian](https://github.com/apiguardian-team/apiguardian) para anotar tipos públicos, métodos, constructores y campos dentro de un marco o aplicación, y [OpenJFX](https://openjfx.io/) que es una plataforma de aplicación para sistemas de escritorio, móviles y embebidos integrados en Java.
 
+> ***Para efectos de esta version, el juego no se puede ejecutar para ser jugado inmediatamente sin embargo viene con una bateria muy amplia de test que explican un poco el funcionamiento clave de la mecanica que maneja el juego.***
+
 # Lógica del juego
 
 Esta primera version del proyecto contiene la lógica y el funcionamiento de los **Paneles** y de las **Unidades**. En ambos casos se crea una **interfaz** para favorecer el mantenimiento y la extensión de futuras versiones del proyecto, y una **clase abstracta** que implementa la interfaz correspondiente en la cual están presentes las funciones genéricas que comparten las subclases que extiendan esta clase. Para cada tipo de panel (**Home**, **Bonus**, **Drop**, **Boss**, **Encounter**, **Draw** y **Neutral**) se crea su respectiva clase, que extiende a **AbstractPanel**, por otro lado, para las unidades se crean al igual que en el caso de los paneles, clases para cada tipo de unidad (**Player**, **Wild** y **Boss**) que extienden a la clase **AbstractUnit**.
