@@ -30,9 +30,9 @@ En el cual se puede ver que se implementa el patron de diseño de ***Double Disp
 
 # Batallas
 
-Esta version permite las batallas entre todas las unidades. A grandes rasgos las batallas se realizan de la siguiente forma:
-1. La unidad que activa la batalla **ataca**
-2. La unidad que es atacada elige si **defender** o **evadir**
+Esta version permite las batallas entre todas las unidades. Las batallas se realizan de la siguiente forma:
+1. La unidad que activa la batalla calcula su ataque y **ataca**
+2. La unidad que es atacada elige si **defender** o **evadir** y calcula su defensa o evasion.
 3. Si la unidad que recibe el ataque queda vida, entonces **contraataca** (volviendo a los pasos 1-2)
 4. Se termina la batalla
 
