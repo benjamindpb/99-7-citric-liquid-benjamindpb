@@ -1,5 +1,7 @@
 package com.github.cc3002.citricjuice.model.cards;
 
+import java.util.Objects;
+
 public abstract class AbstractCard implements ICard{
     private final String name;
     private final String effect;
@@ -28,4 +30,6 @@ public abstract class AbstractCard implements ICard{
     public int getPrice() {
         return price;
     }
+
+
 }
