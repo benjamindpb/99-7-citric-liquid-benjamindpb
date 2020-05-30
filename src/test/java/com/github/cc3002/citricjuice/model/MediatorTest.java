@@ -162,7 +162,7 @@ class MediatorTest {
     assertTrue(panels[1].getPlayers().contains(players[1]));
   }
 
-  @Test
+  /*@Test
   public void testPlayerHome() {
     var homePanel = mediator.createHomePanel(0);
     var panel1 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
@@ -170,6 +170,18 @@ class MediatorTest {
     mediator.setNextPanel(panel1, homePanel);
     mediator.setNextPanel(homePanel, panel2);
     var player = mediator.createPlayer(homePanel, testPlayers.get(0)).getFirst();
+    mediator.setPlayerHome(player, homePanel);
+    mediator.movePlayer();
+    assertTrue(homePanel.getPlayers().contains(player), "Player didn't stop at it's home panel");
+  }*/
+  @Test
+  public void testPlayerHome() {
+    var homePanel = mediator.createHomePanel(0);
+    var panel1 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
+    var panel2 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(2);
+    mediator.setNextPanel(panel1, homePanel);
+    mediator.setNextPanel(homePanel, panel2);
+    var player = mediator.createPlayer(panel1, testPlayers.get(0)).getFirst();
     mediator.setPlayerHome(player, homePanel);
     mediator.movePlayer();
     assertTrue(homePanel.getPlayers().contains(player), "Player didn't stop at it's home panel");
