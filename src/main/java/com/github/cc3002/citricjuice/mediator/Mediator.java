@@ -2,6 +2,8 @@ package com.github.cc3002.citricjuice.mediator;
 
 import com.github.cc3002.citricjuice.controller.GameController;
 import com.github.cc3002.citricjuice.model.NormaGoal;
+import com.github.cc3002.citricjuice.model.board.AbstractPanel;
+import com.github.cc3002.citricjuice.model.units.Player;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -221,7 +223,7 @@ public class Mediator {
      * @param <T>
      *     The panel's class.
      */
-    public static class MediatorPanel<T extends Object> {
+    public static class MediatorPanel<T extends AbstractPanel> {
         // (!) Replace extends Object with the actual class for the panels.
         //  For example: <T extends Panel>
         private final T panel;
@@ -342,7 +344,7 @@ public class Mediator {
      * @param <T>
      *     The player's class.
      */
-    public static class MediatorPlayer<T extends Object> extends MediatorUnit<T> {
+    public static class MediatorPlayer<T extends Player> extends MediatorUnit<T> {
         // (!) Replace extends Object with the actual class for the units
         //  For example: <T extends Player>
         public MediatorPlayer(String name, int hitPoints, int attack, int defense, int evasion) {
