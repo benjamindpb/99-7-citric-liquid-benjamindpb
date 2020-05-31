@@ -1,10 +1,10 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.units.Player;
-import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.boss.FlyingCastle;
-import com.github.cc3002.citricjuice.model.units.boss.ShifuRobot;
-import com.github.cc3002.citricjuice.model.units.boss.StoreManager;
+import com.github.cc3002.citricjuice.model.unit.Player;
+import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.unit.boss.FlyingCastle;
+import com.github.cc3002.citricjuice.model.unit.boss.ShifuRobot;
+import com.github.cc3002.citricjuice.model.unit.boss.StoreManager;
 
 import java.util.ArrayList;
 import java.util.Objects;

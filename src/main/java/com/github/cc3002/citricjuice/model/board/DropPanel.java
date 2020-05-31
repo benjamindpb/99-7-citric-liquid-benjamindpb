@@ -1,6 +1,6 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.units.Player;
+import com.github.cc3002.citricjuice.model.unit.Player;
 
 /**
  * This class represent a Drop Panel

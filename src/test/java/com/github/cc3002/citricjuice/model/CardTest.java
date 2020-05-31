@@ -1,16 +1,15 @@
 package com.github.cc3002.citricjuice.model;
 
-import com.github.cc3002.citricjuice.model.cards.ICard;
-import com.github.cc3002.citricjuice.model.cards.battle.BattleCard;
-import com.github.cc3002.citricjuice.model.cards.battle.BigMagnumCard;
-import com.github.cc3002.citricjuice.model.cards.battle.IAmOnFireCard;
-import com.github.cc3002.citricjuice.model.cards.battle.SinkOrSwimCard;
-import com.github.cc3002.citricjuice.model.cards.boost.*;
-import com.github.cc3002.citricjuice.model.cards.trap.InvasionCard;
-import com.github.cc3002.citricjuice.model.cards.trap.PiyoProcessCard;
-import com.github.cc3002.citricjuice.model.cards.trap.SkyRestaurantCard;
-import com.github.cc3002.citricjuice.model.cards.trap.TrapCard;
-import com.github.cc3002.citricjuice.model.units.Player;
+import com.github.cc3002.citricjuice.model.card.battle.BattleCard;
+import com.github.cc3002.citricjuice.model.card.battle.BigMagnumCard;
+import com.github.cc3002.citricjuice.model.card.battle.IAmOnFireCard;
+import com.github.cc3002.citricjuice.model.card.battle.SinkOrSwimCard;
+import com.github.cc3002.citricjuice.model.card.boost.*;
+import com.github.cc3002.citricjuice.model.card.trap.InvasionCard;
+import com.github.cc3002.citricjuice.model.card.trap.PiyoProcessCard;
+import com.github.cc3002.citricjuice.model.card.trap.SkyRestaurantCard;
+import com.github.cc3002.citricjuice.model.card.trap.TrapCard;
+import com.github.cc3002.citricjuice.model.unit.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
