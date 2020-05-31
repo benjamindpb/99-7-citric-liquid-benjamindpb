@@ -1,13 +1,13 @@
-package com.github.cc3002.citricliquid.mediator;
+package com.github.cc3002.citricjuice.mediator;
 
-import com.github.cc3002.citricliquid.controller.GameController;
-import com.github.cc3002.citricliquid.model.NormaGoal;
-import com.github.cc3002.citricliquid.model.board.HomePanel;
-import com.github.cc3002.citricliquid.model.board.IPanel;
-import com.github.cc3002.citricliquid.model.unit.BossUnit;
-import com.github.cc3002.citricliquid.model.unit.IUnit;
-import com.github.cc3002.citricliquid.model.unit.Player;
-import com.github.cc3002.citricliquid.model.unit.WildUnit;
+import com.github.cc3002.citricjuice.controller.GameController;
+import com.github.cc3002.citricjuice.model.NormaGoal;
+import com.github.cc3002.citricjuice.model.board.HomePanel;
+import com.github.cc3002.citricjuice.model.board.IPanel;
+import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.unit.IUnit;
+import com.github.cc3002.citricjuice.model.unit.Player;
+import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -235,7 +235,7 @@ public class Mediator {
     @NotNull
     public List<MediatorPlayer<?>> getPlayers() {
       var players = new ArrayList<MediatorPlayer<?>>();
-      for (var player : panel.getPlayers()) {
+      for (var player : panel.getPlayersInPanel()) {
         players.add(new MediatorPlayer<>(player));
       }
       return players;

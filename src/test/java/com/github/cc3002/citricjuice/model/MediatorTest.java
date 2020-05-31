@@ -121,7 +121,7 @@ class MediatorTest {
     assertEquals(NormaGoal.STARS, player.getNormaGoal());
   }
 
-  @Test
+/*  @Test
   public void testStarsNorma() {
     var bonusPanel = panelSuppliers.get(0).apply(1);
     var homePanel = mediator.createHomePanel(2);
@@ -138,6 +138,29 @@ class MediatorTest {
       }
       assertEquals(expectedLevel, player.getNormaLevel(),
                    "Player's norma level should be " + expectedLevel);
+      expectedLevel++;
+    }
+  }*/
+  @Test
+  public void testStarsNorma() {
+    var bonusPanel = panelSuppliers.get(0).apply(1);
+    var homePanel = mediator.createHomePanel(2);
+    mediator.setNextPanel(homePanel, bonusPanel);
+    mediator.setNextPanel(bonusPanel, homePanel);
+    var player =
+            mediator.createPlayer(homePanel, testPlayers.get(random.nextInt(testPlayers.size())))
+                    .getFirst();
+    int expectedLevel = 1;
+    assertEquals(expectedLevel++, player.getNormaLevel(), "Player should start with level 1.");
+    for (int starGoal : List.of(10, 30, 70, 120, 200)) {
+      while (player.getStars() < starGoal) {
+        mediator.movePlayer();
+      }
+      while (!homePanel.getPlayers().equals(List.of(player))) {
+        mediator.movePlayer();
+      }
+      assertEquals(expectedLevel, player.getNormaLevel(),
+              "Player's norma level should be " + expectedLevel);
       expectedLevel++;
     }
   }
