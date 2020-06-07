@@ -1,7 +1,6 @@
 package com.github.cc3002.citricjuice.model;
 
 import com.github.cc3002.citricjuice.mediator.Mediator;
-import com.github.cc3002.citricjuice.model.NormaGoal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,9 +31,9 @@ class MediatorTest {
   public void setUp() {
     mediator = new Mediator();
     panelSuppliers =
-        List.of(mediator::createBonusPanel, mediator::createBossPanel, mediator::createDropPanel,
-                mediator::createEncounterPanel, mediator::createHomePanel,
-                mediator::createNeutralPanel);
+        List.of(id -> mediator.createBonusPanel(id, ), id1 -> mediator.createBossPanel(id1, ), id2 -> mediator.createDropPanel(id2, ),
+                id3 -> mediator.createEncounterPanel(id3, ), id4 -> mediator.createHomePanel(id4, ),
+                id5 -> mediator.createNeutralPanel(id5, ));
     createTestPlayers();
     createTestWildUnits();
     createBossUnits();
@@ -144,7 +143,7 @@ class MediatorTest {
   @Test
   public void testStarsNorma() {
     var bonusPanel = panelSuppliers.get(0).apply(1);
-    var homePanel = mediator.createHomePanel(2);
+    var homePanel = mediator.createHomePanel(2, );
     mediator.setNextPanel(homePanel, bonusPanel);
     mediator.setNextPanel(bonusPanel, homePanel);
     var player =
@@ -199,7 +198,7 @@ class MediatorTest {
   }*/
   @Test
   public void testPlayerHome() {
-    var homePanel = mediator.createHomePanel(0);
+    var homePanel = mediator.createHomePanel(0, );
     var panel1 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
     var panel2 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(2);
     mediator.setNextPanel(panel1, homePanel);
