@@ -1,11 +1,10 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.units.Player;
-import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.wild.Chicken;
-import com.github.cc3002.citricjuice.model.units.wild.RoboBall;
-import com.github.cc3002.citricjuice.model.units.wild.Seagull;
-import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
+import com.github.cc3002.citricjuice.model.unit.Player;
+import com.github.cc3002.citricjuice.model.unit.wild.Chicken;
+import com.github.cc3002.citricjuice.model.unit.wild.RoboBall;
+import com.github.cc3002.citricjuice.model.unit.wild.Seagull;
+import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
 
 import java.util.ArrayList;
 import java.util.Objects;

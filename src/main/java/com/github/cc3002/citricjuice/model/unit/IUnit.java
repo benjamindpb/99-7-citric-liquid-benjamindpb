@@ -1,7 +1,7 @@
-package com.github.cc3002.citricjuice.model.units;
+package com.github.cc3002.citricjuice.model.unit;
 
-import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
+import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
 
 /**
  * A representation of an Unit that can battle others

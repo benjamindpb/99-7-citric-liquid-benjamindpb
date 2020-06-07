@@ -1,6 +1,6 @@
-package com.github.cc3002.citricjuice.model.cards.battle;
+package com.github.cc3002.citricjuice.model.card.battle;
 
-import com.github.cc3002.citricjuice.model.cards.AbstractCard;
+import com.github.cc3002.citricjuice.model.card.AbstractCard;
 
 public class BattleCard extends AbstractCard {
     public BattleCard(String name, String effect, int norma, int price) {

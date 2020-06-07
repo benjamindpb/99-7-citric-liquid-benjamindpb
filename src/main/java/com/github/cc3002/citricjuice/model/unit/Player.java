@@ -1,8 +1,8 @@
-package com.github.cc3002.citricjuice.model.units;
+package com.github.cc3002.citricjuice.model.unit;
 
 import com.github.cc3002.citricjuice.model.board.IPanel;
-import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
+import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
 import org.jetbrains.annotations.NotNull;
 
 /**

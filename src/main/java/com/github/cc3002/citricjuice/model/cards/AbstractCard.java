@@ -1,6 +1,4 @@
-package com.github.cc3002.citricjuice.model.cards;
-
-import java.util.Objects;
+package com.github.cc3002.citricjuice.model.card;
 
 public abstract class AbstractCard implements ICard{
     private final String name;

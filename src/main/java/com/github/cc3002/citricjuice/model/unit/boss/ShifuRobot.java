@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.model.units.boss;
+package com.github.cc3002.citricjuice.model.unit.boss;
 
 /**
  * Representation of a Shifu Robot

@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.model.cards.boost;
+package com.github.cc3002.citricjuice.model.card.boost;
 
 public class DashCard extends BoostCard {
     public DashCard() {

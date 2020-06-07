@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.model.cards.battle;
+package com.github.cc3002.citricjuice.model.card.battle;
 
 public class IAmOnFireCard extends BattleCard {
     public IAmOnFireCard() {

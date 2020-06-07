@@ -1,16 +1,17 @@
-package com.github.cc3002.citricjuice.model.units.wild;
+package com.github.cc3002.citricjuice.model.unit.boss;
 
-import com.github.cc3002.citricjuice.model.units.AbstractUnit;
-import com.github.cc3002.citricjuice.model.units.IUnit;
-import com.github.cc3002.citricjuice.model.units.Player;
-import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.unit.AbstractUnit;
+import com.github.cc3002.citricjuice.model.unit.IUnit;
+import com.github.cc3002.citricjuice.model.unit.Player;
+import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
 
 /**
- * Representation of a Wild Unit
+ * Representation of a Boss Unit
  */
-public class WildUnit extends AbstractUnit {
+public class BossUnit extends AbstractUnit {
+
     /**
-     * Creates a new Wild Unit.
+     * Creates a new Boss Unit.
      *
      * @param name
      *     the unit's name.
@@ -23,14 +24,14 @@ public class WildUnit extends AbstractUnit {
      * @param evd
      *     the base evasion of the character.
      */
-    public WildUnit(String name, int hp, int atk, int def, int evd) {
+    public BossUnit(String name, int hp, int atk, int def, int evd) {
         super(name, hp, atk, def, evd);
     }
 
     @Override
     public void attack(IUnit unit) {
         int dmg = this.setDmg();
-        unit.receiveWildAttack(this, dmg);
+        unit.receiveBossAttack(this, dmg);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class WildUnit extends AbstractUnit {
             this.evade = false;
         }
         if(this.isOutOfCombat()){
-            wildUnit.increaseWinsBy(1);
+            wildUnit.increaseWinsBy(3);
             int stars = (int) (this.getStars() * 0.5);
             this.reduceStarsBy(stars);
             wildUnit.increaseStarsBy(stars);
@@ -62,7 +63,7 @@ public class WildUnit extends AbstractUnit {
             this.evade = false;
         }
         if(this.isOutOfCombat()){
-            bossUnit.increaseWinsBy(1);
+            bossUnit.increaseWinsBy(3);
             int stars = (int) (this.getStars() * 0.5);
             this.reduceStarsBy(stars);
             bossUnit.increaseStarsBy(stars);
@@ -71,19 +72,19 @@ public class WildUnit extends AbstractUnit {
 
     @Override
     public void receivePlayerAttack(Player player, int dmg) {
-        if(this.isDefend()){
+        if(this.defend){
             this.defend(dmg);
+            this.defend = false;
         }
-        else if (this.isEvade()){
+        else if (this.evade){
             this.evade(dmg);
-
+            this.evade = false;
         }
         if(this.isOutOfCombat()){
-            player.increaseWinsBy(1);
+            player.increaseWinsBy(3);
             int stars = this.getStars();
             this.reduceStarsBy(stars);
             player.increaseStarsBy(stars);
         }
     }
-
 }

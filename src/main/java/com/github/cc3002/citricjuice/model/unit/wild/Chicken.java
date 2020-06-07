@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.model.units.wild;
+package com.github.cc3002.citricjuice.model.unit.wild;
 
 /**
  * Representation of a Chicken

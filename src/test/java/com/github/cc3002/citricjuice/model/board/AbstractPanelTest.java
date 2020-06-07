@@ -1,14 +1,14 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.units.Player;
-import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.boss.FlyingCastle;
-import com.github.cc3002.citricjuice.model.units.boss.ShifuRobot;
-import com.github.cc3002.citricjuice.model.units.boss.StoreManager;
-import com.github.cc3002.citricjuice.model.units.wild.Chicken;
-import com.github.cc3002.citricjuice.model.units.wild.RoboBall;
-import com.github.cc3002.citricjuice.model.units.wild.Seagull;
-import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
+import com.github.cc3002.citricjuice.model.unit.Player;
+import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.unit.boss.FlyingCastle;
+import com.github.cc3002.citricjuice.model.unit.boss.ShifuRobot;
+import com.github.cc3002.citricjuice.model.unit.boss.StoreManager;
+import com.github.cc3002.citricjuice.model.unit.wild.Chicken;
+import com.github.cc3002.citricjuice.model.unit.wild.RoboBall;
+import com.github.cc3002.citricjuice.model.unit.wild.Seagull;
+import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;

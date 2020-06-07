@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.model.units.boss;
+package com.github.cc3002.citricjuice.model.unit.boss;
 
 public class FlyingCastle extends BossUnit {
     public FlyingCastle() {
