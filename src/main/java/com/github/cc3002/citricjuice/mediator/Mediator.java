@@ -73,8 +73,8 @@ public class Mediator {
   /**
    * Creates a new encounter panel, adds it to the game and returns the created panel inside a
    * mediator.
-   * @param x
-   * @param y
+   * @param x coordinate in the board
+   * @param y coordinate in the board
    */
   public MediatorPanel<?> createEncounterPanel(int x, int y) {
     return new MediatorPanel<>(controller.createEncounterPanel(x, y));
@@ -82,8 +82,8 @@ public class Mediator {
 
   /**
    * Creates a new home panel, adds it to the game and returns the created panel inside a mediator.
-   * @param x
-   * @param y
+   * @param x coordinate in the board
+   * @param y coordinate in the board
    */
   public MediatorPanel<?> createHomePanel(int x, int y) {
     return new MediatorPanel<>(controller.createHomePanel(x, y));
@@ -92,8 +92,8 @@ public class Mediator {
   /**
    * Creates a new neutral panel, adds it to the game and returns the created panel inside a
    * mediator.
-   * @param x
-   * @param y
+   * @param x coordinate in the board
+   * @param y coordinate in the board
    */
   public MediatorPanel<?> createNeutralPanel(int x, int y) {
     return new MediatorPanel<>(controller.createNeutralPanel(x, y));
