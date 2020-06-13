@@ -13,8 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CombatTest {
 
@@ -56,13 +55,13 @@ public class CombatTest {
     @Test
     public void verifyDefenseEvadeValuesTest(){
         //Defense Case
-        assertEquals(false, suguri.isDefend());
+        assertFalse(suguri.isDefend());
         suguri.chooseDefend();
-        assertEquals(true, suguri.isDefend());
+        assertTrue(suguri.isDefend());
         //Evade Case
-        assertEquals(false, suguri.isEvade());
+        assertFalse(suguri.isEvade());
         suguri.chooseEvade();
-        assertEquals(true, suguri.isEvade());
+        assertTrue(suguri.isEvade());
 
     }
 
