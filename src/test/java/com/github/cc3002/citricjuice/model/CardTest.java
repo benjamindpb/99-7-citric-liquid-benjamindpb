@@ -1,5 +1,4 @@
 package com.github.cc3002.citricjuice.model;
-
 import com.github.cc3002.citricjuice.model.card.battle.BattleCard;
 import com.github.cc3002.citricjuice.model.card.battle.BigMagnumCard;
 import com.github.cc3002.citricjuice.model.card.battle.IAmOnFireCard;
@@ -17,18 +16,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CardTest {
 
-    BattleCard bigMagnum;
-    BattleCard iAmOnFire;
-    BattleCard sinkSwim;
+    private BattleCard bigMagnum;
+    private BattleCard iAmOnFire;
+    private BattleCard sinkSwim;
 
-    BoostCard dash;
-    BoostCard nicePresent;
-    BoostCard  pudding;
-    BoostCard sakiscookie;
+    private BoostCard dash;
+    private BoostCard nicePresent;
+    private BoostCard pudding;
+    private BoostCard sakiscookie;
 
-    TrapCard invasion;
-    TrapCard piyoProcess;
-    TrapCard skyRestaurant;
+    private TrapCard invasion;
+    private TrapCard piyoProcess;
+    private TrapCard skyRestaurant;
 
 
     @BeforeEach
