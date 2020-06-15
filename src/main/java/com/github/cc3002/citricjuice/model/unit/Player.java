@@ -2,6 +2,8 @@ package com.github.cc3002.citricjuice.model.unit;
 
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.unit.state.PlayerState;
+import com.github.cc3002.citricjuice.model.unit.state.inGame;
 import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Player extends AbstractUnit {
   private int normaLevel;
+  private PlayerState playerState;
 
   /**
    * Creates a new character.
@@ -32,6 +35,24 @@ public class Player extends AbstractUnit {
                 final int evd) {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
+    this.setPlayerState(new inGame());
+  }
+
+  public void setPlayerState(PlayerState aPlayerState){
+    playerState = aPlayerState;
+    playerState.setPlayer(this);
+  }
+  public void quitGame(){
+    playerState.quitGame();
+  }
+  public void enterGame(){
+    playerState.enterGame();
+  }
+  public boolean isInGame(){
+    return playerState.isInGame();
+  }
+  public boolean isOutOfGame(){
+    return playerState.isOutOfGame();
   }
 
    /**
@@ -140,4 +161,5 @@ public class Player extends AbstractUnit {
       player.increaseStarsBy(stars);
     }
   }
+
 }

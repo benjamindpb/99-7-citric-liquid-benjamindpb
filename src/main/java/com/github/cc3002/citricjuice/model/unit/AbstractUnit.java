@@ -1,5 +1,7 @@
 package com.github.cc3002.citricjuice.model.unit;
 
+import com.github.cc3002.citricjuice.model.NormaGoal;
+
 import java.util.Objects;
 import java.util.Random;
 

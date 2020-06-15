@@ -1,15 +1,24 @@
 package com.github.cc3002.citricjuice.controller;
 
+import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.*;
 import com.github.cc3002.citricjuice.model.unit.Player;
 import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.unit.wild.WildUnit;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
  *This class
  */
 public class GameController {
+    private final Set<IPanel> panels = new HashSet<>();
+    private int chapter;
+
+
     /**
      *
      * @param x coordinate in the board
@@ -17,7 +26,9 @@ public class GameController {
      * @return the panel
      */
     public BonusPanel createBonusPanel(int x, int y) {
-        return new BonusPanel(x, y);
+        BonusPanel bonus = new BonusPanel(x, y);
+        panels.add(bonus);
+        return bonus;
     }
 
     /**
@@ -26,7 +37,9 @@ public class GameController {
      * @return the panel
      */
     public BossPanel createBossPanel(int x, int y) {
-        return new BossPanel(x, y);
+        BossPanel boss = new BossPanel(x, y);
+        panels.add(boss);
+        return boss;
     }
 
     /**
@@ -35,7 +48,10 @@ public class GameController {
      * @return the panel
      */
     public DropPanel createDropPanel(int x, int y) {
-        return new DropPanel(x, y);
+        DropPanel drop = new DropPanel(x, y);
+        panels.add(drop);
+        return drop;
+
     }
 
     /**
@@ -44,7 +60,9 @@ public class GameController {
      * @return the panel
      */
     public EncounterPanel createEncounterPanel(int x, int y) {
-        return new EncounterPanel(x, y);
+        EncounterPanel encounter = new EncounterPanel(x, y);
+        panels.add(encounter);
+        return encounter;
     }
 
     /**
@@ -53,7 +71,9 @@ public class GameController {
      * @return the panel
      */
     public HomePanel createHomePanel(int x, int y) {
-        return new HomePanel(x, y);
+        HomePanel home = new HomePanel(x, y);
+        panels.add(home);
+        return home;
     }
 
     /**
@@ -62,7 +82,9 @@ public class GameController {
      * @return the panel
      */
     public NeutralPanel createNeutralPanel(int x, int y) {
-        return new NeutralPanel(x, y);
+        NeutralPanel neutral = new NeutralPanel(x, y);
+        panels.add(neutral);
+        return neutral;
     }
 
     /**
@@ -106,4 +128,33 @@ public class GameController {
         return new BossUnit(name, hitPoints, attack, defense, evasion);
     }
 
+    public void setNextPanel(IPanel panel, IPanel panel1) {
+        panel.addNextPanel(panel1);
+    }
+
+    public Set<IPanel> getPanels() {
+        return panels;
+    }
+
+    public void movePlayer() {
+    }
+
+    public Player getTurnOwner() {
+    }
+
+    public IPanel getPlayerPanel(Player unit) {
+    }
+
+    public void setCurrPlayerNormaGoal(NormaGoal goal) {
+    }
+
+    public void setPlayerHome(Player unit, HomePanel panel) {
+    }
+
+    public int getChapter() {
+        return chapter;
+    }
+
+    public void endTurn() {
+    }
 }

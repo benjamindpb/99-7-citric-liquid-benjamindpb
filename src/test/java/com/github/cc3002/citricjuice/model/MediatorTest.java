@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * @version 2.0-rc.1
  * @since 2.0
  */
+@SuppressWarnings("ALL")
 class MediatorTest {
   private final Random random = new Random();
   private Mediator mediator;
@@ -31,9 +32,12 @@ class MediatorTest {
   public void setUp() {
     mediator = new Mediator();
     panelSuppliers =
-        List.of(id -> mediator.createBonusPanel(id, ), id1 -> mediator.createBossPanel(id1, ), id2 -> mediator.createDropPanel(id2, ),
-                id3 -> mediator.createEncounterPanel(id3, ), id4 -> mediator.createHomePanel(id4, ),
-                id5 -> mediator.createNeutralPanel(id5, ));
+            List.of(id -> mediator.createBonusPanel(id, 0),
+                    id1 -> mediator.createBossPanel(id1, 0),
+                    id2 -> mediator.createDropPanel(id2, 0),
+                    id3 -> mediator.createEncounterPanel(id3, 0),
+                    id4 -> mediator.createHomePanel(id4, 0),
+                    id5 -> mediator.createNeutralPanel(id5, 0));
     createTestPlayers();
     createTestWildUnits();
     createBossUnits();
@@ -54,7 +58,12 @@ class MediatorTest {
   }
 
   @Test
-  public void testAddPlayer() {
+  public void testAddPlayer() { // stream: secuencias
+    /*
+    el codigo de abajo mapea la lista de los paneles, les aplica una funcion.
+    En concreto se crea una funcion que reciben un int y para cada panel de la lista
+    de paneles que se creo se realiza el test...
+     */
     panelSuppliers.stream().map(supplier -> supplier.apply(random.nextInt())).forEach(testPanel -> {
       for (var player : testPlayers) {
         var resultingPair =
@@ -95,7 +104,7 @@ class MediatorTest {
                  "New panel shouldn't contain any next panels");
       mediator.setNextPanel(resultingPanel, originSupplier.apply(id++));
       assertTrue(resultingPanel.getNextPanels().isEmpty(),
-                 "A panel shouldn't be able to add itself as next");
+                 "A panel shouldn't be able to add itself as next"); //en sets no pasa
       int expectedPanelsN = 0;
       for (var supplier : panelSuppliers) {
         var newPanel = supplier.apply(id++);
@@ -123,7 +132,7 @@ class MediatorTest {
   @Test
   public void testStarsNorma() {
     var bonusPanel = panelSuppliers.get(0).apply(1);
-    var homePanel = mediator.createHomePanel(2, );
+    var homePanel = mediator.createHomePanel(2, 0);
     mediator.setNextPanel(homePanel, bonusPanel);
     mediator.setNextPanel(bonusPanel, homePanel);
     var player =
@@ -167,7 +176,7 @@ class MediatorTest {
 
   @Test
   public void testPlayerHome() {
-    var homePanel = mediator.createHomePanel(0, );
+    var homePanel = mediator.createHomePanel(0, 0);
     var panel1 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
     var panel2 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(2);
     mediator.setNextPanel(panel1, homePanel);
