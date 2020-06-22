@@ -140,9 +140,11 @@ public class GameController {
     }
 
     public Player getTurnOwner() {
+        return new Player("Null Player" ,0,0,0,0);
     }
 
     public IPanel getPlayerPanel(Player unit) {
+        return new HomePanel(1,2);
     }
 
     public void setCurrPlayerNormaGoal(NormaGoal goal) {

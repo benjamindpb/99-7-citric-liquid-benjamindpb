@@ -2,6 +2,7 @@ package com.github.cc3002.citricjuice.mediator;
 
 import com.github.cc3002.citricjuice.controller.GameController;
 import com.github.cc3002.citricjuice.model.NormaGoal;
+import com.github.cc3002.citricjuice.model.board.BonusPanel;
 import com.github.cc3002.citricjuice.model.board.HomePanel;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
@@ -49,7 +50,7 @@ public class Mediator {
    * @param y coordinate in the board
    */
   public MediatorPanel<?> createBonusPanel(int x, int y) {
-    return new MediatorPanel<>(controller.createBonusPanel(x, y));
+    return new MediatorPanel<BonusPanel>(controller.createBonusPanel(x, y));
   }
 
   /**

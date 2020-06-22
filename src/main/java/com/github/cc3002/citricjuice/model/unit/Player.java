@@ -1,5 +1,6 @@
 package com.github.cc3002.citricjuice.model.unit;
 
+import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.unit.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.unit.state.PlayerState;
@@ -162,4 +163,7 @@ public class Player extends AbstractUnit {
     }
   }
 
+  public NormaGoal getNormaGoal() {
+    return NormaGoal.STARS;
+  }
 }
