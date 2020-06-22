@@ -160,9 +160,9 @@ public class Mediator {
     /**
      * Sets the norma goal of the turn owner and returns the player wrapped in a mediator.
      */
-    public MediatorPlayer<?> setNormaGoal(NormaGoal goal) {
+    public void setNormaGoal(NormaGoal goal) {
         controller.setCurrPlayerNormaGoal(goal);
-        return new MediatorPlayer<>(controller.getTurnOwner());
+        new MediatorPlayer<>(controller.getTurnOwner());
     }
 
 

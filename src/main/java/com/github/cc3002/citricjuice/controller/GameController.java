@@ -1,20 +1,27 @@
 package com.github.cc3002.citricjuice.controller;
 
+import com.github.cc3002.citricjuice.mediator.Mediator;
 import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.*;
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class GameController {
     private Set<IPanel> panels;
+    private List<Player> players;
     private int chapter;
+    private int indexCurrentPlayer;
 
     public GameController() {
         panels = new HashSet<>();
+        players = new ArrayList<>(4);
+        indexCurrentPlayer = 0;
     }
 
     /**
@@ -25,6 +32,7 @@ public class GameController {
      */
     public BonusPanel createBonusPanel(int x, int y) {
         BonusPanel bonus = new BonusPanel(x, y);
+        panels.add(bonus);
         return bonus;
     }
 
@@ -35,6 +43,7 @@ public class GameController {
      */
     public BossPanel createBossPanel(int x, int y) {
         BossPanel boss = new BossPanel(x, y);
+        panels.add(boss);
         return boss;
     }
 
@@ -45,6 +54,7 @@ public class GameController {
      */
     public DropPanel createDropPanel(int x, int y) {
         DropPanel drop = new DropPanel(x, y);
+        panels.add(drop);
         return drop;
 
     }
@@ -56,6 +66,7 @@ public class GameController {
      */
     public EncounterPanel createEncounterPanel(int x, int y) {
         EncounterPanel encounter = new EncounterPanel(x, y);
+        panels.add(encounter);
         return encounter;
     }
 
@@ -66,6 +77,7 @@ public class GameController {
      */
     public HomePanel createHomePanel(int x, int y) {
         HomePanel home = new HomePanel(x, y);
+        panels.add(home);
         return home;
     }
 
@@ -76,6 +88,7 @@ public class GameController {
      */
     public NeutralPanel createNeutralPanel(int x, int y) {
         NeutralPanel neutral = new NeutralPanel(x, y);
+        panels.add(neutral);
         return neutral;
     }
 
@@ -90,8 +103,9 @@ public class GameController {
      */
     public Player createPlayer(String name, int hitPoints, int attack, int defense,
                                int evasion, IPanel panel) {
-        //todo: hacer que los player se ubiquen en un panel
-        return new Player(name, hitPoints, attack, defense, evasion);
+        Player player = new Player(name, hitPoints, attack, defense, evasion);
+        players.add(player);
+        return player;
     }
 
     /**
@@ -121,22 +135,26 @@ public class GameController {
     }
 
     public void setNextPanel(IPanel panel, IPanel panel1) {
-        panel.addNextPanel(panel1);
+        if(!panel.equals(panel1)){
+            panel.addNextPanel(panel1);
+        }
     }
 
 
     public void movePlayer() {
     }
 
-    public Player getTurnOwner() {
-        return new Player("Null Player" ,0,0,0,0);
-    }
 
     public IPanel getPlayerPanel(Player unit) {
         return new HomePanel(1,2);
     }
 
     public void setCurrPlayerNormaGoal(NormaGoal goal) {
+        getTurnOwner().setNormaGoal(goal);
+    }
+
+    public Player getTurnOwner() {
+        return players.get(indexCurrentPlayer);
     }
 
     public void setPlayerHome(Player unit, HomePanel panel) {

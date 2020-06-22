@@ -31,6 +31,7 @@ public class BonusPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        player.increaseStarsBy(player.roll() * Math.min(player.getNormaLevel(), 3));
+        player.increaseStarsBy(player.roll() *
+                Math.min(player.getNormaLevel(), 3));
     }
 }

@@ -94,7 +94,8 @@ class MediatorTest {
                 var newPanel = supplier.apply(x++, y++);
                 mediator.setNextPanel(resultingPanel, newPanel);
                 assertEquals(++expectedPanelsN, resultingPanel.getNextPanels().size(),
-                        "Actual amount of next panels after adding a new one doesn't match with the expected amount");
+                        "Actual amount of next panels after adding a new one " +
+                                "doesn't match with the expected amount");
                 assertTrue(resultingPanel.getNextPanels().contains(newPanel));
             }
         }
@@ -120,8 +121,8 @@ class MediatorTest {
         mediator.setNextPanel(homePanel, bonusPanel);
         mediator.setNextPanel(bonusPanel, homePanel);
         var player =
-                mediator.createPlayer(homePanel, testPlayers.get(random.nextInt(testPlayers.size())))
-                        .getFirst();
+                mediator.createPlayer(homePanel,
+                        testPlayers.get(random.nextInt(testPlayers.size()))).getFirst();
         int expectedLevel = 1;
         assertEquals(expectedLevel++, player.getNormaLevel(), "Player should start with level 1.");
         for (int starGoal : List.of(10, 30, 70, 120, 200)) {

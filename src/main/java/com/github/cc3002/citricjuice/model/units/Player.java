@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Player extends AbstractUnit {
   private int normaLevel;
+  private NormaGoal normaGoal;
 
   /**
    * Creates a new character.
@@ -33,6 +34,7 @@ public class Player extends AbstractUnit {
                 final int evd) {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
+    normaGoal = NormaGoal.STARS;
   }
 
    /**
@@ -143,6 +145,10 @@ public class Player extends AbstractUnit {
   }
 
     public NormaGoal getNormaGoal() {
-      return NormaGoal.STARS;
+      return normaGoal;
     }
+
+  public void setNormaGoal(NormaGoal goal) {
+    this.normaGoal = goal;
+  }
 }
