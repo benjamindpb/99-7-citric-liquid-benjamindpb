@@ -19,7 +19,7 @@ public interface IPanel {
     /**
      * Returns a copy of the players in this panel.
      */
-    Set<Player> getPlayersInPanel();
+    Set<Player> getPlayers();
 
     /**
      * Adds a new adjacent panel to this one.

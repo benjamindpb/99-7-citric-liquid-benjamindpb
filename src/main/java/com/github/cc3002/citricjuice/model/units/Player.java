@@ -1,5 +1,6 @@
 package com.github.cc3002.citricjuice.model.units;
 
+import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
@@ -140,4 +141,8 @@ public class Player extends AbstractUnit {
       player.increaseStarsBy(stars);
     }
   }
+
+    public NormaGoal getNormaGoal() {
+      return NormaGoal.STARS;
+    }
 }

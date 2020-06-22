@@ -41,7 +41,7 @@ public abstract class AbstractPanel implements IPanel {
   }
 
   @Override
-  public Set<Player> getPlayersInPanel() {
+  public Set<Player> getPlayers() {
     return Set.copyOf(playersInPanel);
   }
 
