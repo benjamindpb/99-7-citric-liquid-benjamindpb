@@ -17,20 +17,15 @@ public abstract class AbstractPanel implements IPanel {
   private Set<IPanel> nextPanels = new HashSet<>();
   private List<Player> playersInPanel = new ArrayList<>();
 
-  private final int row;
-  private final int column;
-  private final String id;
+  private final int id;
 
   /**
    * Constructor for a default panel without any special behaviour.
+   *  @param id represent a row of the panel in the board
    *
-   * @param row represent a row of the panel in the board
-   * @param column  represent a column of the panel in the board
    */
-  public AbstractPanel(int row, int column) {
-    this.row = row;
-    this.column = column;
-    id = "(" + row + ", " + column + ")";
+  public AbstractPanel(int id) {
+    this.id = id;
   }
 
   @Override
@@ -53,23 +48,11 @@ public abstract class AbstractPanel implements IPanel {
     playersInPanel.add(player);
   }
 
-  @Override
-  public String toString() {
+  /**
+   * @return the id of the current panel
+   */
+  public int getId() {
     return id;
-  }
-
-  /**
-   * @return the row of the current panel
-   */
-  public int getRow() {
-    return row;
-  }
-
-  /**
-   * @return the column of the current panel
-   */
-  public int getColumn() {
-    return column;
   }
 
   @Override
@@ -77,14 +60,13 @@ public abstract class AbstractPanel implements IPanel {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     AbstractPanel that = (AbstractPanel) o;
-    return row == that.row &&
-            column == that.column &&
+    return id == that.id &&
             Objects.equals(nextPanels, that.nextPanels) &&
             Objects.equals(playersInPanel, that.playersInPanel);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nextPanels, playersInPanel, row, column);
+    return Objects.hash(nextPanels, playersInPanel, id);
   }
 }

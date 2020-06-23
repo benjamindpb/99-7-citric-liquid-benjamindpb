@@ -44,46 +44,52 @@ public class Mediator {
     /**
      * Creates a new bonus panel, adds it to the game and returns the created panel inside a
      * mediator.
+     * @param id
      */
-    public MediatorPanel<?> createBonusPanel(int x, int y) {
-        return new MediatorPanel<BonusPanel>(controller.createBonusPanel(x, y));
+    public MediatorPanel<?> createBonusPanel(int id) {
+        return new MediatorPanel<BonusPanel>(controller.createBonusPanel(id));
     }
 
     /**
      * Creates a new boss panel, adds it to the game and returns the created panel inside a mediator.
+     * @param id
      */
-    public MediatorPanel<?> createBossPanel(int x, int y) {
-        return new MediatorPanel<BossPanel>(controller.createBossPanel(x, y));
+    public MediatorPanel<?> createBossPanel(int id) {
+        return new MediatorPanel<BossPanel>(controller.createBossPanel(id));
     }
 
     /**
      * Creates a new drop panel, adds it to the game and returns the created panel inside a mediator.
+     * @param id
      */
-    public MediatorPanel<?> createDropPanel(int x, int y) {
-        return new MediatorPanel<DropPanel>(controller.createDropPanel(x, y));
+    public MediatorPanel<?> createDropPanel(int id) {
+        return new MediatorPanel<DropPanel>(controller.createDropPanel(id));
     }
 
     /**
      * Creates a new encounter panel, adds it to the game and returns the created panel inside a
      * mediator.
+     * @param id
      */
-    public MediatorPanel<?> createEncounterPanel(int x, int y) {
-        return new MediatorPanel<EncounterPanel>(controller.createEncounterPanel(x, y));
+    public MediatorPanel<?> createEncounterPanel(int id) {
+        return new MediatorPanel<EncounterPanel>(controller.createEncounterPanel(id));
     }
 
     /**
      * Creates a new home panel, adds it to the game and returns the created panel inside a mediator.
+     * @param id
      */
-    public MediatorPanel<?> createHomePanel(int x, int y) {
-        return new MediatorPanel<HomePanel>(controller.createHomePanel(x, y));
+    public MediatorPanel<?> createHomePanel(int id) {
+        return new MediatorPanel<HomePanel>(controller.createHomePanel(id));
     }
 
     /**
      * Creates a new neutral panel, adds it to the game and returns the created panel inside a
      * mediator.
+     * @param id
      */
-    public MediatorPanel<?> createNeutralPanel(int x, int y) {
-        return new MediatorPanel<NeutralPanel>(controller.createNeutralPanel(x, y));
+    public MediatorPanel<?> createNeutralPanel(int id) {
+        return new MediatorPanel<NeutralPanel>(controller.createNeutralPanel(id));
     }
 
     /**

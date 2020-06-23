@@ -9,18 +9,11 @@ public class NeutralPanel extends AbstractPanel{
 
 
     /**
-     * @param row    represent a row of the panel in the board
-     * @param column represent a column of the panel in the board
+     * @param id    represent a id of the panel in the board
+     *
      */
-    public NeutralPanel(int row, int column) {
-        super(row, column);
-    }
-
-    /**
-     * Thic Constructor creates a panel in the (0,0) board coordinate
-     */
-    public NeutralPanel() {
-        super(0,0);
+    public NeutralPanel(int id) {
+        super(id);
     }
 
     /**

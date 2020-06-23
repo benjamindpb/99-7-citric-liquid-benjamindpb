@@ -1,6 +1,5 @@
 package com.github.cc3002.citricjuice.controller;
 
-import com.github.cc3002.citricjuice.mediator.Mediator;
 import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.*;
 import com.github.cc3002.citricjuice.model.units.Player;
@@ -26,68 +25,62 @@ public class GameController {
 
     /**
      *
-     * @param x coordinate in the board
-     * @param y coordinate in the board
+     * @param id coordinate in the board
      * @return the panel
      */
-    public BonusPanel createBonusPanel(int x, int y) {
-        BonusPanel bonus = new BonusPanel(x, y);
+    public BonusPanel createBonusPanel(int id) {
+        BonusPanel bonus = new BonusPanel(id);
         panels.add(bonus);
         return bonus;
     }
 
     /**
-     * @param x coordinate in the board
-     * @param y coordinate in the board
+     * @param id coordinate in the board
      * @return the panel
      */
-    public BossPanel createBossPanel(int x, int y) {
-        BossPanel boss = new BossPanel(x, y);
+    public BossPanel createBossPanel(int id) {
+        BossPanel boss = new BossPanel(id);
         panels.add(boss);
         return boss;
     }
 
     /**
-     * @param x coordinate in the board
-     * @param y coordinate in the board
+     * @param id coordinate in the board
      * @return the panel
      */
-    public DropPanel createDropPanel(int x, int y) {
-        DropPanel drop = new DropPanel(x, y);
+    public DropPanel createDropPanel(int id) {
+        DropPanel drop = new DropPanel(id);
         panels.add(drop);
         return drop;
 
     }
 
     /**
-     * @param x coordinate in the board
-     * @param y coordinate in the board
+     * @param id coordinate in the board
      * @return the panel
      */
-    public EncounterPanel createEncounterPanel(int x, int y) {
-        EncounterPanel encounter = new EncounterPanel(x, y);
+    public EncounterPanel createEncounterPanel(int id) {
+        EncounterPanel encounter = new EncounterPanel(id);
         panels.add(encounter);
         return encounter;
     }
 
     /**
-     * @param x coordinate in the board
-     * @param y coordinate in the board
+     * @param id coordinate in the board
      * @return the panel
      */
-    public HomePanel createHomePanel(int x, int y) {
-        HomePanel home = new HomePanel(x, y);
+    public HomePanel createHomePanel(int id) {
+        HomePanel home = new HomePanel(id);
         panels.add(home);
         return home;
     }
 
     /**
-     * @param x coordinate in the board
-     * @param y coordinate in the board
+     * @param id coordinate in the board
      * @return the panel
      */
-    public NeutralPanel createNeutralPanel(int x, int y) {
-        NeutralPanel neutral = new NeutralPanel(x, y);
+    public NeutralPanel createNeutralPanel(int id) {
+        NeutralPanel neutral = new NeutralPanel(id);
         panels.add(neutral);
         return neutral;
     }
@@ -143,11 +136,14 @@ public class GameController {
 
 
     public void movePlayer() {
+        Player player = this.getTurnOwner();
+        int moves = player.roll();
+
     }
 
 
     public IPanel getPlayerPanel(Player unit) {
-        return new HomePanel(1,2);
+        return new HomePanel(1);
     }
 
     public void setCurrPlayerNormaGoal(NormaGoal goal) {

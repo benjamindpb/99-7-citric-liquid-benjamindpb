@@ -25,24 +25,17 @@ public class BossPanel extends AbstractPanel{
 
     /**
      * Creates a new Boss Panel
+     *  @param id    represent a id of the panel in the board
      *
-     * @param row    represent a row of the panel in the board
-     * @param column represent a column of the panel in the board
      */
-    public BossPanel(int row, int column) {
-        super(row, column);
+    public BossPanel(int id) {
+        super(id);
         this.selectedBossUnit = null;
         random = new Random();
 
         this.bossUnits.add(new FlyingCastle());
         this.bossUnits.add(new ShifuRobot());
         this.bossUnits.add(new StoreManager());
-    }
-    /**
-     * Thic Constructor creates a panel in the (0,0) board coordinate
-     */
-    public BossPanel() {
-        super(0,0);
     }
 
     public BossUnit getSelectedBossUnit() {

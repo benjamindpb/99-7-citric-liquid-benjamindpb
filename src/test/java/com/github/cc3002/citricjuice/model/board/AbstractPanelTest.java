@@ -51,13 +51,14 @@ class AbstractPanelTest {
 
   @BeforeEach
   public void setUp() {
-    testBonusPanel = new BonusPanel();
-    testBossPanel = new BossPanel();
-    testDrawPanel = new DrawPanel();
-    testDropPanel = new DropPanel();
-    testEncounterPanel = new EncounterPanel();
-    testHomePanel = new HomePanel();
-    testNeutralPanel = new NeutralPanel();
+    int i = 0;
+    testBonusPanel = new BonusPanel(i++);
+    testBossPanel = new BossPanel(i++);
+    testDrawPanel = new DrawPanel(i++);
+    testDropPanel = new DropPanel(i++);
+    testEncounterPanel = new EncounterPanel(i++);
+    testHomePanel = new HomePanel(i++);
+    testNeutralPanel = new NeutralPanel(i);
 
     testSeed = new Random().nextInt();
 
@@ -75,52 +76,23 @@ class AbstractPanelTest {
   }
 
   @Test
-  public void constructorTest() {
-    assertEquals(new BonusPanel(), testBonusPanel);
-    assertEquals(new BossPanel(), testBossPanel);
-    assertEquals(new DrawPanel(), testDrawPanel);
-    assertEquals(new DropPanel(), testDropPanel);
-    assertEquals(new EncounterPanel(), testEncounterPanel);
-    assertEquals(new HomePanel(), testHomePanel);
-    assertEquals(new NeutralPanel(), testNeutralPanel);
-  }
-
-  @Test
   public void constructorWhitParameterTest(){
-    final var bonus = new BonusPanel(1,2);
-    final var boss = new BossPanel(4,6);
-    final var draw = new DrawPanel(3,2);
-    final var drop = new DropPanel(0,1);
-    final var encounter = new EncounterPanel(5,2);
-    final var home = new HomePanel(1,9);
-    assertEquals(1, bonus.getRow());
-    assertEquals(2, bonus.getColumn());
-    assertEquals(4, boss.getRow());
-    assertEquals(6, boss.getColumn());
-    assertEquals(3, draw.getRow());
-    assertEquals(2, draw.getColumn());
-    assertEquals(0, drop.getRow());
-    assertEquals(1, drop.getColumn());
-    assertEquals(5, encounter.getRow());
-    assertEquals(2, encounter.getColumn());
-    assertEquals(1, home.getRow());
-    assertEquals(9, home.getColumn());
+    var expectedId = 0;
+    assertEquals(expectedId++, testBonusPanel.getId());
+    assertEquals(expectedId++, testBossPanel.getId());
+    assertEquals(expectedId++, testDrawPanel.getId());
+    assertEquals(expectedId++, testDropPanel.getId());
+    assertEquals(expectedId++, testEncounterPanel.getId());
+    assertEquals(expectedId++, testHomePanel.getId());
+    assertEquals(expectedId, testNeutralPanel.getId());
 
-  }
-
-  @Test
-  public void toStringTest(){
-    final var bonus = new BonusPanel(1,2);
-    String coordinate = bonus.toString();
-    assertEquals("(1, 2)", coordinate);
-    assertEquals("(0, 0)", testNeutralPanel.toString());
   }
 
   @Test
   public void nextPanelTest() {
     assertTrue(testNeutralPanel.getNextPanels().isEmpty());
-    final var expectedPanel1 = new NeutralPanel(1, 2);
-    final var expectedPanel2 = new NeutralPanel(2,3);
+    final var expectedPanel1 = new NeutralPanel(1);
+    final var expectedPanel2 = new NeutralPanel(2);
 
     testNeutralPanel.addNextPanel(expectedPanel1);
     assertEquals(1, testNeutralPanel.getNextPanels().size());
@@ -193,8 +165,8 @@ class AbstractPanelTest {
 
   @Test
   public void bossPanelTest(){
-    final var boss = new BossPanel(1,2);
-    assertEquals(new BossPanel(1, 2), boss);
+    final var boss = new BossPanel(1);
+    assertEquals(new BossPanel(1), boss);
     assertEquals(null, boss.getSelectedBossUnit());
     assertFalse(boss.getBossUnits() == null);
     assertEquals(new FlyingCastle(), boss.getBossUnits().get(0));
@@ -212,8 +184,8 @@ class AbstractPanelTest {
 
   @Test
   public void encounterPanelTest(){
-    final var wild = new EncounterPanel(1,2);
-    assertEquals(new EncounterPanel(1, 2), wild);
+    final var wild = new EncounterPanel(1);
+    assertEquals(new EncounterPanel(1), wild);
     assertEquals(null, wild.getSelectedWildUnit());
     assertFalse(wild.getWildUnits() == null);
     assertEquals(new Chicken(), wild.getWildUnits().get(0));
