@@ -104,6 +104,7 @@ public class GameController {
     public Player createPlayer(String name, int hitPoints, int attack, int defense,
                                int evasion, IPanel panel) {
         Player player = new Player(name, hitPoints, attack, defense, evasion);
+        panel.addPlayerToPanel(player);
         players.add(player);
         return player;
     }

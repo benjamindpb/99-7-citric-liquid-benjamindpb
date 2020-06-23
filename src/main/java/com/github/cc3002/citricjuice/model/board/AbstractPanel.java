@@ -2,9 +2,7 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.units.Player;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Abstract class that represents a generic panel in the board of the game.
@@ -17,11 +15,11 @@ import java.util.Set;
 public abstract class AbstractPanel implements IPanel {
 
   private Set<IPanel> nextPanels = new HashSet<>();
-  private Set<Player> playersInPanel = new HashSet<>();
+  private List<Player> playersInPanel = new ArrayList<>();
 
-  private int row;
-  private int column;
-  private String id;
+  private final int row;
+  private final int column;
+  private final String id;
 
   /**
    * Constructor for a default panel without any special behaviour.
@@ -41,8 +39,8 @@ public abstract class AbstractPanel implements IPanel {
   }
 
   @Override
-  public Set<Player> getPlayers() {
-    return Set.copyOf(playersInPanel);
+  public List<Player> getPlayers() {
+    return playersInPanel;
   }
 
 
@@ -51,7 +49,7 @@ public abstract class AbstractPanel implements IPanel {
     nextPanels.add(panel);
   }
 
-  public void addPlayerToPanel(final Player player){
+  public void addPlayerToPanel(Player player){
     playersInPanel.add(player);
   }
 
