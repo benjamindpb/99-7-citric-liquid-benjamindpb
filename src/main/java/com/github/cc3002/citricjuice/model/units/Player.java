@@ -2,6 +2,7 @@ package com.github.cc3002.citricjuice.model.units;
 
 import com.github.cc3002.citricjuice.controller.handlers.IHandler;
 import com.github.cc3002.citricjuice.model.NormaGoal;
+import com.github.cc3002.citricjuice.model.board.HomePanel;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
@@ -19,6 +20,8 @@ public class Player extends AbstractUnit {
   private int normaLevel;
   private NormaGoal normaGoal;
   private IPanel panel;
+
+  private HomePanel homePanel;
 
   private final PropertyChangeSupport changeNormaNotification = new PropertyChangeSupport(this);
 
@@ -170,5 +173,13 @@ public class Player extends AbstractUnit {
 
   public void changeNormaListener(IHandler changeNormaHadler) {
     changeNormaNotification.addPropertyChangeListener(changeNormaHadler);
+  }
+
+  public void setHomePanel(HomePanel homePanel) {
+    this.homePanel = homePanel;
+  }
+
+  public HomePanel getHomePanel() {
+    return homePanel;
   }
 }

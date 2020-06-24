@@ -146,6 +146,26 @@ public class GameController {
     }
 
     public void movePlayer() {
+        int moves = getTurnOwner().roll();
+        IPanel homePanel = getTurnOwner().getPanel();
+        Player turnOwner = getTurnOwner();
+        do {
+            if(turnOwner.getPanel().getNextPanels().size() > 1){
+                // el panel del player actual tiene mas de un panel siguiente
+            }
+            else{ // el panel del player actual tiene solo un panel siguiente o 0 (?)
+                IPanel nextPanel = turnOwner.getPanel().getNextPanels().iterator().next();
+                turnOwner.getPanel().getPlayers().remove(turnOwner);
+                nextPanel.getPlayers().add(turnOwner);
+                nextPanel.activatePanelEffectBy(turnOwner);
+                turnOwner.setPanel(nextPanel);
+            }
+            moves = moves - 1;
+        }while(
+                moves > 0
+                || turnOwner.getPanel().equals(homePanel)
+                || turnOwner.getPanel().getPlayers().size() > 1);
+
     }
 
 
@@ -163,7 +183,7 @@ public class GameController {
     }
 
     public void setPlayerHome(Player unit, HomePanel panel) {
-        unit.setPanel(panel);
+        unit.setHomePanel(panel);
     }
 
     public void endTurn() {
