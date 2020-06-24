@@ -30,7 +30,7 @@ public abstract class AbstractPanel implements IPanel {
 
   @Override
   public Set<IPanel> getNextPanels() {
-    return Set.copyOf(nextPanels);
+    return nextPanels;
   }
 
   @Override
@@ -58,15 +58,15 @@ public abstract class AbstractPanel implements IPanel {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (!(o instanceof AbstractPanel)) return false;
     AbstractPanel that = (AbstractPanel) o;
-    return id == that.id &&
-            Objects.equals(nextPanels, that.nextPanels) &&
+    return getId() == that.getId() &&
+            Objects.equals(getNextPanels(), that.getNextPanels()) &&
             Objects.equals(playersInPanel, that.playersInPanel);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(nextPanels, playersInPanel, id);
+    return Objects.hash(getNextPanels(), playersInPanel, getId());
   }
 }

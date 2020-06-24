@@ -51,7 +51,7 @@ public class EncounterPanel extends AbstractPanel {
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        if(this.selectedWildUnit == null || this.selectedWildUnit.getCurrentHP() == 0){
+        if(this.selectedWildUnit == null){
             createWildUnit();
         }
         player.attack(selectedWildUnit);

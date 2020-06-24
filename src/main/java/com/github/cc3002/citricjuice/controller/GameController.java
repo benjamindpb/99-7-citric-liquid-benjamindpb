@@ -1,5 +1,8 @@
 package com.github.cc3002.citricjuice.controller;
 
+import com.github.cc3002.citricjuice.controller.handlers.ChangeNormaHandler;
+import com.github.cc3002.citricjuice.controller.handlers.IHandler;
+import com.github.cc3002.citricjuice.controller.handlers.PlayerMovedHandler;
 import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.*;
 import com.github.cc3002.citricjuice.model.units.Player;
@@ -16,11 +19,13 @@ public class GameController {
     private List<Player> players;
     private int chapter;
     private int indexCurrentPlayer;
-
+    private IHandler changeNormaHandler = new ChangeNormaHandler(this);
+    private IHandler playerMovedHandler = new PlayerMovedHandler(this);
     public GameController() {
         panels = new HashSet<>();
         players = new ArrayList<>(4);
         indexCurrentPlayer = 0;
+        chapter = 1;
     }
 
     /**
@@ -92,23 +97,24 @@ public class GameController {
      * @param defense of the player
      * @param evasion of the panel
      * @param panel that the player is located
-     * @return
+     * @return a new Player
      */
     public Player createPlayer(String name, int hitPoints, int attack, int defense,
                                int evasion, IPanel panel) {
         Player player = new Player(name, hitPoints, attack, defense, evasion);
         panel.addPlayerToPanel(player);
+        player.setPanel(panel); //home panel
         players.add(player);
         return player;
     }
 
     /**
      * @param name of the unit
-     * @param hitPoints
-     * @param attack
-     * @param defense
-     * @param evasion
-     * @return
+     * @param hitPoints of the unit
+     * @param attack of the unit
+     * @param defense of the unit
+     * @param evasion of the unit
+     * @return a new Wild Unit
      */
     public WildUnit createWildUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
@@ -117,11 +123,11 @@ public class GameController {
 
     /**
      * @param name of the unit
-     * @param hitPoints
-     * @param attack
-     * @param defense
-     * @param evasion
-     * @return
+     * @param hitPoints of the unit
+     * @param attack of the unit
+     * @param defense of the unit
+     * @param evasion of the unit
+     * @return a new Boss Unit
      */
     public BossUnit createBossUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
@@ -135,29 +141,39 @@ public class GameController {
     }
 
 
-    public void movePlayer() {
-        Player player = this.getTurnOwner();
-        int moves = player.roll();
+    public List<Player> getPlayers() {
+        return players;
+    }
 
+    public void movePlayer() {
     }
 
 
-    public IPanel getPlayerPanel(Player unit) {
-        return new HomePanel(1);
+    public IPanel getPlayerPanel(Player player) {
+        return player.getPanel();
     }
 
     public void setCurrPlayerNormaGoal(NormaGoal goal) {
+        getTurnOwner().changeNormaListener(changeNormaHandler);
         getTurnOwner().setNormaGoal(goal);
     }
 
     public Player getTurnOwner() {
-        return players.get(indexCurrentPlayer);
+        return players.get(indexCurrentPlayer%4);
     }
 
     public void setPlayerHome(Player unit, HomePanel panel) {
+        unit.setPanel(panel);
     }
 
     public void endTurn() {
+        if(indexCurrentPlayer == 3){
+            indexCurrentPlayer = 0;
+            chapter++;
+        }
+        else{
+            indexCurrentPlayer++;
+        }
     }
 
     public Set<IPanel> getPanels() {

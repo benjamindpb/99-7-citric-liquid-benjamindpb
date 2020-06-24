@@ -23,7 +23,8 @@ public class NeutralPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-
+        // no hace nada
+        // implementacion sin querer de de Null Pattern xD
     }
 
 

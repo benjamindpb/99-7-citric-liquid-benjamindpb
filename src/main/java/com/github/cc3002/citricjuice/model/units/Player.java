@@ -1,10 +1,13 @@
 package com.github.cc3002.citricjuice.model.units;
 
+import com.github.cc3002.citricjuice.controller.handlers.IHandler;
 import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.jetbrains.annotations.NotNull;
+
+import java.beans.PropertyChangeSupport;
 
 /**
  * This class represents a player in the game 99.7% Citric Liquid.
@@ -15,6 +18,9 @@ import org.jetbrains.annotations.NotNull;
 public class Player extends AbstractUnit {
   private int normaLevel;
   private NormaGoal normaGoal;
+  private IPanel panel;
+
+  private final PropertyChangeSupport changeNormaNotification = new PropertyChangeSupport(this);
 
   /**
    * Creates a new character.
@@ -144,11 +150,25 @@ public class Player extends AbstractUnit {
     }
   }
 
-    public NormaGoal getNormaGoal() {
+  public NormaGoal getNormaGoal() {
       return normaGoal;
-    }
+  }
 
   public void setNormaGoal(NormaGoal goal) {
+    NormaGoal oldNorma = normaGoal;
     this.normaGoal = goal;
+    changeNormaNotification.firePropertyChange("CHANGE_NORMA", oldNorma, goal);
+  }
+
+  public IPanel getPanel() {
+    return panel;
+  }
+
+    public void setPanel(IPanel panel) {
+        this.panel = panel;
+    }
+
+  public void changeNormaListener(IHandler changeNormaHadler) {
+    changeNormaNotification.addPropertyChangeListener(changeNormaHadler);
   }
 }
