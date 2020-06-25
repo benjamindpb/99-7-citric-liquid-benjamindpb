@@ -11,25 +11,20 @@ import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import java.util.*;
 
 public class GameController {
-    private Set<IPanel> panels;
+    private HashMap<Integer, IPanel> panels;
     private List<Player> players;
-    private List<WildUnit> wildUnits;
-    private List<BossUnit> bossUnits;
     private int chapter;
     private int indexCurrentPlayer;
+
+    private final IHandler changeNormaHandler = new ChangeNormaHandler(this);
     private Random random;
 
-    private IHandler changeNormaHandler = new ChangeNormaHandler(this);
-
     public GameController() {
-        panels = new HashSet<>();
+        panels = new HashMap<>();
         players = new ArrayList<>(4);
         indexCurrentPlayer = 0;
         chapter = 1;
-        wildUnits = new ArrayList<>();
-        bossUnits = new ArrayList<>();
     }
-
 
     /**
      *
@@ -38,7 +33,7 @@ public class GameController {
      */
     public BonusPanel createBonusPanel(int id) {
         BonusPanel bonus = new BonusPanel(id);
-        panels.add(bonus);
+        panels.put(id, bonus);
         return bonus;
     }
 
@@ -48,7 +43,7 @@ public class GameController {
      */
     public DropPanel createDropPanel(int id) {
         DropPanel drop = new DropPanel(id);
-        panels.add(drop);
+        panels.put(id, drop);
         return drop;
 
     }
@@ -59,8 +54,7 @@ public class GameController {
      */
     public BossPanel createBossPanel(int id) {
         BossPanel boss = new BossPanel(id);
-        //boss.setBossUnit(bossUnits.get(random.nextInt(3)));
-        panels.add(boss);
+        panels.put(id, boss);
         return boss;
     }
 
@@ -71,7 +65,7 @@ public class GameController {
     public EncounterPanel createEncounterPanel(int id) {
         EncounterPanel encounter = new EncounterPanel(id);
         //encounter.setWildUnit(wildUnits.get(random.nextInt(3)));
-        panels.add(encounter);
+        panels.put(id, encounter);
         return encounter;
     }
 
@@ -81,7 +75,7 @@ public class GameController {
      */
     public HomePanel createHomePanel(int id) {
         HomePanel home = new HomePanel(id);
-        panels.add(home);
+        panels.put(id, home);
         return home;
     }
 
@@ -91,7 +85,7 @@ public class GameController {
      */
     public NeutralPanel createNeutralPanel(int id) {
         NeutralPanel neutral = new NeutralPanel(id);
-        panels.add(neutral);
+        panels.put(id, neutral);
         return neutral;
     }
 
@@ -124,7 +118,6 @@ public class GameController {
     public WildUnit createWildUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
         WildUnit unit = new WildUnit(name, hitPoints, attack, defense, evasion);
-        //wildUnits.add(unit);
         return unit;
     }
 
@@ -139,7 +132,6 @@ public class GameController {
     public BossUnit createBossUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
         BossUnit unit = new BossUnit(name, hitPoints, attack, defense, evasion);
-        //bossUnits.add(unit);
         return unit;
     }
 
@@ -147,11 +139,6 @@ public class GameController {
         if(!panel.equals(panel1)){
             panel.addNextPanel(panel1);
         }
-    }
-
-
-    public List<Player> getPlayers() {
-        return players;
     }
 
     public void movePlayer() {
@@ -175,9 +162,7 @@ public class GameController {
             }
         }while(moves-- > 0);
         turnOwner.getPanel().activatePanelEffectBy(turnOwner);
-
     }
-
 
     public IPanel getPlayerPanel(Player player) {
         return player.getPanel();
@@ -206,11 +191,19 @@ public class GameController {
         }
     }
 
-    public Set<IPanel> getPanels() {
-        return panels;
+    public Collection<IPanel> getPanels() {
+        return panels.values();
     }
 
     public int getChapter() {
         return chapter;
+    }
+
+    public void setBossUnitToBossPanel(BossUnit bossUnit, BossPanel bossPanel) {
+        bossPanel.setBossUnit(bossUnit);
+    }
+
+    public void setWildUnitToBossPanel(WildUnit wildUnit, EncounterPanel encounterPanel) {
+        encounterPanel.setWildUnit(wildUnit);
     }
 }
