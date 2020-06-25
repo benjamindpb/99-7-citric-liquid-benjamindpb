@@ -3,8 +3,6 @@ package com.github.cc3002.citricjuice.model.board;
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 
-import java.util.Random;
-
 /**
  * This class represent a Boss Panel
  *
@@ -14,8 +12,6 @@ import java.util.Random;
 public class BossPanel extends AbstractPanel{
 
     private BossUnit bossUnit;
-    private Random random;
-
     /**
      * Creates a new Boss Panel
      *  @param id    represent a id of the panel in the board
@@ -24,7 +20,6 @@ public class BossPanel extends AbstractPanel{
     public BossPanel(int id) {
         super(id);
         this.bossUnit = null;
-        random = new Random();
     }
 
     public BossUnit getBossUnit() {

@@ -23,7 +23,7 @@ public class DrawPanel extends AbstractPanel {
      */
     public void activatePanelEffectBy(Player player) {
         try{
-
+            //TODO: implement cards
         }catch (Exception e){
             System.out.println("Cards aren't available in this version.");
         }

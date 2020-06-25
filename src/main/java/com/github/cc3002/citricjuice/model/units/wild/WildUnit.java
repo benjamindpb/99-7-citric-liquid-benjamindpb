@@ -85,5 +85,4 @@ public class WildUnit extends AbstractUnit {
             player.increaseStarsBy(stars);
         }
     }
-
 }

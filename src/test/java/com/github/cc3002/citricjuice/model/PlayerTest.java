@@ -1,5 +1,6 @@
 package com.github.cc3002.citricjuice.model;
 
+import com.github.cc3002.citricjuice.model.board.NeutralPanel;
 import com.github.cc3002.citricjuice.model.units.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -19,10 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTest {
   private final static String PLAYER_NAME = "Suguri";
   private Player suguri;
+  private NeutralPanel neutralPanel;
 
   @BeforeEach
   public void setUp() {
     suguri = new Player(PLAYER_NAME, 4, 1, -1, 2);
+    neutralPanel = new NeutralPanel(1);
   }
 
   @Test
@@ -65,6 +68,13 @@ public class PlayerTest {
     assertEquals(expectedSuguri, actualSuguri);
     // Checks that the copied player doesn't reference the same object
     assertNotSame(expectedSuguri, actualSuguri);
+  }
+
+  @Test
+  public void activatePanelTest(){
+    int expectedHp = suguri.getCurrentHP();
+    suguri.activatePanel(neutralPanel);
+    assertEquals(expectedHp, suguri.getCurrentHP());
   }
 
   // region : consistency tests

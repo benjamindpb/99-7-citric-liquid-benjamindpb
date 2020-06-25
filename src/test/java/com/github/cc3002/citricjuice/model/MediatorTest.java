@@ -35,7 +35,7 @@ class MediatorTest {
         createBossUnits();
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testAddPanel() {
         assertTrue(mediator.getPanels().isEmpty(),
                 "The game shouldn't have panels if none has been added.");
@@ -49,7 +49,7 @@ class MediatorTest {
         }
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testAddPlayer() {
         panelSuppliers.stream().map(supplier -> supplier.apply(random.nextInt())).forEach(testPanel -> {
             for (var player : testPlayers) {
@@ -62,7 +62,7 @@ class MediatorTest {
         });
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testCreateWildUnit() {
         for (var wildUnit : testWildUnits) {
             var actualWildUnit =
@@ -72,7 +72,7 @@ class MediatorTest {
         }
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testCreateBossUnit() {
         for (var boss : testBosses) {
             var actualBoss =
@@ -82,7 +82,7 @@ class MediatorTest {
         }
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testSetNextPanel() {
         int id = 0;
         for (var originSupplier : panelSuppliers) {
@@ -104,7 +104,7 @@ class MediatorTest {
         }
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testNormaGoal() {
         var panel = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
         var player = mediator.createPlayer(panel, testPlayers.get(random.nextInt(testPlayers.size())))
@@ -117,7 +117,7 @@ class MediatorTest {
         assertEquals(NormaGoal.STARS, player.getNormaGoal());
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testStarsNorma() {
         var bonusPanel = panelSuppliers.get(0).apply(1);
         var homePanel = mediator.createHomePanel(2);
@@ -143,7 +143,7 @@ class MediatorTest {
         }
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testMeetPlayer() {
         var panels = new Mediator.MediatorPanel<?>[]{
                 panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1),
@@ -163,7 +163,7 @@ class MediatorTest {
         assertTrue(panels[1].getPlayers().contains(players[1]));//y contiene al player 2
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testPlayerHome() {
         var homePanel = mediator.createHomePanel(0);
         var panel1 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
@@ -176,7 +176,7 @@ class MediatorTest {
         assertTrue(homePanel.getPlayers().contains(player), "Player didn't stop at it's home panel");
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testMultipleNextPanels() {
         var panel1 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
         var panel2 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(2);
@@ -190,7 +190,7 @@ class MediatorTest {
         assertTrue(panel2.getPlayers().contains(player), "Player didn't stop at split");
     }
 
-    @Test
+    @RepeatedTest(10)
     public void testTurns() {
         var panel = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);
         testPlayers.forEach(player -> mediator.createPlayer(panel, player));

@@ -3,8 +3,6 @@ package com.github.cc3002.citricjuice.model.board;
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
-import java.util.Random;
-
 /**
  * This class represent a Encounter Panel
  *
@@ -14,7 +12,6 @@ import java.util.Random;
 public class EncounterPanel extends AbstractPanel {
 
     private WildUnit wildUnit;
-    private Random random;
 
     /**
      * Creates a new Encounter Panel
@@ -24,9 +21,7 @@ public class EncounterPanel extends AbstractPanel {
     public EncounterPanel(int id) {
         super(id);
         wildUnit = null;
-        random = new Random();
     }
-
     public WildUnit getWildUnit() {
         return wildUnit;
     }
@@ -47,6 +42,4 @@ public class EncounterPanel extends AbstractPanel {
             System.out.println("The panel has not a unit asigned yet.");
         }
     }
-
-
 }
