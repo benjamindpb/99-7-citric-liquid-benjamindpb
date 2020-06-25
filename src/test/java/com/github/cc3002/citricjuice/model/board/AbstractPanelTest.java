@@ -7,8 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -157,20 +155,20 @@ class AbstractPanelTest {
   public void bossPanelTest(){
     final var boss = new BossPanel(1);
     assertEquals(new BossPanel(1), boss);
-    assertEquals(null, boss.getBossUnit());
+    assertNull(boss.getBossUnit());
     boss.setBossUnit(shifuRobot);
     assertEquals(new BossUnit("Shifu Robot", 7,2, 3, -2), boss.getBossUnit());
-    assertFalse(boss.getBossUnit() == null);
+    assertNotNull(boss.getBossUnit());
   }
 
   @Test
   public void encounterPanelTest(){
     final var wild = new EncounterPanel(1);
     assertEquals(new EncounterPanel(1), wild);
-    assertEquals(null, wild.getWildUnit());
+    assertNull(wild.getWildUnit());
     wild.setWildUnit(seagull);
     assertEquals(new WildUnit("Seagull", 3, 1, -1, -1), wild.getWildUnit());
-    assertFalse(wild.getWildUnit() == null);
+    assertNotNull(wild.getWildUnit());
   }
 
 

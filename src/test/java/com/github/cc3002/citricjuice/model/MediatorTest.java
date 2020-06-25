@@ -4,6 +4,7 @@ import com.github.cc3002.citricjuice.mediator.Mediator;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -141,7 +142,7 @@ class MediatorTest {
             expectedLevel++;
         }
     }
-    @Disabled
+
     @Test
     public void testMeetPlayer() {
         var panels = new Mediator.MediatorPanel<?>[]{
@@ -162,7 +163,6 @@ class MediatorTest {
         assertTrue(panels[1].getPlayers().contains(players[1]));//y contiene al player 2
     }
 
-    @Disabled
     @Test
     public void testPlayerHome() {
         var homePanel = mediator.createHomePanel(0);
@@ -175,7 +175,7 @@ class MediatorTest {
         mediator.movePlayer();
         assertTrue(homePanel.getPlayers().contains(player), "Player didn't stop at it's home panel");
     }
-    @Disabled
+
     @Test
     public void testMultipleNextPanels() {
         var panel1 = panelSuppliers.get(random.nextInt(panelSuppliers.size())).apply(1);

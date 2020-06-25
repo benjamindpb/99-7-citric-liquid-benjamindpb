@@ -41,7 +41,11 @@ public class EncounterPanel extends AbstractPanel {
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        player.attack(wildUnit);
+        try{
+            player.attack(wildUnit);
+        }catch (Exception e){
+            System.out.println("The panel has not a unit asigned yet.");
+        }
     }
 
 
