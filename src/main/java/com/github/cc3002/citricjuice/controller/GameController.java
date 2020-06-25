@@ -147,7 +147,6 @@ public class GameController {
 
     public void movePlayer() {
         int moves = getTurnOwner().roll();
-        IPanel homePanel = getTurnOwner().getPanel();
         Player turnOwner = getTurnOwner();
         do {
             if(turnOwner.getPanel().getNextPanels().size() > 1){
@@ -157,10 +156,10 @@ public class GameController {
                 IPanel nextPanel = turnOwner.getPanel().getNextPanels().iterator().next();
                 turnOwner.getPanel().getPlayers().remove(turnOwner);
                 nextPanel.getPlayers().add(turnOwner);
-                nextPanel.activatePanelEffectBy(turnOwner);
                 turnOwner.setPanel(nextPanel);
             }
         }while(moves-- > 0);
+        turnOwner.getPanel().activatePanelEffectBy(turnOwner);
     }
 
 
@@ -178,7 +177,7 @@ public class GameController {
     }
 
     public void setPlayerHome(Player unit, HomePanel panel) {
-        panel.setPlayer(unit);
+        unit.setHomePanel(panel);
     }
 
     public void endTurn() {

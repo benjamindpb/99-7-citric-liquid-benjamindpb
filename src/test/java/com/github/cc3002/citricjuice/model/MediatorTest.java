@@ -1,6 +1,7 @@
 package com.github.cc3002.citricjuice.model;
 
 import com.github.cc3002.citricjuice.mediator.Mediator;
+import com.github.cc3002.citricjuice.model.board.IPanel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
