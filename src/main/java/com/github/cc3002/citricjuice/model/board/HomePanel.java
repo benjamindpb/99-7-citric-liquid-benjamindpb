@@ -7,6 +7,8 @@ import com.github.cc3002.citricjuice.model.units.Player;
  */
 public class HomePanel extends AbstractPanel{
 
+    private Player player;
+
     /**
      * @param id    represent a id of the panel in the board
      *
@@ -61,5 +63,13 @@ public class HomePanel extends AbstractPanel{
                 player.normaClear(); // player wins
             }
         }
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

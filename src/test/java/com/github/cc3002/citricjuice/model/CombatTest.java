@@ -2,10 +2,6 @@ package com.github.cc3002.citricjuice.model;
 
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.boss.ShifuRobot;
-import com.github.cc3002.citricjuice.model.units.boss.StoreManager;
-import com.github.cc3002.citricjuice.model.units.wild.Chicken;
-import com.github.cc3002.citricjuice.model.units.wild.Seagull;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
@@ -20,10 +16,10 @@ public class CombatTest {
 
     private Player suguri;
     private Player kai;
-    private Seagull seagull;
-    private Chicken chicken;
-    private ShifuRobot shifu;
-    private StoreManager storeManager;
+    private WildUnit seagull;
+    private WildUnit chicken;
+    private BossUnit shifu;
+    private BossUnit storeManager;
 
     private long seed1;
     private long seed2;
@@ -35,10 +31,10 @@ public class CombatTest {
     public void setUp(){
         suguri = new Player("Suguri", 4,1, -1, 2);
         kai = new Player("Kai", 5, 1 ,0, 0);
-        seagull = new Seagull(); //("Seagull", 3, 1, -1, -1)
-        chicken = new Chicken();
-        shifu = new ShifuRobot(); //("Shifu Robot", 7, 2, 3, -2)
-        storeManager = new StoreManager();
+        seagull = new WildUnit("Seagull", 3, 1, -1, -1); //("Seagull", 3, 1, -1, -1)
+        chicken = new WildUnit("Chicken", 3, -1, -1, 1);
+        shifu = new BossUnit("Shifu Robot", 7, 2, 3, -2); //("Shifu Robot", 7, 2, 3, -2)
+        storeManager = new BossUnit("Store Manager", 8, 3, 2, -1);
 
         seed1 = new Random().nextLong();
         seed2 = new Random().nextLong();
@@ -47,10 +43,10 @@ public class CombatTest {
     }
 
     private BossUnit getStoreManager(){
-        return new StoreManager();
+        return storeManager;
     }
     private WildUnit getChicken(){
-        return new Chicken(); //("Chicken", 3, -1, -1, 1);
+        return chicken; //("Chicken", 3, -1, -1, 1);
     }
 
     @Test
@@ -84,19 +80,18 @@ public class CombatTest {
     }
     @RepeatedTest(10)
     public void simpleBattleWithEvadeUnitChooseTest(){
-        BossUnit opponent = new StoreManager();
         r1.setSeed(seed1);
         r2.setSeed(seed2);
         suguri.setSeed(seed1);
-        opponent.setSeed(seed2);
+        storeManager.setSeed(seed2);
 
         int dmg = (r1.nextInt(6) + 1) + suguri.getAtk();
-        int evd = (r2.nextInt(6) +1) + opponent.getEvd();
+        int evd = (r2.nextInt(6) +1) + storeManager.getEvd();
         int d = suguri.setDmg();
 
-        int expectedHP = Math.max(0, opponent.getCurrentHP() - (evd <= dmg ? dmg : 0));
-        opponent.evade(d);
-        assertEquals(expectedHP, opponent.getCurrentHP());
+        int expectedHP = Math.max(0, storeManager.getCurrentHP() - (evd <= dmg ? dmg : 0));
+        storeManager.evade(d);
+        assertEquals(expectedHP, storeManager.getCurrentHP());
     }
 
     @RepeatedTest(50)

@@ -1,13 +1,8 @@
 package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.units.Player;
-import com.github.cc3002.citricjuice.model.units.wild.Chicken;
-import com.github.cc3002.citricjuice.model.units.wild.RoboBall;
-import com.github.cc3002.citricjuice.model.units.wild.Seagull;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -18,18 +13,8 @@ import java.util.Random;
  */
 public class EncounterPanel extends AbstractPanel {
 
-    private WildUnit selectedWildUnit;
-    private final ArrayList<WildUnit> wildUnits = new ArrayList<WildUnit>();
+    private WildUnit wildUnit;
     private Random random;
-    private long seed;
-
-    public WildUnit getSelectedWildUnit() {
-        return selectedWildUnit;
-    }
-
-    public ArrayList<WildUnit> getWildUnits() {
-        return wildUnits;
-    }
 
     /**
      * Creates a new Encounter Panel
@@ -38,11 +23,16 @@ public class EncounterPanel extends AbstractPanel {
      */
     public EncounterPanel(int id) {
         super(id);
-        this.selectedWildUnit = null;
+        wildUnit = null;
+        random = new Random();
+    }
 
-        this.wildUnits.add(new Chicken());
-        this.wildUnits.add(new RoboBall());
-        this.wildUnits.add(new Seagull());
+    public WildUnit getWildUnit() {
+        return wildUnit;
+    }
+
+    public void setWildUnit(WildUnit wildUnit) {
+        this.wildUnit = wildUnit;
     }
 
     /**
@@ -51,41 +41,8 @@ public class EncounterPanel extends AbstractPanel {
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        if(this.selectedWildUnit == null){
-            createWildUnit();
-        }
-        player.attack(selectedWildUnit);
-        if(!selectedWildUnit.isOutOfCombat()){
-            selectedWildUnit.attack(player);
-        }
+        player.attack(wildUnit);
     }
 
-    /**
-     * This method creates a new instance of a Wild Unit
-     */
-    public void createWildUnit(){
-        int index = random.nextInt(wildUnits.size());
-        this.selectedWildUnit = wildUnits.get(index);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        EncounterPanel that = (EncounterPanel) o;
-        return Objects.equals(wildUnits, that.wildUnits);
-    }
-
-
-    /**
-     * Set a seed
-     *
-     * @param seed to be setted
-     */
-    public void setSeed(long seed) {
-        random = new Random(seed);
-        this.seed = seed;
-    }
 
 }

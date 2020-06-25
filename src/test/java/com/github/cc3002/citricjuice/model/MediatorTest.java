@@ -115,7 +115,6 @@ class MediatorTest {
         assertEquals(NormaGoal.STARS, player.getNormaGoal());
     }
 
-    @Disabled
     @Test
     public void testStarsNorma() {
         var bonusPanel = panelSuppliers.get(0).apply(1);

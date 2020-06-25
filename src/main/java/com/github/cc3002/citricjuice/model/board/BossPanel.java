@@ -2,12 +2,7 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.boss.FlyingCastle;
-import com.github.cc3002.citricjuice.model.units.boss.ShifuRobot;
-import com.github.cc3002.citricjuice.model.units.boss.StoreManager;
 
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -18,10 +13,8 @@ import java.util.Random;
  */
 public class BossPanel extends AbstractPanel{
 
-    private BossUnit selectedBossUnit;
-    private final ArrayList<BossUnit> bossUnits = new ArrayList<BossUnit>();
+    private BossUnit bossUnit;
     private Random random;
-    private long seed;
 
     /**
      * Creates a new Boss Panel
@@ -30,16 +23,16 @@ public class BossPanel extends AbstractPanel{
      */
     public BossPanel(int id) {
         super(id);
-        this.selectedBossUnit = null;
+        this.bossUnit = null;
         random = new Random();
-
-        this.bossUnits.add(new FlyingCastle());
-        this.bossUnits.add(new ShifuRobot());
-        this.bossUnits.add(new StoreManager());
     }
 
-    public BossUnit getSelectedBossUnit() {
-        return selectedBossUnit;
+    public BossUnit getBossUnit() {
+        return bossUnit;
+    }
+
+    public void setBossUnit(BossUnit bossUnit) {
+        this.bossUnit = bossUnit;
     }
 
     /**
@@ -48,43 +41,8 @@ public class BossPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        if(this.selectedBossUnit == null || selectedBossUnit.getCurrentHP() == 0){
-            createBossUnit();
-        }
-        player.attack(selectedBossUnit);
-        if(!selectedBossUnit.isOutOfCombat()){ //CA
-            selectedBossUnit.attack(player);
-        }
+        player.attack(bossUnit);
     }
 
-    /**
-     * This method creates a new instance of a Boss Unit
-     */
-    public void createBossUnit(){
-        int index = random.nextInt(bossUnits.size());
-        this.selectedBossUnit = bossUnits.get(index);
-    }
 
-    public ArrayList<BossUnit> getBossUnits() {
-        return bossUnits;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        BossPanel bossPanel = (BossPanel) o;
-        return Objects.equals(bossUnits, bossPanel.bossUnits);
-    }
-
-    /**
-     * Set a seed
-     *
-     * @param seed to be setted
-     */
-    public void setSeed(long seed) {
-        random = new Random(seed);
-        this.seed = seed;
-    }
 }

@@ -60,8 +60,8 @@ public abstract class AbstractPanel implements IPanel {
     if (this == o) return true;
     if (!(o instanceof AbstractPanel)) return false;
     AbstractPanel that = (AbstractPanel) o;
-    return getId() == that.getId() &&
-            Objects.equals(getNextPanels(), that.getNextPanels()) &&
+    return id == that.id &&
+            Objects.equals(nextPanels, that.nextPanels) &&
             Objects.equals(playersInPanel, that.playersInPanel);
   }
 

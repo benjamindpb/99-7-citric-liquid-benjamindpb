@@ -160,12 +160,7 @@ public class GameController {
                 nextPanel.activatePanelEffectBy(turnOwner);
                 turnOwner.setPanel(nextPanel);
             }
-            moves = moves - 1;
-        }while(
-                moves > 0
-                || turnOwner.getPanel().equals(homePanel)
-                || turnOwner.getPanel().getPlayers().size() > 1);
-
+        }while(moves-- > 0);
     }
 
 
@@ -183,7 +178,7 @@ public class GameController {
     }
 
     public void setPlayerHome(Player unit, HomePanel panel) {
-        unit.setHomePanel(panel);
+        panel.setPlayer(unit);
     }
 
     public void endTurn() {

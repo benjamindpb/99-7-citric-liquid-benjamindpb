@@ -2,18 +2,13 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
-import com.github.cc3002.citricjuice.model.units.boss.FlyingCastle;
-import com.github.cc3002.citricjuice.model.units.boss.ShifuRobot;
-import com.github.cc3002.citricjuice.model.units.boss.StoreManager;
-import com.github.cc3002.citricjuice.model.units.wild.Chicken;
-import com.github.cc3002.citricjuice.model.units.wild.RoboBall;
-import com.github.cc3002.citricjuice.model.units.wild.Seagull;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
@@ -35,6 +30,9 @@ class AbstractPanelTest {
   private Player chicken;
   private Player suguri;
 
+  private BossUnit shifuRobot;
+  private WildUnit seagull;
+
   private HomePanel testHomePanel;
   private NeutralPanel testNeutralPanel;
   private BonusPanel testBonusPanel;
@@ -42,10 +40,6 @@ class AbstractPanelTest {
   private EncounterPanel testEncounterPanel;
   private BossPanel testBossPanel;
   private DrawPanel testDrawPanel;
-
-  private ArrayList<BossUnit> bossUnits = new ArrayList<BossUnit>();
-  private ArrayList<WildUnit> wildUnits = new ArrayList<>();
-
 
   private int testSeed;
 
@@ -66,13 +60,9 @@ class AbstractPanelTest {
     kai = new Player("Kai", 5, 1, 0, 0);
     chicken = new Player("Chicken", 3, -1, -1, 1);
 
-    bossUnits.add(new FlyingCastle());
-    bossUnits.add(new ShifuRobot());
-    bossUnits.add(new StoreManager());
+    seagull = new WildUnit("Seagull", 3, 1, -1, -1);
+    shifuRobot = new BossUnit("Shifu Robot", 7, 2, 3, -2);
 
-    wildUnits.add(new Chicken());
-    wildUnits.add(new RoboBall());
-    wildUnits.add(new Seagull());
   }
 
   @Test
@@ -167,38 +157,20 @@ class AbstractPanelTest {
   public void bossPanelTest(){
     final var boss = new BossPanel(1);
     assertEquals(new BossPanel(1), boss);
-    assertEquals(null, boss.getSelectedBossUnit());
-    assertFalse(boss.getBossUnits() == null);
-    assertEquals(new FlyingCastle(), boss.getBossUnits().get(0));
-
-    long seed1 = new Random().nextLong();
-    Random r1 = new Random();
-    r1.setSeed(seed1);
-    boss.setSeed(seed1);
-
-    BossUnit bossExpected = bossUnits.get(r1.nextInt(bossUnits.size()));
-    boss.activatePanelEffectBy(suguri);
-    assertEquals(bossExpected, boss.getSelectedBossUnit());
-    assertFalse(boss.getSelectedBossUnit() == null);
+    assertEquals(null, boss.getBossUnit());
+    boss.setBossUnit(shifuRobot);
+    assertEquals(new BossUnit("Shifu Robot", 7,2, 3, -2), boss.getBossUnit());
+    assertFalse(boss.getBossUnit() == null);
   }
 
   @Test
   public void encounterPanelTest(){
     final var wild = new EncounterPanel(1);
     assertEquals(new EncounterPanel(1), wild);
-    assertEquals(null, wild.getSelectedWildUnit());
-    assertFalse(wild.getWildUnits() == null);
-    assertEquals(new Chicken(), wild.getWildUnits().get(0));
-
-    long seed1 = new Random().nextLong();
-    Random r1 = new Random();
-    r1.setSeed(seed1);
-    wild.setSeed(seed1);
-
-    WildUnit wildExpected = wildUnits.get(r1.nextInt(bossUnits.size()));
-    wild.activatePanelEffectBy(suguri);
-    assertEquals(wildExpected, wild.getSelectedWildUnit());
-    assertFalse(wild.getSelectedWildUnit() == null);
+    assertEquals(null, wild.getWildUnit());
+    wild.setWildUnit(seagull);
+    assertEquals(new WildUnit("Seagull", 3, 1, -1, -1), wild.getWildUnit());
+    assertFalse(wild.getWildUnit() == null);
   }
 
 
@@ -235,5 +207,4 @@ class AbstractPanelTest {
       suguri.normaClear();
     }
   }
-  // endregion
 }
