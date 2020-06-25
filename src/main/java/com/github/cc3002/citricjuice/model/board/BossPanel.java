@@ -41,8 +41,10 @@ public class BossPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        player.attack(bossUnit);
+        try{
+            player.attack(bossUnit);
+        }catch (Exception e){
+            System.out.println("The panel has not a unit asigned yet.");
+        }
     }
-
-
 }

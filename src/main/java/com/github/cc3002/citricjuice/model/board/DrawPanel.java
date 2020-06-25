@@ -22,6 +22,10 @@ public class DrawPanel extends AbstractPanel {
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
+        try{
 
+        }catch (Exception e){
+            System.out.println("Cards aren't available in this version.");
+        }
     }
 }

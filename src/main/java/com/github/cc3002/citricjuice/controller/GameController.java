@@ -2,31 +2,34 @@ package com.github.cc3002.citricjuice.controller;
 
 import com.github.cc3002.citricjuice.controller.handlers.ChangeNormaHandler;
 import com.github.cc3002.citricjuice.controller.handlers.IHandler;
-import com.github.cc3002.citricjuice.controller.handlers.PlayerMovedHandler;
 import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.*;
 import com.github.cc3002.citricjuice.model.units.Player;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class GameController {
     private Set<IPanel> panels;
     private List<Player> players;
+    private List<WildUnit> wildUnits;
+    private List<BossUnit> bossUnits;
     private int chapter;
     private int indexCurrentPlayer;
+    private Random random;
+
     private IHandler changeNormaHandler = new ChangeNormaHandler(this);
-    private IHandler playerMovedHandler = new PlayerMovedHandler(this);
+
     public GameController() {
         panels = new HashSet<>();
         players = new ArrayList<>(4);
         indexCurrentPlayer = 0;
         chapter = 1;
+        wildUnits = new ArrayList<>();
+        bossUnits = new ArrayList<>();
     }
+
 
     /**
      *
@@ -37,16 +40,6 @@ public class GameController {
         BonusPanel bonus = new BonusPanel(id);
         panels.add(bonus);
         return bonus;
-    }
-
-    /**
-     * @param id coordinate in the board
-     * @return the panel
-     */
-    public BossPanel createBossPanel(int id) {
-        BossPanel boss = new BossPanel(id);
-        panels.add(boss);
-        return boss;
     }
 
     /**
@@ -64,8 +57,20 @@ public class GameController {
      * @param id coordinate in the board
      * @return the panel
      */
+    public BossPanel createBossPanel(int id) {
+        BossPanel boss = new BossPanel(id);
+        //boss.setBossUnit(bossUnits.get(random.nextInt(3)));
+        panels.add(boss);
+        return boss;
+    }
+
+    /**
+     * @param id coordinate in the board
+     * @return the panel
+     */
     public EncounterPanel createEncounterPanel(int id) {
         EncounterPanel encounter = new EncounterPanel(id);
+        //encounter.setWildUnit(wildUnits.get(random.nextInt(3)));
         panels.add(encounter);
         return encounter;
     }
@@ -103,7 +108,7 @@ public class GameController {
                                int evasion, IPanel panel) {
         Player player = new Player(name, hitPoints, attack, defense, evasion);
         panel.addPlayerToPanel(player);
-        player.setPanel(panel); //home panel
+        player.setPanel(panel);
         players.add(player);
         return player;
     }
@@ -118,7 +123,9 @@ public class GameController {
      */
     public WildUnit createWildUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
-        return new WildUnit(name, hitPoints, attack, defense, evasion);
+        WildUnit unit = new WildUnit(name, hitPoints, attack, defense, evasion);
+        //wildUnits.add(unit);
+        return unit;
     }
 
     /**
@@ -131,7 +138,9 @@ public class GameController {
      */
     public BossUnit createBossUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
-        return new BossUnit(name, hitPoints, attack, defense, evasion);
+        BossUnit unit = new BossUnit(name, hitPoints, attack, defense, evasion);
+        //bossUnits.add(unit);
+        return unit;
     }
 
     public void setNextPanel(IPanel panel, IPanel panel1) {
@@ -149,6 +158,12 @@ public class GameController {
         int moves = getTurnOwner().roll();
         Player turnOwner = getTurnOwner();
         do {
+            if(turnOwner.getPanel().equals(turnOwner.getHomePanel())){
+                break;
+            }
+            if(turnOwner.getPanel().getPlayers().size() > 1){
+                break;
+            }
             if(turnOwner.getPanel().getNextPanels().size() > 1){
                 // el panel del player actual tiene mas de un panel siguiente
             }
@@ -160,6 +175,7 @@ public class GameController {
             }
         }while(moves-- > 0);
         turnOwner.getPanel().activatePanelEffectBy(turnOwner);
+
     }
 
 
