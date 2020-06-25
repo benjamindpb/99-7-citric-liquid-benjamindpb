@@ -6,6 +6,8 @@ import com.github.cc3002.citricjuice.model.board.HomePanel;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
+import com.github.cc3002.citricjuice.states.InGame;
+import com.github.cc3002.citricjuice.states.State;
 import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeSupport;
@@ -20,11 +22,9 @@ public class Player extends AbstractUnit {
   private int normaLevel;
   private NormaGoal normaGoal;
   private IPanel panel;
-
   private HomePanel homePanel;
-
+  private State state;
   private final PropertyChangeSupport changeNormaNotification = new PropertyChangeSupport(this);
-
   /**
    * Creates a new character.
    *
@@ -44,6 +44,7 @@ public class Player extends AbstractUnit {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
     normaGoal = NormaGoal.STARS;
+    this.setState(new InGame());
   }
 
    /**
@@ -181,5 +182,8 @@ public class Player extends AbstractUnit {
 
   public HomePanel getHomePanel() {
     return homePanel;
+  }
+
+  public void setState(State state) {
   }
 }

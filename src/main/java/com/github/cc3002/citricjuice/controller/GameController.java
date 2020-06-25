@@ -144,11 +144,14 @@ public class GameController {
     public void movePlayer() {
         int moves = getTurnOwner().roll();
         Player turnOwner = getTurnOwner();
+        boolean earlyStop = false; // para detectar si se el jugador se detiene
         do {
             if(turnOwner.getPanel().equals(turnOwner.getHomePanel())){
+                earlyStop = true;
                 break;
             }
             if(turnOwner.getPanel().getPlayers().size() > 1){
+                earlyStop = true;
                 break;
             }
             if(turnOwner.getPanel().getNextPanels().size() > 1){
@@ -161,7 +164,9 @@ public class GameController {
                 turnOwner.setPanel(nextPanel);
             }
         }while(moves-- > 0);
-        turnOwner.getPanel().activatePanelEffectBy(turnOwner);
+        if(!earlyStop){
+            turnOwner.getPanel().activatePanelEffectBy(turnOwner);
+        }
     }
 
     public IPanel getPlayerPanel(Player player) {
