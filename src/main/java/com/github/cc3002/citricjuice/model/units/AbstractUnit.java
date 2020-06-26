@@ -132,33 +132,27 @@ public abstract class AbstractUnit implements IUnit{
         defend = false;
         evade = true;
     }
-
     @Override
     public boolean isDefend() {
         return defend;
     }
-
     @Override
     public boolean isEvade() {
         return evade;
     }
-
     @Override
     public void increaseWinsBy(final int amount){
         wins += amount;
     }
-
     @Override
     public boolean isOutOfCombat(){
         return currentHP == 0;
     }
 
-
     public void setSeed(long seed) {
         random = new Random(seed);
         this.seed = seed;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

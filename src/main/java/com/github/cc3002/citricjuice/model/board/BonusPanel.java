@@ -9,19 +9,11 @@ public class BonusPanel extends AbstractPanel{
 
     /**
      * Constructor for a default panel without any special behaviour.
+     *  @param id    represent a id of the panel in the board
      *
-     * @param row    represent a row of the panel in the board
-     * @param column represent a column of the panel in the board
      */
-    public BonusPanel(int row, int column) {
-        super(row, column);
-    }
-
-    /**
-     * Thic Constructor creates a panel in the (0,0) board coordinate
-     */
-    public BonusPanel() {
-        super(0,0);
+    public BonusPanel(int id) {
+        super(id);
     }
 
     /**
@@ -31,6 +23,7 @@ public class BonusPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        player.increaseStarsBy(player.roll() * Math.min(player.getNormaLevel(), 3));
+        player.increaseStarsBy(player.roll() *
+                Math.min(player.getNormaLevel(), 3));
     }
 }

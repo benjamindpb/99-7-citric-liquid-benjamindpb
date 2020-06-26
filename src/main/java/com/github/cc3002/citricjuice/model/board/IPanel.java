@@ -2,6 +2,7 @@ package com.github.cc3002.citricjuice.model.board;
 
 import com.github.cc3002.citricjuice.model.units.Player;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,8 +19,9 @@ public interface IPanel {
 
     /**
      * Returns a copy of the players in this panel.
+     * @return
      */
-    Set<Player> getPlayersInPanel();
+    List<Player> getPlayers();
 
     /**
      * Adds a new adjacent panel to this one.

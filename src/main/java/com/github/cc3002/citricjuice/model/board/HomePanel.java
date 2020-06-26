@@ -8,18 +8,11 @@ import com.github.cc3002.citricjuice.model.units.Player;
 public class HomePanel extends AbstractPanel{
 
     /**
-     * @param row    represent a row of the panel in the board
-     * @param column represent a column of the panel in the board
+     * @param id    represent a id of the panel in the board
+     *
      */
-    public HomePanel(int row, int column) {
-        super(row, column);
-    }
-
-    /**
-     * Thic Constructor creates a panel in the (0,0) board coordinate
-     */
-    public HomePanel() {
-        super(0,0);
+    public HomePanel(int id) {
+        super(id);
     }
 
     /**
@@ -69,4 +62,5 @@ public class HomePanel extends AbstractPanel{
             }
         }
     }
+
 }
