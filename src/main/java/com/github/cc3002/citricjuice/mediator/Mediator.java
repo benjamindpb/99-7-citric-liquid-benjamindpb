@@ -153,7 +153,7 @@ public class Mediator {
     }
 
     /**
-     * Makes the turn owner move a random number of panels and returns the turn owner and the panel it
+     * Makes the turn owner movePlayer a random number of panels and returns the turn owner and the panel it
      * landed each one wrapped in a mediator.
      */
     public Pair<MediatorPlayer<?>, MediatorPanel<?>> movePlayer() {

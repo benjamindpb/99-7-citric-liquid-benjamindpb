@@ -7,7 +7,7 @@ import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import com.github.cc3002.citricjuice.states.InGame;
-import com.github.cc3002.citricjuice.states.State;
+import com.github.cc3002.citricjuice.states.TurnPhase;
 import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeSupport;
@@ -23,7 +23,7 @@ public class Player extends AbstractUnit {
   private NormaGoal normaGoal;
   private IPanel panel;
   private HomePanel homePanel;
-  private State state;
+  private TurnPhase turnPhase;
   private final PropertyChangeSupport changeNormaNotification = new PropertyChangeSupport(this);
   /**
    * Creates a new character.
@@ -44,7 +44,7 @@ public class Player extends AbstractUnit {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
     normaGoal = NormaGoal.STARS;
-    this.setState(new InGame());
+    this.setTurnPhase(new InGame());
   }
 
    /**
@@ -154,36 +154,121 @@ public class Player extends AbstractUnit {
     }
   }
 
+  /**
+   * @return el tipo de norma que tiene actualmente
+   */
   public NormaGoal getNormaGoal() {
       return normaGoal;
   }
 
+  /**
+   * @param goal que sera fijada
+   */
   public void setNormaGoal(NormaGoal goal) {
     NormaGoal oldNorma = normaGoal;
     this.normaGoal = goal;
     changeNormaNotification.firePropertyChange("CHANGE_NORMA", oldNorma, goal);
   }
 
+  /**
+   * @return el panel actual del player
+   */
   public IPanel getPanel() {
     return panel;
   }
 
-    public void setPanel(IPanel panel) {
+  /**
+   * @param panel que sera seteado al player
+   */
+  public void setPanel(IPanel panel) {
         this.panel = panel;
     }
+
 
   public void changeNormaListener(IHandler changeNormaHadler) {
     changeNormaNotification.addPropertyChangeListener(changeNormaHadler);
   }
 
+  /**
+   * @param homePanel del player
+   */
   public void setHomePanel(HomePanel homePanel) {
     this.homePanel = homePanel;
   }
 
+  /**
+   * @return el home panel del player
+   */
   public HomePanel getHomePanel() {
     return homePanel;
   }
 
-  public void setState(State state) {
+  /**
+   * @param turnPhase fase del turno en que se encuentra el player
+   */
+  public void setTurnPhase(TurnPhase turnPhase) {
+    this.turnPhase = turnPhase;
+    turnPhase.setPlayer(this);
   }
+
+  /**
+   * Los siguientes metodos retornan true si el player se encuentra en
+   * un estado en particular o false en caso contrario.
+   */
+  public boolean isInGame() {
+    return turnPhase.isInGame();
+  }
+  public boolean isOutOfGame() {
+    return turnPhase.isOutOfGame();
+  }
+  public boolean receivingStars() {
+    return turnPhase.isReceivingStars();
+  }
+  public boolean playingCard() {
+    return turnPhase.playingCard();
+  }
+  public boolean isPlayingCard() {
+    return turnPhase.playingCard();
+  }
+  public boolean isMoving() {
+    return turnPhase.isMoving();
+  }
+  public boolean isInBattle() {
+    return turnPhase.isInBattle();
+  }
+  public boolean isActivatingTrapCard() {
+    return turnPhase.activatingTrapCard();
+  }
+  public boolean isActivatingPanel() {
+    return turnPhase.activatingPanel();
+  }
+
+  /**
+   * Los siguientes metodos cambian la fase actual del turno del jugador
+   */
+  public void receiveStarsPhase() {
+    turnPhase.receiveStars();
+  }
+  public void playCardPhase() {
+    turnPhase.playCard();
+  }
+  public void movePhase() {
+    turnPhase.movePlayer();
+  }
+  public void battlePhase() {
+    turnPhase.battlePhase();
+  }
+  public void activateTrapCardPhase() {
+    turnPhase.activateTrapCard();
+  }
+  public void activatePanelPhase() {
+    turnPhase.activatePanelPhase();
+  }
+  public void outOfGame() {
+    turnPhase.outOfGame();
+  }
+  public void backToTheGame() {
+    turnPhase.backToGame();
+  }
+
 }

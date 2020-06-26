@@ -1,13 +1,16 @@
 package com.github.cc3002.citricjuice.states;
 
-public class ReceiveStars extends State {
+/**
+ * Primera fase del turno cuando el player recibe estrellas
+ */
+public class ReceiveStars extends TurnPhase {
 
-    public void PlayCard(){
-        this.changeState(new PlayCard());
+    public void playCard(){
+        this.changePhase(new PlayCard());
     }
 
-    public void activateTrapCard(){
-        this.changeState(new ActivateTrapCard());
+    public void movePlayer(){
+        this.changePhase(new MovePlayer());
     }
 
     public boolean isReceivingStars(){

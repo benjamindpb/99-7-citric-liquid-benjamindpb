@@ -1,17 +1,27 @@
 package com.github.cc3002.citricjuice.states;
 
-public class MovePlayer extends State {
+/**
+ * Fase de movimiento del player
+ */
+public class MovePlayer extends TurnPhase {
 
+    /**
+     * se cambia a la fase de batalla
+     */
     public void battlePhase(){
-        this.changeState(new BattlePhase());
+        this.changePhase(new BattlePhase());
     }
 
-    public void activateCard(){
-        this.changeState(new ActivateTrapCard());
+    /**
+     * el player activa la trampa carta del panel
+     */
+    public void activateTrapCard(){
+        this.changePhase(new ActivateTrapCard());
     }
 
-    public void activatePanel() { this.changeState(new ActivatePanel());}
-
+    /**
+     * @return true, porque efectivamente estamos en su fase xD
+     */
     public boolean isMoving(){
         return true;
     }

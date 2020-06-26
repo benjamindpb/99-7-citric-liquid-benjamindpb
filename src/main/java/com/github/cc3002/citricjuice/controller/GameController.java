@@ -10,6 +10,12 @@ import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
 import java.util.*;
 
+/**
+ * Esta clase representa al controlador. Este sirve como intermediario entre los objetos
+ * del modelo y la interfaz gráfica de la aplicación.
+ * El controlador debe encargarse de mantener todos los parámetros necesarios para
+ * implementar las reglas y el flujo del juego.
+ */
 public class GameController {
     private HashMap<Integer, IPanel> panels;
     private List<Player> players;
@@ -17,8 +23,10 @@ public class GameController {
     private int indexCurrentPlayer;
 
     private final IHandler changeNormaHandler = new ChangeNormaHandler(this);
-    private Random random;
 
+    /**
+     * metodo constructor
+     */
     public GameController() {
         panels = new HashMap<>();
         players = new ArrayList<>(4);
@@ -117,8 +125,7 @@ public class GameController {
      */
     public WildUnit createWildUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
-        WildUnit unit = new WildUnit(name, hitPoints, attack, defense, evasion);
-        return unit;
+        return new WildUnit(name, hitPoints, attack, defense, evasion);
     }
 
     /**
@@ -131,16 +138,24 @@ public class GameController {
      */
     public BossUnit createBossUnit(String name, int hitPoints, int attack, int defense,
                                    int evasion) {
-        BossUnit unit = new BossUnit(name, hitPoints, attack, defense, evasion);
-        return unit;
+        return new BossUnit(name, hitPoints, attack, defense, evasion);
     }
 
+    /**
+     * @param panel al que se le va a setear un panel siguiente
+     * @param panel1 agregado
+     */
     public void setNextPanel(IPanel panel, IPanel panel1) {
         if(!panel.equals(panel1)){
             panel.addNextPanel(panel1);
         }
     }
 
+    /**
+     * Este metodo se encarga del movimiento del jugador por los paneles.
+     * Se detiene cuando hay un jugador mas en el panel o cuando llega a
+     * su home panel.
+     */
     public void movePlayer() {
         int moves = getTurnOwner().roll();
         Player turnOwner = getTurnOwner();
@@ -155,7 +170,7 @@ public class GameController {
                 break;
             }
             if(turnOwner.getPanel().getNextPanels().size() > 1){
-                // el panel del player actual tiene mas de un panel siguiente
+                // TODO: el panel del player actual tiene mas de un panel siguiente
             }
             else{ // el panel del player actual tiene solo un panel siguiente o 0 (?)
                 IPanel nextPanel = turnOwner.getPanel().getNextPanels().iterator().next();
@@ -169,6 +184,10 @@ public class GameController {
         }
     }
 
+    /**
+     * @param player que se estudia
+     * @return  el panel en que esta el player
+     */
     public IPanel getPlayerPanel(Player player) {
         return player.getPanel();
     }
@@ -178,14 +197,25 @@ public class GameController {
         getTurnOwner().setNormaGoal(goal);
     }
 
+    /**
+     * @return el propietario del turno
+     */
     public Player getTurnOwner() {
         return players.get(indexCurrentPlayer%4);
     }
 
+    /**
+     * @param unit a la que se le seteara el home panel
+     * @param panel home panel unico del player
+     */
     public void setPlayerHome(Player unit, HomePanel panel) {
         unit.setHomePanel(panel);
     }
 
+    /**
+     * metodo que se encarga de finalizar el turno y de paso aumentar el chapter
+     * si ya se cumplio una ronda
+     */
     public void endTurn() {
         if(indexCurrentPlayer == 3){
             indexCurrentPlayer = 0;
@@ -196,19 +226,34 @@ public class GameController {
         }
     }
 
+    /**
+     * @return el tablero, es una coleccion de todos los paneles
+     */
     public Collection<IPanel> getPanels() {
         return panels.values();
     }
 
+    /**
+     * @return el capitulo actual del juego
+     */
     public int getChapter() {
         return chapter;
     }
 
+    /**
+     * @param bossUnit que sera agregada al panel
+     * @param bossPanel al que se le agrega la unidad
+     */
     public void setBossUnitToBossPanel(BossUnit bossUnit, BossPanel bossPanel) {
         bossPanel.setBossUnit(bossUnit);
     }
-
+    /**
+     * @param wildUnit que sera agregada al panel
+     * @param encounterPanel al que se le agrega la unidad
+     */
     public void setWildUnitToBossPanel(WildUnit wildUnit, EncounterPanel encounterPanel) {
         encounterPanel.setWildUnit(wildUnit);
     }
+
+    //TODO:  agregar NormaCheck y NormaClear, observer (?)
 }
