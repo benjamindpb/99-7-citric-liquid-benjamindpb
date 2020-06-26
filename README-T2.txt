@@ -16,5 +16,5 @@ Esta version no esta 100% terminada y faltan algunas modificaciones pero si es r
 mas Handlers (observers) que notifican el cambio de propiedades de objetos del modelo. Pero eso lo hare para la proxima entrega
 para poder implementar la interfaz grafica y terminar el proyecto.
 
-PD1: este nuevo modelo tiene pequeñas modificaciones ya que la primera version se implemento de una muy buena manera. Y por otro
-lado obviamente mantiene todas las caracteristicas y requisitos necesarios de la Tarea 1.
+PD: este nuevo modelo tiene pequeñas modificaciones con respecto a la primera entrega ya que la primera version se implemento 
+de una muy buena manera y no presentaba tantos inconvenientes.
