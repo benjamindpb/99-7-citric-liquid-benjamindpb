@@ -1,6 +1,6 @@
-package com.github.cc3002.citricjuice.gui;
+package com.github.cc3002.citricliquid.gui;
 
-import com.github.cc3002.citricjuice.gui.nodes.MovableNodeBuilder;
+import com.github.cc3002.citricliquid.gui.nodes.MovableNodeBuilder;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.Group;

@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.gui.nodes;
+package com.github.cc3002.citricliquid.gui.nodes;
 
 import javafx.scene.Scene;
 
