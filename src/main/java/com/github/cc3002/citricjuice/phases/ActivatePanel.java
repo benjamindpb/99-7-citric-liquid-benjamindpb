@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.states;
+package com.github.cc3002.citricjuice.phases;
 
 /**
  * Esta clase representa la fase de activar el panel en que cae

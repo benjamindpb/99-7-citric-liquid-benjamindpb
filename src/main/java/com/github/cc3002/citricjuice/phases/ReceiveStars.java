@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.states;
+package com.github.cc3002.citricjuice.phases;
 
 /**
  * Primera fase del turno cuando el player recibe estrellas

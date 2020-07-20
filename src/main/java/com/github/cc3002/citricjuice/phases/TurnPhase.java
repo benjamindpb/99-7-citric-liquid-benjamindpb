@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.states;
+package com.github.cc3002.citricjuice.phases;
 
 import com.github.cc3002.citricjuice.model.units.Player;
 

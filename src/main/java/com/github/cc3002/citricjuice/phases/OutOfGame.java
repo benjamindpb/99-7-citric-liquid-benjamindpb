@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.states;
+package com.github.cc3002.citricjuice.phases;
 
 /**
  * Representa cuando un player sale del juego (KO)

@@ -6,8 +6,8 @@ import com.github.cc3002.citricjuice.model.board.HomePanel;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
-import com.github.cc3002.citricjuice.states.InGame;
-import com.github.cc3002.citricjuice.states.TurnPhase;
+import com.github.cc3002.citricjuice.phases.InGame;
+import com.github.cc3002.citricjuice.phases.TurnPhase;
 import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeSupport;
@@ -25,6 +25,7 @@ public class Player extends AbstractUnit {
   private HomePanel homePanel;
   private TurnPhase turnPhase;
   private final PropertyChangeSupport changeNormaNotification = new PropertyChangeSupport(this);
+  private final PropertyChangeSupport normaClearNotification = new PropertyChangeSupport(this);
   /**
    * Creates a new character.
    *
@@ -58,6 +59,7 @@ public class Player extends AbstractUnit {
    * Performs a norma clear action; the {@code norma} counter increases in 1.
    */
   public void normaClear() {
+    changeNormaNotification.firePropertyChange("NORMA_CLEAR", normaLevel, normaLevel + 1);
     normaLevel++;
   }
 
@@ -187,6 +189,10 @@ public class Player extends AbstractUnit {
 
   public void changeNormaListener(IHandler changeNormaHadler) {
     changeNormaNotification.addPropertyChangeListener(changeNormaHadler);
+  }
+
+  public void normaClearListener(IHandler normaClearHandler){
+    normaClearNotification.addPropertyChangeListener(normaClearHandler);
   }
 
   /**

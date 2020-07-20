@@ -1,5 +1,6 @@
 package com.github.cc3002.citricliquid.gui;
 
+import com.github.cc3002.citricjuice.controller.GameController;
 import com.github.cc3002.citricliquid.gui.nodes.MovableNodeBuilder;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -24,14 +25,28 @@ import java.io.IOException;
  */
 public class CitricLiquid extends Application {
   private static final String RESOURCE_PATH = "src/main/resources/";
+  GameController controller = new GameController();
 
+  /**
+   * @param stage primario
+   */
   @Override
   public void start(@NotNull Stage stage) throws FileNotFoundException {
     stage.setTitle("99.7% Citric Liquid");
-    Group root = new Group();
-    int width = 1280;
-    int height = 720;
-    Scene scene = new Scene(root, width, height);
+    stage.setResizable(false);
+    Image boardImage = new Image(RESOURCE_PATH + "PracticeField.png");
+    ImageView imageView = new ImageView(boardImage);
+    imageView.setX(255);
+    imageView.setY(45);
+    imageView.setFitHeight(450);
+    imageView.setFitWidth(450);
+    imageView.setPreserveRatio(true);
+
+    Group root = new Group(); // nodo raiz que agrupa otras cosas (nodos), clase padre de todos
+    // los componentes
+    int width = 960;
+    int height = 540;
+    Scene scene = new Scene(root, width, height); //Stage->Scene->Group
     var sprite = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "sprite.png")
                                               .setPosition(100, 100)
                                               .setSize(50, 50)
@@ -39,7 +54,8 @@ public class CitricLiquid extends Application {
     var background =
         new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "background.jpg")));
     root.getChildren().add(background);
-    root.getChildren().add(setupButton());
+    root.getChildren().add(imageView);
+    root.getChildren().add(setupButton()); //agrega el boton
     root.getChildren().add(sprite.getNode());
     stage.setScene(scene);
     stage.show();
@@ -47,10 +63,10 @@ public class CitricLiquid extends Application {
 
   private @NotNull Button setupButton() {
     Button button = new Button("Play sound");
-    button.setLayoutX(950);
-    button.setLayoutY(100);
+    button.setLayoutX(720);
+    button.setLayoutY(75);
     button.setFocusTraversable(false);
-    button.setOnAction(CitricLiquid::playSound);
+    button.setOnAction(CitricLiquid::playSound); //accion que se genera al oprimir el boton
     return button;
   }
 

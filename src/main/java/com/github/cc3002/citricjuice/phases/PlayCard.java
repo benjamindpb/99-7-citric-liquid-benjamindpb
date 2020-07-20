@@ -1,4 +1,4 @@
-package com.github.cc3002.citricjuice.states;
+package com.github.cc3002.citricjuice.phases;
 
 /**
  * Fase de jugar una carta

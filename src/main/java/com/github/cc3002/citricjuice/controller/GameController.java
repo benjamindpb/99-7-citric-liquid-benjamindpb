@@ -2,6 +2,7 @@ package com.github.cc3002.citricjuice.controller;
 
 import com.github.cc3002.citricjuice.controller.handlers.ChangeNormaHandler;
 import com.github.cc3002.citricjuice.controller.handlers.IHandler;
+import com.github.cc3002.citricjuice.controller.handlers.NormaClearHandler;
 import com.github.cc3002.citricjuice.model.NormaGoal;
 import com.github.cc3002.citricjuice.model.board.*;
 import com.github.cc3002.citricjuice.model.units.Player;
@@ -23,6 +24,7 @@ public class GameController {
     private int indexCurrentPlayer;
 
     private final IHandler changeNormaHandler = new ChangeNormaHandler(this);
+    private final IHandler normaClearHandler = new NormaClearHandler(this);
 
     /**
      * metodo constructor
@@ -255,5 +257,10 @@ public class GameController {
         encounterPanel.setWildUnit(wildUnit);
     }
 
-    //TODO:  agregar NormaCheck y NormaClear, observer (?)
+    public void normaCheck(Player player){
+        if(player.getHomePanel().equals(player.getPanel())){
+            player.getHomePanel().activatePanelEffectBy(player);
+            player.normaClearListener(normaClearHandler);
+        }
+    }
 }
