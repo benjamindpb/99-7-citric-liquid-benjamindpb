@@ -9,14 +9,14 @@ public class BattlePhase extends TurnPhase {
      * si se muere, entonces se tiene que ir fuera del juego
      */
     public void outOfGame(){
-        this.changePhase(new OutOfGame());
+        this.changePhase(new OutOfGamePhase());
     }
 
     /**
      * si queda vivo, se sigue con la fase de activacion de carta trampa
      */
     public void activateTrapCard(){
-        this.changePhase(new ActivateTrapCard());
+        this.changePhase(new ActivateTrapCardPhase());
     }
 
     /**

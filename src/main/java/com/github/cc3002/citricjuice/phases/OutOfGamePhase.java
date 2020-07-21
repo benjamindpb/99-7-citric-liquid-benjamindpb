@@ -3,12 +3,12 @@ package com.github.cc3002.citricjuice.phases;
 /**
  * Representa cuando un player sale del juego (KO)
  */
-public class OutOfGame extends TurnPhase {
+public class OutOfGamePhase extends TurnPhase {
     /**
      * el player vuelve al juego
      */
     public void backToGame(){
-        this.changePhase(new InGame());
+        this.changePhase(new InGamePhase());
     }
 
     /**

@@ -3,12 +3,12 @@ package com.github.cc3002.citricjuice.phases;
 /**
  * Fase de jugar una carta
  */
-public class PlayCard extends TurnPhase {
+public class PlayCardPhase extends TurnPhase {
     /**
      * cambiamos a la fase de movimiento del player
      */
     public void movePlayer(){
-        this.changePhase(new MovePlayer());
+        this.changePhase(new MovePlayerPhase());
     }
 
     /**

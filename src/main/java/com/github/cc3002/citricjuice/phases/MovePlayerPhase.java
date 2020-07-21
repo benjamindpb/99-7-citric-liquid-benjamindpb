@@ -3,7 +3,7 @@ package com.github.cc3002.citricjuice.phases;
 /**
  * Fase de movimiento del player
  */
-public class MovePlayer extends TurnPhase {
+public class MovePlayerPhase extends TurnPhase {
 
     /**
      * se cambia a la fase de batalla
@@ -16,7 +16,7 @@ public class MovePlayer extends TurnPhase {
      * el player activa la trampa carta del panel
      */
     public void activateTrapCard(){
-        this.changePhase(new ActivateTrapCard());
+        this.changePhase(new ActivateTrapCardPhase());
     }
 
     /**

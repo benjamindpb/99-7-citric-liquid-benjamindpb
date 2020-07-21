@@ -24,17 +24,6 @@ public class TurnPhase {
     }
 
     /**
-     * ERROR method
-     */
-    public void error(){
-        try{
-            //
-        }catch(Exception e){
-            System.out.println("ERROR.");
-        }
-    }
-
-    /**
      * Todos los metodos hacia abajo retornan false. Se invocan solo si
      * estamos preguntando si estamos en una fase erronea.
      */
@@ -72,28 +61,28 @@ public class TurnPhase {
      * Si estamos en la fase ingame no podemos ir a la fase battle en un paso, tenemos
      * que pasar por otras fases antes de llegar a battle. Por esto es que salta un ERROR
      */
-    public void receiveStars() {
-        error();
+    public void receiveStars() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to receive stars phase.");
     }
-    public void playCard() {
-        error();
+    public void playCard() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to play card phase.");
     }
-    public void movePlayer() {
-        error();
+    public void movePlayer() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to move player phase.");
     }
-    public void battlePhase(){
-        error();
+    public void battlePhase() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to battle phase.");
     }
-    public void activateTrapCard(){
-        error();
+    public void activateTrapCard() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to activate trap card phase.");
     }
-    public void activatePanelPhase(){
-        error();
+    public void activatePanelPhase() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to activate panel phase.");
     }
-    public void outOfGame(){
-        error();
+    public void outOfGame() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to out of game phase.");
     }
-    public void backToGame() {
-        error();
+    public void backToGame() throws InvalidTransitionException {
+        throw new InvalidTransitionException("Can't change to back to game phase.");
     }
 }

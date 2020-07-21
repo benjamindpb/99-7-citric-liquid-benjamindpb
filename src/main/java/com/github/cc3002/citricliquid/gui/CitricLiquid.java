@@ -63,9 +63,9 @@ public class CitricLiquid extends Application {
   }
 
   private @NotNull Button setupButton() {
-    Button button = new Button("Play sound");
-    button.setLayoutX(720);
-    button.setLayoutY(75);
+    Button button = new Button("Play Kai's Theme");
+    button.setLayoutX(620);
+    button.setLayoutY(495);
     button.setFocusTraversable(false);
     button.setOnAction(CitricLiquid::playSound); //accion que se genera al oprimir el boton
     return button;
@@ -79,8 +79,9 @@ public class CitricLiquid extends Application {
       Clip sound = AudioSystem.getClip();
       try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
           new File(audioFilePath))) {
-        sound.open(audioInputStream);
-        sound.start();
+          sound.open(audioInputStream);
+          sound.start();
+          sound.loop(Clip.LOOP_CONTINUOUSLY);
       }
     } catch (LineUnavailableException | UnsupportedAudioFileException | IOException e) {
       e.printStackTrace();
