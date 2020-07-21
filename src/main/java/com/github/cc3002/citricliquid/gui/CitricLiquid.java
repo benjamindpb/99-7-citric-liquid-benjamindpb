@@ -34,7 +34,8 @@ public class CitricLiquid extends Application {
   public void start(@NotNull Stage stage) throws FileNotFoundException {
     stage.setTitle("99.7% Citric Liquid");
     stage.setResizable(false);
-    Image boardImage = new Image(RESOURCE_PATH + "PracticeField.png");
+    Image boardImage = new Image(new FileInputStream(RESOURCE_PATH + "800px-A-Practice_Field" +
+            ".png"));
     ImageView imageView = new ImageView(boardImage);
     imageView.setX(255);
     imageView.setY(45);
@@ -48,8 +49,8 @@ public class CitricLiquid extends Application {
     int height = 540;
     Scene scene = new Scene(root, width, height); //Stage->Scene->Group
     var sprite = new MovableNodeBuilder(scene).setImagePath(RESOURCE_PATH + "sprite.png")
-                                              .setPosition(100, 100)
-                                              .setSize(50, 50)
+                                              .setPosition(100, 100) //360,150
+                                              .setSize(45, 45)
                                               .build();
     var background =
         new ImageView(new Image(new FileInputStream(RESOURCE_PATH + "background.jpg")));
@@ -70,8 +71,10 @@ public class CitricLiquid extends Application {
     return button;
   }
 
+
+
   private static void playSound(ActionEvent event) {
-    String audioFilePath = RESOURCE_PATH + "prfvr.wav";
+    String audioFilePath = RESOURCE_PATH + "kai's-theme.wav";
     try {
       Clip sound = AudioSystem.getClip();
       try (AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
