@@ -6,8 +6,9 @@ import com.github.cc3002.citricjuice.model.board.HomePanel;
 import com.github.cc3002.citricjuice.model.board.IPanel;
 import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
 import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
-import com.github.cc3002.citricjuice.states.InGame;
-import com.github.cc3002.citricjuice.states.TurnPhase;
+import com.github.cc3002.citricjuice.phases.InGamePhase;
+import com.github.cc3002.citricjuice.phases.InvalidTransitionException;
+import com.github.cc3002.citricjuice.phases.TurnPhase;
 import org.jetbrains.annotations.NotNull;
 
 import java.beans.PropertyChangeSupport;
@@ -25,6 +26,7 @@ public class Player extends AbstractUnit {
   private HomePanel homePanel;
   private TurnPhase turnPhase;
   private final PropertyChangeSupport changeNormaNotification = new PropertyChangeSupport(this);
+  private final PropertyChangeSupport normaClearNotification = new PropertyChangeSupport(this);
   /**
    * Creates a new character.
    *
@@ -44,7 +46,7 @@ public class Player extends AbstractUnit {
     super(name, hp, atk, def, evd);
     normaLevel = 1;
     normaGoal = NormaGoal.STARS;
-    this.setTurnPhase(new InGame());
+    this.setTurnPhase(new InGamePhase());
   }
 
    /**
@@ -58,6 +60,7 @@ public class Player extends AbstractUnit {
    * Performs a norma clear action; the {@code norma} counter increases in 1.
    */
   public void normaClear() {
+    changeNormaNotification.firePropertyChange("NORMA_CLEAR", normaLevel, normaLevel + 1);
     normaLevel++;
   }
 
@@ -189,6 +192,10 @@ public class Player extends AbstractUnit {
     changeNormaNotification.addPropertyChangeListener(changeNormaHadler);
   }
 
+  public void normaClearListener(IHandler normaClearHandler){
+    normaClearNotification.addPropertyChangeListener(normaClearHandler);
+  }
+
   /**
    * @param homePanel del player
    */
@@ -246,28 +253,28 @@ public class Player extends AbstractUnit {
   /**
    * Los siguientes metodos cambian la fase actual del turno del jugador
    */
-  public void receiveStarsPhase() {
+  public void receiveStarsPhase() throws InvalidTransitionException {
     turnPhase.receiveStars();
   }
-  public void playCardPhase() {
+  public void playCardPhase() throws InvalidTransitionException {
     turnPhase.playCard();
   }
-  public void movePhase() {
+  public void movePhase() throws InvalidTransitionException {
     turnPhase.movePlayer();
   }
-  public void battlePhase() {
+  public void battlePhase() throws InvalidTransitionException {
     turnPhase.battlePhase();
   }
-  public void activateTrapCardPhase() {
+  public void activateTrapCardPhase() throws InvalidTransitionException {
     turnPhase.activateTrapCard();
   }
-  public void activatePanelPhase() {
+  public void activatePanelPhase() throws InvalidTransitionException {
     turnPhase.activatePanelPhase();
   }
-  public void outOfGame() {
+  public void outOfGame() throws InvalidTransitionException {
     turnPhase.outOfGame();
   }
-  public void backToTheGame() {
+  public void backToTheGame() throws InvalidTransitionException {
     turnPhase.backToGame();
   }
 
