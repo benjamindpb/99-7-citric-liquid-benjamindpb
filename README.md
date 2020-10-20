@@ -1,4 +1,6 @@
 <!-- 1.0.3-b1 -->
+#Aviso!: el Readme no está actualizado ;_;
+
 ![](img/97%25CitricLiquid.png)
 
 <p align="center">
