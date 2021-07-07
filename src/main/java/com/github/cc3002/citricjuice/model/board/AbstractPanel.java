@@ -1,10 +1,8 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-import org.jetbrains.annotations.NotNull;
+import com.github.cc3002.citricjuice.model.units.Player;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Abstract class that represents a generic panel in the board of the game.
@@ -14,29 +12,30 @@ import java.util.Set;
  * @version 1.0.6-rc.2
  * @since 1.0
  */
-public abstract class AbstractPanel implements IPanel{
+public abstract class AbstractPanel implements IPanel {
+
   private Set<IPanel> nextPanels = new HashSet<>();
-  private Set<Player> playersInPanel = new HashSet<>();
+  private List<Player> playersInPanel = new ArrayList<>();
+
+  private final int id;
 
   /**
-   * Creates a new Panel
+   * Constructor for a default panel without any special behaviour.
+   *  @param id represent a row of the panel in the board
    *
-   * @param nextPanels Panel's next panels
-   * @param playersInPanel Panel's players
    */
-  public AbstractPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-    this.nextPanels = nextPanels;
-    this.playersInPanel = playersInPanel;
+  public AbstractPanel(int id) {
+    this.id = id;
   }
 
   @Override
   public Set<IPanel> getNextPanels() {
-    return Set.copyOf(nextPanels);
+    return nextPanels;
   }
 
   @Override
-  public Set<Player> getPlayers() {
-    return Set.copyOf(playersInPanel);
+  public List<Player> getPlayers() {
+    return playersInPanel;
   }
 
 
@@ -45,5 +44,29 @@ public abstract class AbstractPanel implements IPanel{
     nextPanels.add(panel);
   }
 
+  public void addPlayerToPanel(Player player){
+    playersInPanel.add(player);
+  }
 
+  /**
+   * @return the id of the current panel
+   */
+  public int getId() {
+    return id;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof AbstractPanel)) return false;
+    AbstractPanel that = (AbstractPanel) o;
+    return id == that.id &&
+            Objects.equals(nextPanels, that.nextPanels) &&
+            Objects.equals(playersInPanel, that.playersInPanel);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(getNextPanels(), playersInPanel, getId());
+  }
 }

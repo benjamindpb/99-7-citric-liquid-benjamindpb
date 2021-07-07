@@ -1,22 +1,19 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-
-import java.util.Set;
+import com.github.cc3002.citricjuice.model.units.Player;
 
 /**
  * This class represent a Draw Panel
  */
 public class DrawPanel extends AbstractPanel {
 
+
     /**
-     * Creates a new Draw Panel
+     * @param id    represent a id of the panel in the board
      *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
      */
-    public DrawPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public DrawPanel(int id) {
+        super(id);
     }
 
     /**
@@ -25,6 +22,10 @@ public class DrawPanel extends AbstractPanel {
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-
+        try{
+            //TODO: implement cards
+        }catch (Exception e){
+            System.out.println("Cards aren't available in this version.");
+        }
     }
 }

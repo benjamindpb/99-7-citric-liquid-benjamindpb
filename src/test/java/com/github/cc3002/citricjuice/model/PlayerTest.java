@@ -1,5 +1,7 @@
 package com.github.cc3002.citricjuice.model;
 
+import com.github.cc3002.citricjuice.model.board.NeutralPanel;
+import com.github.cc3002.citricjuice.model.units.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -18,10 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerTest {
   private final static String PLAYER_NAME = "Suguri";
   private Player suguri;
+  private NeutralPanel neutralPanel;
 
   @BeforeEach
   public void setUp() {
     suguri = new Player(PLAYER_NAME, 4, 1, -1, 2);
+    neutralPanel = new NeutralPanel(1);
   }
 
   @Test
@@ -66,10 +70,17 @@ public class PlayerTest {
     assertNotSame(expectedSuguri, actualSuguri);
   }
 
+  @Test
+  public void activatePanelTest(){
+    int expectedHp = suguri.getCurrentHP();
+    suguri.activatePanel(neutralPanel);
+    assertEquals(expectedHp, suguri.getCurrentHP());
+  }
+
   // region : consistency tests
   @RepeatedTest(100)
   public void hitPointsConsistencyTest() {
-    final long testSeed = new Random().nextLong();
+    final int testSeed = new Random().nextInt();
     // We're gonna try and set random hit points in [-maxHP * 2, maxHP * 2]
     final int testHP = new Random(testSeed).nextInt(4 * suguri.getMaxHP() + 1)
                        - 2 * suguri.getMaxHP();
@@ -83,7 +94,7 @@ public class PlayerTest {
 
   @RepeatedTest(100)
   public void normaClearConsistencyTest() {
-    final long testSeed = new Random().nextLong();
+    final int testSeed = new Random().nextInt();
     // We're gonna test for 0 to 5 norma clears
     final int iterations = Math.abs(new Random(testSeed).nextInt(6));
     final int expectedNorma = suguri.getNormaLevel() + iterations;
@@ -96,7 +107,7 @@ public class PlayerTest {
 
   @RepeatedTest(100)
   public void rollConsistencyTest() {
-    final long testSeed = new Random().nextLong();
+    final int testSeed = new Random().nextInt();
     suguri.setSeed(testSeed);
     final int roll = suguri.roll();
     assertTrue(roll >= 1 && roll <= 6,

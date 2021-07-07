@@ -1,8 +1,6 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-
-import java.util.Set;
+import com.github.cc3002.citricjuice.model.units.Player;
 
 /**
  * This class represent a Neutral Panel
@@ -11,13 +9,11 @@ public class NeutralPanel extends AbstractPanel{
 
 
     /**
-     * Creates a new Neutral Panel
+     * @param id    represent a id of the panel in the board
      *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
      */
-    public NeutralPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public NeutralPanel(int id) {
+        super(id);
     }
 
     /**
@@ -27,6 +23,9 @@ public class NeutralPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-
+        // no hace nada
+        // implementacion sin querer de de Null Pattern xD
     }
+
+
 }

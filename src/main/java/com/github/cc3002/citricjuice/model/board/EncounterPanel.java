@@ -1,22 +1,33 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-
-import java.util.Set;
+import com.github.cc3002.citricjuice.model.units.Player;
+import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 
 /**
  * This class represent a Encounter Panel
+ *
+ * @author Benjamin del Pino Badilla
+ *
  */
 public class EncounterPanel extends AbstractPanel {
 
+    private WildUnit wildUnit;
+
     /**
      * Creates a new Encounter Panel
+     *  @param id    represent a id of the panel in the board
      *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
      */
-    public EncounterPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public EncounterPanel(int id) {
+        super(id);
+        wildUnit = null;
+    }
+    public WildUnit getWildUnit() {
+        return wildUnit;
+    }
+
+    public void setWildUnit(WildUnit wildUnit) {
+        this.wildUnit = wildUnit;
     }
 
     /**
@@ -25,6 +36,10 @@ public class EncounterPanel extends AbstractPanel {
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-
+        try{
+            player.attack(wildUnit);
+        }catch (Exception e){
+            System.out.println("The panel has not a unit asigned yet.");
+        }
     }
 }

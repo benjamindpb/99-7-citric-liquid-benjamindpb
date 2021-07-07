@@ -1,6 +1,8 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
+import com.github.cc3002.citricjuice.model.units.Player;
+import com.github.cc3002.citricjuice.model.units.boss.BossUnit;
+import com.github.cc3002.citricjuice.model.units.wild.WildUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
@@ -8,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Random;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @author <a href="mailto:ignacio.slater@ug.uchile.cl">Ignacio Slater M.</a>.
@@ -22,42 +23,64 @@ class AbstractPanelTest {
   private final static int BASE_ATK = 1;
   private final static int BASE_DEF = -1;
   private final static int BASE_EVD = 2;
-  private AbstractPanel testHomePanel;
-  private AbstractPanel testNeutralPanel;
-  private AbstractPanel testBonusPanel;
-  private AbstractPanel testDropPanel;
-  private AbstractPanel testEncounterPanel;
-  private AbstractPanel testBossPanel;
+
+  private Player kai;
+  private Player chicken;
   private Player suguri;
-  private long testSeed;
+
+  private BossUnit shifuRobot;
+  private WildUnit seagull;
+
+  private HomePanel testHomePanel;
+  private NeutralPanel testNeutralPanel;
+  private BonusPanel testBonusPanel;
+  private DropPanel testDropPanel;
+  private EncounterPanel testEncounterPanel;
+  private BossPanel testBossPanel;
+  private DrawPanel testDrawPanel;
+
+  private int testSeed;
 
   @BeforeEach
   public void setUp() {
-    testBonusPanel = new AbstractPanel(PanelType.BONUS);
-    testBossPanel = new AbstractPanel(PanelType.BOSS);
-    testDropPanel = new AbstractPanel(PanelType.DROP);
-    testEncounterPanel = new AbstractPanel(PanelType.ENCOUNTER);
-    testHomePanel = new AbstractPanel(PanelType.HOME);
-    testNeutralPanel = new AbstractPanel(PanelType.NEUTRAL);
-    testSeed = new Random().nextLong();
+    int i = 0;
+    testBonusPanel = new BonusPanel(i++);
+    testBossPanel = new BossPanel(i++);
+    testDrawPanel = new DrawPanel(i++);
+    testDropPanel = new DropPanel(i++);
+    testEncounterPanel = new EncounterPanel(i++);
+    testHomePanel = new HomePanel(i++);
+    testNeutralPanel = new NeutralPanel(i);
+
+    testSeed = new Random().nextInt();
+
     suguri = new Player(PLAYER_NAME, BASE_HP, BASE_ATK, BASE_DEF, BASE_EVD);
+    kai = new Player("Kai", 5, 1, 0, 0);
+    chicken = new Player("Chicken", 3, -1, -1, 1);
+
+    seagull = new WildUnit("Seagull", 3, 1, -1, -1);
+    shifuRobot = new BossUnit("Shifu Robot", 7, 2, 3, -2);
+
   }
 
   @Test
-  public void constructorTest() {
-    assertEquals(PanelType.BONUS, testBonusPanel.getType());
-    assertEquals(PanelType.BOSS, testBossPanel.getType());
-    assertEquals(PanelType.DROP, testDropPanel.getType());
-    assertEquals(PanelType.ENCOUNTER, testEncounterPanel.getType());
-    assertEquals(PanelType.HOME, testHomePanel.getType());
-    assertEquals(PanelType.NEUTRAL, testNeutralPanel.getType());
+  public void constructorWhitParameterTest(){
+    var expectedId = 0;
+    assertEquals(expectedId++, testBonusPanel.getId());
+    assertEquals(expectedId++, testBossPanel.getId());
+    assertEquals(expectedId++, testDrawPanel.getId());
+    assertEquals(expectedId++, testDropPanel.getId());
+    assertEquals(expectedId++, testEncounterPanel.getId());
+    assertEquals(expectedId++, testHomePanel.getId());
+    assertEquals(expectedId, testNeutralPanel.getId());
+
   }
 
   @Test
   public void nextPanelTest() {
     assertTrue(testNeutralPanel.getNextPanels().isEmpty());
-    final var expectedPanel1 = new AbstractPanel(PanelType.NEUTRAL);
-    final var expectedPanel2 = new AbstractPanel(PanelType.NEUTRAL);
+    final var expectedPanel1 = new NeutralPanel(1);
+    final var expectedPanel2 = new NeutralPanel(2);
 
     testNeutralPanel.addNextPanel(expectedPanel1);
     assertEquals(1, testNeutralPanel.getNextPanels().size());
@@ -73,22 +96,81 @@ class AbstractPanelTest {
   }
 
   @Test
-  public void homePanelTest() {
-    assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
-    testHomePanel.activatePanelEffectBy(suguri);
-    assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
-
-    suguri.setCurrentHP(1);
-    testHomePanel.activatePanelEffectBy(suguri);
-    assertEquals(2, suguri.getCurrentHP());
+  public void addPlayerTest(){
+    assertTrue(testNeutralPanel.getPlayers().isEmpty());
+    testNeutralPanel.addPlayerToPanel(kai);
+    assertEquals(1, testNeutralPanel.getPlayers().size());
+    testNeutralPanel.addPlayerToPanel(chicken);
+    assertEquals(2, testNeutralPanel.getPlayers().size());
   }
 
+
+  @Test
+  public void homePanelTest() {
+    assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
+    suguri.increaseStarsBy(10);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(suguri.getMaxHP(), suguri.getCurrentHP());
+    assertEquals(2, suguri.getNormaLevel());
+
+    suguri.setCurrentHP(1);
+    suguri.increaseWinsBy(1);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(2, suguri.getCurrentHP());
+    assertEquals(3, suguri.getNormaLevel());
+
+    suguri.increaseStarsBy(61);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(4, suguri.getNormaLevel());
+
+    suguri.increaseWinsBy(12);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(5, suguri.getNormaLevel());
+
+    suguri.increaseStarsBy(300);
+
+    testHomePanel.activatePanelEffectBy(suguri);
+    assertEquals(6, suguri.getNormaLevel());
+  }
   @Test
   public void neutralPanelTest() {
     final var expectedSuguri = suguri.copy();
     testNeutralPanel.activatePanelEffectBy(suguri);
     assertEquals(expectedSuguri, suguri);
   }
+
+  @Test
+  public void bonusPanelTest(){
+    int stars = suguri.getStars();
+    assertEquals(1, suguri.getNormaLevel());
+    testBonusPanel.activatePanelEffectBy(suguri);
+    assertNotEquals(stars, suguri.getStars());
+  }
+
+  @Test
+  public void bossPanelTest(){
+    final var boss = new BossPanel(1);
+    assertEquals(new BossPanel(1), boss);
+    assertNull(boss.getBossUnit());
+    boss.setBossUnit(shifuRobot);
+    assertEquals(new BossUnit("Shifu Robot", 7,2, 3, -2), boss.getBossUnit());
+    assertNotNull(boss.getBossUnit());
+  }
+
+  @Test
+  public void encounterPanelTest(){
+    final var wild = new EncounterPanel(1);
+    assertEquals(new EncounterPanel(1), wild);
+    assertNull(wild.getWildUnit());
+    wild.setWildUnit(seagull);
+    assertEquals(new WildUnit("Seagull", 3, 1, -1, -1), wild.getWildUnit());
+    assertNotNull(wild.getWildUnit());
+  }
+
 
   // region : Consistency tests
   @RepeatedTest(100)
@@ -123,5 +205,4 @@ class AbstractPanelTest {
       suguri.normaClear();
     }
   }
-  // endregion
 }

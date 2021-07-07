@@ -1,8 +1,6 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-
-import java.util.Set;
+import com.github.cc3002.citricjuice.model.units.Player;
 
 /**
  * This class represent a Bonus Panel
@@ -10,13 +8,12 @@ import java.util.Set;
 public class BonusPanel extends AbstractPanel{
 
     /**
-     * Creates a new Bonus Panel
+     * Constructor for a default panel without any special behaviour.
+     *  @param id    represent a id of the panel in the board
      *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
      */
-    public BonusPanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public BonusPanel(int id) {
+        super(id);
     }
 
     /**
@@ -26,6 +23,7 @@ public class BonusPanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        player.increaseStarsBy(player.roll() * Math.min(player.getNormaLevel(), 3));
+        player.increaseStarsBy(player.roll() *
+                Math.min(player.getNormaLevel(), 3));
     }
 }

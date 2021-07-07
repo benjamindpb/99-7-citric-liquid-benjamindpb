@@ -1,8 +1,6 @@
 package com.github.cc3002.citricjuice.model.board;
 
-import com.github.cc3002.citricjuice.model.Player;
-
-import java.util.Set;
+import com.github.cc3002.citricjuice.model.units.Player;
 
 /**
  * This class represent a Home Panel
@@ -10,13 +8,11 @@ import java.util.Set;
 public class HomePanel extends AbstractPanel{
 
     /**
-     * Creates a new Home Panel
+     * @param id    represent a id of the panel in the board
      *
-     * @param nextPanels     Panel's next panels
-     * @param playersInPanel Panel's players
      */
-    public HomePanel(Set<IPanel> nextPanels, Set<Player> playersInPanel) {
-        super(nextPanels, playersInPanel);
+    public HomePanel(int id) {
+        super(id);
     }
 
     /**
@@ -25,8 +21,8 @@ public class HomePanel extends AbstractPanel{
      * @param player who activate the panel
      */
     public void activatePanelEffectBy(Player player) {
-        player.setCurrentHP(player.getCurrentHP() + 1);
         normaCheck(player);
+        player.setCurrentHP(player.getCurrentHP() + 1);
     }
 
     /**
@@ -37,6 +33,34 @@ public class HomePanel extends AbstractPanel{
      */
     private void normaCheck(Player player) {
         int norma = player.getNormaLevel();
-        //...to do...
+        int stars = player.getStars();
+        int wins = player.getWins();
+
+        if(norma == 1){
+            if(stars >= 10){
+                player.normaClear();
+            }
+        }
+        else if(norma == 2){
+            if(stars >= 30 || wins >= 1) {
+                player.normaClear();
+            }
+        }
+        else if(norma == 3){
+            if(stars >= 70 || wins >= 5) {
+                player.normaClear();
+            }
+        }
+        else if(norma == 4){
+            if(stars >= 120 || wins >= 9) {
+                player.normaClear();
+            }
+        }
+        else if(norma == 5){
+            if(stars >= 200 || wins >= 14) {
+                player.normaClear(); // player wins
+            }
+        }
     }
+
 }
